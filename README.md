@@ -101,7 +101,7 @@ After starting the project:
 
 ```bash
 ng serve
-
+```
 Navigate to:
 
 bash
