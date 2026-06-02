@@ -188,7 +188,7 @@ This makes the project suitable as a reusable **WL app template** rather than a 
 
 ## Project Structure
 
-bash
+```
 src
 ├── app
 │   ├── core
@@ -216,7 +216,7 @@ src
 ├── assets
 ├── branding
 └── styles
-
+```
 ---
 
 ## Design Decisions
