@@ -1,10 +1,21 @@
-  <h3>Ingredients</h3>
-  <mat-chip-set aria-label="Tags" color="primary"
-  class="example-chip"
-  >
-  @for (ingredient of productsStore.selectedProductDetailsIngredients(); track $index) {
-    <mat-chip class="example-box">{{ingredient}}</mat-chip>
-  }@empty {
-    N/A
-  }
-</mat-chip-set>
+<h2>{{ title }}</h2>
+@if (rows.length) {
+    <ul>
+        @for (row of rows; track $index) {
+            <li>
+                <span class="measure">
+                    {{ row.measure }}
+                    @if (row.metric) {
+                        <small>{{ row.metric }}</small>
+                    }
+                </span>
+                <span class="name">{{ row.name }}</span>
+            </li>
+        }
+    </ul>
+    @if (missingMeasures) {
+        <p class="note">Blank amounts aren't given in the original recipe.</p>
+    }
+} @else {
+    <p class="note">The source doesn't list ingredients for this one.</p>
+}

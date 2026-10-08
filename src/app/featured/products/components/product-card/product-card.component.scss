@@ -1,0 +1,80 @@
+$cream: #f6efe6;
+$amber: #e9b872;
+
+:host {
+  display: block;
+}
+
+.drink-card {
+  display: block;
+  color: $cream;
+  text-decoration: none;
+
+  &:hover {
+    img {
+      transform: scale(1.04);
+      filter: none;
+    }
+
+    .name {
+      color: $amber;
+    }
+
+    .arrow {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $amber;
+    outline-offset: 6px;
+  }
+}
+
+.media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 3px;
+  background: rgba($cream, 0.06);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.88);
+    transition:
+      transform 0.5s ease,
+      filter 0.3s;
+  }
+}
+
+.name {
+  margin: 14px 0 0;
+  font: 400 1.2rem / 1.25 Fraunces, Georgia, serif;
+  transition: color 0.2s;
+}
+
+.arrow {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+.detail {
+  margin: 6px 0 0;
+  color: rgba($cream, 0.55);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media img,
+  .arrow {
+    transition: none;
+  }
+}

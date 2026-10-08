@@ -1,0 +1,156 @@
+$cream: #f6efe6;
+$amber: #e9b872;
+
+:host {
+  display: block;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid rgba($cream, 0.3);
+
+  &:focus-within {
+    border-color: $amber;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 0;
+    border: 0;
+    outline: 0;
+    background: none;
+    color: $cream;
+    font: 400 clamp(1.2rem, 2.4vw, 1.6rem) Fraunces, Georgia, serif;
+
+    &::placeholder {
+      color: rgba($cream, 0.45);
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+}
+
+button {
+  padding: 6px 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: none;
+  color: rgba($cream, 0.65);
+  font: inherit;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+
+  &:hover {
+    color: $cream;
+  }
+
+  &.active {
+    color: $amber;
+    border-bottom-color: $amber;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $amber;
+    outline-offset: 3px;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px 40px;
+  margin-top: 24px;
+}
+
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 20px;
+}
+
+.spirit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  select {
+    min-width: 11rem;
+    padding: 6px 28px 6px 0;
+    border: 0;
+    border-bottom: 1px solid rgba($cream, 0.3);
+    border-radius: 0;
+    appearance: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23e9b872'/%3E%3C/svg%3E")
+      no-repeat right 4px center;
+    color: $cream;
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid $amber;
+      outline-offset: 3px;
+    }
+  }
+
+  option {
+    background: #1b1511;
+  }
+}
+
+.label {
+  color: rgba($cream, 0.45);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.letters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid rgba($cream, 0.12);
+
+  button {
+    min-width: 22px;
+    font: 400 1rem Fraunces, Georgia, serif;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 599px) {
+  .spirit select {
+    flex: 1;
+  }
+
+  .letters {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+
+    button {
+      min-height: 36px;
+    }
+  }
+}

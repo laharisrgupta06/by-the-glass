@@ -1,16 +1,6 @@
 {
-   "components": [ 
-    "image",
-    "description",
-    "tags",
-    "ingredients",
-    "instructions"
-    ],
-    "layouts":{
-        "display": "flex",
-        "flex-wrap": "wrap",
-        "margin": "10px",
-        "justify-content": "space-between",
-        "flex-direction": "column"
-    }
+    "backLabel": "All drinks",
+    "ingredientsTitle": "What you'll need",
+    "methodTitle": "Method",
+    "translationsLabel": "Method in other languages"
 }

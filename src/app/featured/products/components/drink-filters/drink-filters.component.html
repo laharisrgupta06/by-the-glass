@@ -1,0 +1,36 @@
+<form class="search" role="search" (submit)="submit($event)">
+    <label class="visually-hidden" for="drink-search">Search drinks by name, ingredient or spirit</label>
+    <input id="drink-search" type="search" autocomplete="off" enterkeyhint="search"
+        placeholder="Search a drink, ingredient or spirit"
+        [value]="text()" (input)="onInput($any($event.target).value)" />
+    @if (text()) {
+        <button type="button" (click)="clear()">Clear</button>
+    }
+</form>
+
+<div class="row">
+    <div class="group" role="group" aria-label="Drink type">
+        @for (option of types; track option.value) {
+            <button type="button" [class.active]="type === option.value" [attr.aria-pressed]="type === option.value"
+                (click)="typeChange.emit(option.value)">{{ option.label }}</button>
+        }
+    </div>
+
+    <label class="spirit">
+        <span class="label">Spirit</span>
+        <select [value]="spirit" (change)="spiritChange.emit($any($event.target).value)">
+            <option value="">Any spirit</option>
+            @for (option of spirits; track option.id) {
+                <option [value]="option.id" [selected]="option.id === spirit">{{ option.label }}</option>
+            }
+        </select>
+    </label>
+</div>
+
+<div class="letters" role="group" aria-label="Browse A to Z">
+    <button type="button" [class.active]="!letter" [attr.aria-pressed]="!letter" (click)="letterChange.emit('')">All</button>
+    @for (l of letters; track l) {
+        <button type="button" [class.active]="letter === l" [attr.aria-pressed]="letter === l"
+            [attr.aria-label]="'Drinks starting with ' + l" (click)="letterChange.emit(l)">{{ l }}</button>
+    }
+</div>

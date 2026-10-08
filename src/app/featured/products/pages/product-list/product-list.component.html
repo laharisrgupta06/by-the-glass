@@ -1,9 +1,62 @@
+<section class="drinks-page">
+    <header class="masthead">
+        <img class="masthead-bg" src="assets/images/drinks-hero.jpg" alt="" width="1600" height="1166" />
+        <div class="masthead-content">
+            <h1>{{ productListConfig.title }}</h1>
+            <p class="intro">{{ productListConfig.intro }}</p>
 
-<div [style]="productListConfig.cardsLayout">
-        @for (product of productsStore.getProducts().drinks; track product.idDrink) {
-            <app-product-card [productData]="product"></app-product-card> 
-        } @empty {
-            <mat-progress-spinner></mat-progress-spinner>
-            <div [style]="productListConfig.loadingTextSpinner">loading ...</div>
+            <app-drink-filters
+                [query]="filters().q" [letter]="filters().letter" [type]="filters().type"
+                [spirit]="filters().spirit" [spirits]="spirits"
+                (queryChange)="setQuery($event)" (letterChange)="setLetter($event)" (typeChange)="setType($event)"
+                (spiritChange)="setSpirit($event)">
+            </app-drink-filters>
+        </div>
+    </header>
+
+    <div class="results">
+        <div class="results-bar">
+            <p class="summary" aria-live="polite">{{ summary() }}</p>
+            @if (hasFilters()) {
+                <button type="button" class="text-button" (click)="clearAll()">Clear all</button>
+            }
+        </div>
+        <div class="notes">
+            @for (note of notes(); track note) {
+                <p class="note">{{ note }}</p>
+            }
+        </div>
+
+        @switch (productsStore.status()) {
+            @case ('error') {
+                <div class="message" role="alert">
+                    <h2>The bar's closed for a moment.</h2>
+                    <p>We couldn't reach the drinks list. Check your connection and try again.</p>
+                    <button type="button" class="text-button" (click)="retry()">Try again</button>
+                </div>
+            }
+            @case ('ready') {
+                @if (cards().length) {
+                    <ul class="grid">
+                        @for (card of cards(); track card.recipe.source + card.recipe.id) {
+                            <li><app-product-card [recipe]="card.recipe" [detail]="card.detail"></app-product-card></li>
+                        }
+                    </ul>
+                } @else {
+                    <div class="message">
+                        <h2>Nothing poured{{ filters().q ? ' for “' + filters().q + '”' : '' }}.</h2>
+                        <p>{{ emptyHint() }}</p>
+                        <button type="button" class="text-button" (click)="clearAll()">Clear all</button>
+                    </div>
+                }
+            }
+            @default {
+                <div class="grid" aria-hidden="true">
+                    @for (i of skeletons; track i) {
+                        <div><div class="skeleton-media"></div><div class="skeleton-line"></div></div>
+                    }
+                </div>
+            }
         }
-</div>
+    </div>
+</section>

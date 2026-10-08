@@ -9,6 +9,19 @@ import {
 } from './featured/products/config/product.config';
 import { ProductsStore } from './featured/products/store/product.store';
 import { ProductService } from './featured/products/services/product.service';
+import { DrinkRepository } from './featured/products/data/drink.repository';
+import { CocktailDbSource } from './featured/products/data/cocktaildb.source';
+import { CuratedSource } from './featured/products/data/curated.source';
+
+// Each drinks route gets its own store; the data layer underneath is the same.
+const DRINK_DATA_PROVIDERS = [
+  ProductsStore,
+  ProductService,
+  DrinkRepository,
+  CocktailDbSource,
+  CuratedSource,
+  { provide: API_URL, useValue: ApiURL },
+];
 
 export const routes: Routes = [
   {
@@ -22,15 +35,10 @@ export const routes: Routes = [
   {
     path: 'drinks',
     providers: [
-      ProductsStore,
-      ProductService,
+      ...DRINK_DATA_PROVIDERS,
       {
         provide: PRODUCT_LIST_CONFIG_DATA,
         useValue: ProductListConfig,
-      },
-      {
-        provide: API_URL,
-        useValue: ApiURL,
       },
     ],
     loadComponent: () =>
@@ -41,15 +49,10 @@ export const routes: Routes = [
   {
     path: 'product-details/:id',
     providers: [
-      ProductsStore,
-      ProductService,
+      ...DRINK_DATA_PROVIDERS,
       {
         provide: PRODUCT_DETIAL_CONFIG_DATA,
         useValue: ProductDetailConfig,
-      },
-      {
-        provide: API_URL,
-        useValue: ApiURL,
       },
     ],
     loadComponent: () =>

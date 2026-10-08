@@ -1,14 +1,11 @@
-<mat-card role="group" class="{{generalConfig.exampleCard}}">
-    <img mat-card-image role="img"  src="{{productData.strDrinkThumb}}" alt="product" width="250" height="200"/>
-    <mat-card-content role="contentinfo" class="{{generalConfig.exampleCardContent}}">
-        <h4>
-        {{ productData.strDrink}}
-        </h4>
-    </mat-card-content>
-    <mat-card-actions role="group" class="{{generalConfig.exampleCardAction}}">
-        <a class="button" role="button" mat-stroked-button color="{{generalConfig.button}}" [routerLink]="['/product-details', productData.idDrink]"
-           >
-                More Info
-        </a>
-      </mat-card-actions>
-</mat-card>
+<a class="drink-card" [routerLink]="['/product-details', recipe.id]">
+    <div class="media">
+        @if (recipe.thumbnail) {
+            <img [src]="recipe.thumbnail" alt="" width="350" height="350" loading="lazy" decoding="async" />
+        }
+    </div>
+    <h2 class="name">{{ recipe.name }} <span class="arrow" aria-hidden="true">&rarr;</span></h2>
+    @if (detail) {
+        <p class="detail">{{ detail }}</p>
+    }
+</a>

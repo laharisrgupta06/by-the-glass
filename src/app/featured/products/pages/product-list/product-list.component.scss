@@ -1,0 +1,151 @@
+$ink: #120e0b;
+$cream: #f6efe6;
+$amber: #e9b872;
+$gutter: clamp(16px, 4vw, 48px);
+
+// Bleed past the app's .container margin so the page runs edge to edge.
+.drinks-page {
+  min-height: calc(100svh - 64px);
+  margin: -15px -2px;
+  padding-bottom: 96px;
+  background: $ink;
+  color: $cream;
+}
+
+.masthead {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(48px, 7vw, 96px) $gutter 32px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(0deg, $ink 5%, transparent 60%),
+      linear-gradient(90deg, $ink 25%, rgba($ink, 0.55) 55%, rgba($ink, 0.15));
+  }
+}
+
+.masthead-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 75% 40%;
+}
+
+h1 {
+  margin: 0;
+  font: 400 clamp(2.8rem, 6vw, 4.5rem) / 1 Fraunces, Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+.intro {
+  max-width: 34rem;
+  margin: 16px 0 40px;
+  color: rgba($cream, 0.75);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.results {
+  padding: 0 $gutter;
+}
+
+.results-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.summary,
+.note {
+  margin: 0;
+  color: rgba($cream, 0.6);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+.notes {
+  min-height: 1.4em;
+  margin: 4px 0 24px;
+}
+
+.note {
+  margin-top: 2px;
+  color: rgba($amber, 0.8);
+}
+
+.text-button {
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: $amber;
+  font: inherit;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+
+  &:hover {
+    color: $cream;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 44px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skeleton-media,
+.skeleton-line {
+  border-radius: 3px;
+  background: rgba($cream, 0.06);
+}
+
+.skeleton-media {
+  aspect-ratio: 4 / 5;
+}
+
+.skeleton-line {
+  width: 60%;
+  height: 16px;
+  margin-top: 14px;
+}
+
+.message {
+  max-width: 32rem;
+  padding: 48px 0;
+
+  h2 {
+    margin: 0 0 8px;
+    font: 400 1.75rem / 1.2 Fraunces, Georgia, serif;
+  }
+
+  p {
+    margin: 0 0 16px;
+    color: rgba($cream, 0.7);
+  }
+}
+
+@media (max-width: 599px) {
+  .drinks-page {
+    min-height: calc(100svh - 96px);
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 14px;
+  }
+}

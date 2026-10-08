@@ -3,37 +3,32 @@ import { provideRouter } from '@angular/router';
 import { DebugElement } from '@angular/core';
 
 import { ProductCardComponent } from './product-card.component';
-import { ProductModel } from '../../models/product.model';
-import {
-  GENERAL_CONFIG_DATA,
-  GeneralConfig,
-} from 'src/app/core/config/general.config';
+import { Recipe } from '../../models/recipe.model';
 
 describe('ProductCardComponent', () => {
   let component: ProductCardComponent;
   let fixture: ComponentFixture<ProductCardComponent>;
-  const mockProductResult: ProductModel = {
-    strDrink: 'Almond Chocolate Coffee',
-    strDrinkThumb:
-      'https://www.thecocktaildb.com/images/media/drink/jls02c1493069441.jpg',
-    idDrink: '16082',
+  const mockRecipe: Recipe = {
+    id: '16082',
+    source: 'cocktaildb',
+    credit: 'TheCocktailDB',
+    name: 'Almond Chocolate Coffee',
+    thumbnail:
+      'https://www.thecocktaildb.com/images/media/drink/jls02c1493069441.jpg/medium',
+    ingredients: [],
+    translations: [],
+    hasDetails: false,
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ProductCardComponent],
-      providers: [
-        provideRouter([]),
-        {
-          provide: GENERAL_CONFIG_DATA,
-          useValue: GeneralConfig,
-        },
-      ],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductCardComponent);
     component = fixture.componentInstance;
-    component.productData = mockProductResult;
+    component.recipe = mockRecipe;
     fixture.detectChanges();
   });
 
@@ -45,7 +40,7 @@ describe('ProductCardComponent', () => {
     expect(component).toBeTruthy();
     const productDe: DebugElement = fixture.debugElement;
     const productEl: HTMLElement = productDe.nativeElement;
-    const p = productEl.querySelector('h4')!;
-    expect(p.textContent?.trim()).toEqual('Almond Chocolate Coffee');
+    const p = productEl.querySelector('h2')!;
+    expect(p.textContent).toContain('Almond Chocolate Coffee');
   });
 });

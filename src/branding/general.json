@@ -1,9 +1,5 @@
 {
     "appTitle": "By the Glass",
-    "button": "accent", 
     "routerLinkActiveColor": "router-link-active-color",
-    "ariaCurrentWhenActiveColor": "ria-Current-when-active-color",
-    "exampleCardAction": "example-card-action",
-    "exampleCardContent": "example-card-content",
-    "exampleCard": "example-card"
+    "ariaCurrentWhenActiveColor": "ria-Current-when-active-color"
 }

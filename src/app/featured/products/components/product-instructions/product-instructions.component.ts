@@ -1,15 +1,21 @@
-import { Component, inject } from '@angular/core';
-import { MatListModule } from '@angular/material/list';
+import { Component, Input } from '@angular/core';
 
-import { ProductsStore } from '../../store/product.store';
+import { RecipeTranslation } from '../../models/recipe.model';
+import { toSteps } from '../../utils/recipe-text';
 
 @Component({
   selector: 'app-product-instructions',
   standalone: true,
-  imports: [MatListModule],
   templateUrl: './product-instructions.component.html',
   styleUrl: './product-instructions.component.scss',
 })
 export class ProductInstructionsComponent {
-  readonly productsStore = inject(ProductsStore);
+  @Input() title = 'Method';
+  @Input() translationsLabel = 'Method in other languages';
+  @Input() translations: RecipeTranslation[] = [];
+  @Input() set instructions(value: string | undefined) {
+    this.steps = toSteps(value);
+  }
+
+  steps: string[] = [];
 }
