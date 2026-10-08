@@ -14,5 +14,5 @@ import { NavbarComponent } from './core/components/navbar/navbar.component';
   `,
 })
 export class AppComponent {
-  title = 'eliq-wla-assignment';
+  title = 'by-the-glass';
 }

@@ -1,5 +1,5 @@
 {
-  "name": "eliq-wla-assignment",
+  "name": "by-the-glass",
   "version": "0.0.0",
   "author": "Zahra Sarlak <sarlak.zh@gmail.com>(https://github.com/sarlakZM)",
   "keywords": [
@@ -21,7 +21,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:eliq-wla-assignment": "node dist/eliq-wla-assignment/server/server.mjs",
+    "serve:ssr:by-the-glass": "node dist/by-the-glass/server/server.mjs",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "prettier": "npx prettier --write src/**/*.ts"

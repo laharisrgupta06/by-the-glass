@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "eliq-wla-assignment": {
+    "by-the-glass": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/eliq-wla-assignment",
+            "outputPath": "dist/by-the-glass",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "eliq-wla-assignment:build:production"
+              "buildTarget": "by-the-glass:build:production"
             },
             "development": {
-              "buildTarget": "eliq-wla-assignment:build:development"
+              "buildTarget": "by-the-glass:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "eliq-wla-assignment:build"
+            "buildTarget": "by-the-glass:build"
           }
         },
         "test": {
