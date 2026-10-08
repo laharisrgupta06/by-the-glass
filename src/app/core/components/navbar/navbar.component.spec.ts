@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { NavbarComponent } from './navbar.component';
 import {
@@ -14,6 +15,7 @@ describe('NavbarComponent', () => {
     await TestBed.configureTestingModule({
       imports: [NavbarComponent],
       providers: [
+        provideRouter([]),
         {
           provide: GENERAL_CONFIG_DATA,
           useValue: GeneralConfig,

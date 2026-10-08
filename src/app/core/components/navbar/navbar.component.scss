@@ -1,3 +1,16 @@
 .example-spacer {
     flex: 1 1 auto;
   }
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+}
+
+.nav-link-active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
