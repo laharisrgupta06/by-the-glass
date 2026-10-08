@@ -5,9 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-home',
   standalone: true,
   imports: [RouterLink],
-  template: `
-    <h1>Welcome to By the Glass</h1>
-    <p>Discover cocktails and drinks. <a routerLink="/drinks">Browse drinks</a></p>
-  `,
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {}

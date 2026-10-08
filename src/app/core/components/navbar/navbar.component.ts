@@ -6,22 +6,13 @@ import {
   RouterLink,
   RouterLinkActive,
 } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { filter, map } from 'rxjs';
 import { GENERAL_CONFIG_DATA } from '../../config/general.config';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    RouterLink,
-    RouterLinkActive,
-  ],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })

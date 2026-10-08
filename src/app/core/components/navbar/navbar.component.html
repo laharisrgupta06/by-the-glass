@@ -1,11 +1,9 @@
-<mat-toolbar class="navbar" color="{{generalConfig.navbarColor}}" role="toolbar">
-    <img [style]="generalConfig.logoStyle" src="{{generalConfig.logo}}" alt="logo" role="img" />
-    <span role="text">{{generalConfig.appTitle}}</span>
-    <span role="text" class="example-spacer"></span>
+<header class="navbar">
+    <a class="brand" routerLink="/">{{generalConfig.appTitle}}</a>
     <nav class="nav-links" aria-label="Main navigation">
-        <a mat-button routerLink="/" routerLinkActive="nav-link-active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">Home</a>
-        <a mat-button routerLink="/drinks" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page" [class.nav-link-active]="isDrinkDetails()">Drinks</a>
-        <a mat-button routerLink="/what-can-i-make" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page">What Can I Make?</a>
-        <a mat-button routerLink="/personal" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page">Personal</a>
+        <a routerLink="/" routerLinkActive="nav-link-active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">Home</a>
+        <a routerLink="/drinks" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page" [class.nav-link-active]="isDrinkDetails()">Drinks</a>
+        <a routerLink="/what-can-i-make" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page">What Can I Make?</a>
+        <a routerLink="/personal" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page">Personal</a>
     </nav>
-</mat-toolbar>
+</header>
