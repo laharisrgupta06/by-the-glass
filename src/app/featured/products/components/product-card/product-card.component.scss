@@ -2,7 +2,14 @@ $cream: #f6efe6;
 $amber: #e9b872;
 
 :host {
+  position: relative;
   display: block;
+}
+
+.favorite {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
 }
 
 .drink-card {
@@ -48,6 +55,11 @@ $amber: #e9b872;
       transform 0.5s ease,
       filter 0.3s;
   }
+}
+
+.name,
+.detail {
+  padding-right: 32px;
 }
 
 .name {

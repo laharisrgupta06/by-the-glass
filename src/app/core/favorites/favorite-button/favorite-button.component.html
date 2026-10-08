@@ -1,0 +1,10 @@
+<button type="button" class="favorite" [class.saved]="saved()" [class.labelled]="variant === 'labelled'"
+    [attr.aria-pressed]="saved()" [attr.aria-label]="variant === 'icon' ? label() : null"
+    [attr.title]="variant === 'icon' ? label() : null" [attr.aria-busy]="busy()" (click)="toggle()">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path d="M12 20.3 4.9 13.4a4.6 4.6 0 0 1 6.5-6.5l.6.6.6-.6a4.6 4.6 0 0 1 6.5 6.5Z" />
+    </svg>
+    @if (variant === 'labelled') {
+        <span>{{ saved() ? 'Saved' : 'Save' }}</span>
+    }
+</button>

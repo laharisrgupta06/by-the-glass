@@ -2,8 +2,10 @@
     @if (eyebrow) {
         <p class="eyebrow">{{ eyebrow }}</p>
     }
-    <h1>{{ recipe.name }}</h1>
-    <!-- Favourite control goes here once favourites are backed by accounts. -->
+    <div class="title">
+        <h1>{{ recipe.name }}</h1>
+        <app-favorite-button [drink]="recipe" variant="labelled"></app-favorite-button>
+    </div>
 </header>
 
 @if (facts.length) {

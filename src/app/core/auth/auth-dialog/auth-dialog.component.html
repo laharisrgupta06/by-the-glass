@@ -1,0 +1,43 @@
+<dialog #dialog aria-labelledby="auth-title" (close)="dismiss()">
+    <div class="panel">
+        <button type="button" class="close" aria-label="Close" (click)="dismiss()">&times;</button>
+        <h2 id="auth-title">{{ mode() === 'sign-up' ? 'Create your account' : 'Welcome back' }}</h2>
+        <p class="reason">{{ reason() ?? 'Save the drinks you love and find them again in Personal.' }}</p>
+
+        <form #form (submit)="submit($event, email.value, password.value)">
+            <label>
+                <span>Email</span>
+                <input #email type="email" name="email" autocomplete="email" required />
+            </label>
+            <label>
+                <span>Password</span>
+                <input #password type="password" name="password" required
+                    [attr.minlength]="mode() === 'sign-up' ? minPassword : null"
+                    [attr.autocomplete]="mode() === 'sign-up' ? 'new-password' : 'current-password'" />
+                @if (mode() === 'sign-up') {
+                    <small>At least {{ minPassword }} characters.</small>
+                }
+            </label>
+
+            @if (error()) {
+                <p class="error" role="alert">{{ error() }}</p>
+            }
+
+            <button type="submit" class="submit" [disabled]="busy()">
+                @if (mode() === 'sign-up') {
+                    {{ busy() ? 'Creating account…' : 'Create account' }}
+                } @else {
+                    {{ busy() ? 'Signing in…' : 'Sign in' }}
+                }
+            </button>
+        </form>
+
+        <p class="switch">
+            @if (mode() === 'sign-up') {
+                Already have an account? <button type="button" (click)="switchMode('sign-in')">Sign in</button>
+            } @else {
+                New here? <button type="button" (click)="switchMode('sign-up')">Create an account</button>
+            }
+        </p>
+    </div>
+</dialog>

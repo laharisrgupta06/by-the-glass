@@ -1,0 +1,37 @@
+rules_version = '2';
+
+// Personal data is private: each user can only read and change their own documents.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // One document per saved drink. The id is "<source>_<drinkId>", so the same
+    // drink can't be saved twice, and there are no updates: it's saved or it isn't.
+    match /users/{userId}/favorites/{favoriteId} {
+      allow read, delete: if isOwner(userId);
+      allow create: if isOwner(userId) && validFavorite(userId, favoriteId);
+    }
+
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function validFavorite(userId, favoriteId) {
+      let data = request.resource.data;
+      return data.keys().hasAll(['userId', 'source', 'drinkId', 'name', 'createdAt'])
+        && data.keys().hasOnly(['userId', 'source', 'drinkId', 'name', 'thumbnail', 'kind', 'createdAt'])
+        && data.userId == userId
+        && data.source in ['cocktaildb', 'curated']
+        && data.drinkId is string && data.drinkId.size() > 0 && data.drinkId.size() <= 64
+        && favoriteId == data.source + '_' + data.drinkId
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 200
+        && (!('thumbnail' in data) || (data.thumbnail is string && data.thumbnail.size() <= 500))
+        && (!('kind' in data) || data.kind in ['cocktail', 'mocktail', 'optional'])
+        && data.createdAt == request.time;
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

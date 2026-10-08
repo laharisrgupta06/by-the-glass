@@ -1,0 +1,66 @@
+$cream: #f6efe6;
+$amber: #e9b872;
+
+.favorite {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba($cream, 0.6);
+  font: inherit;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  svg {
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+    transition:
+      fill 0.2s,
+      transform 0.2s;
+  }
+
+  &:hover {
+    color: $amber;
+  }
+
+  &.saved {
+    color: $amber;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  &:active svg {
+    transform: scale(0.88);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $amber;
+    outline-offset: 2px;
+  }
+
+  &.labelled {
+    padding: 8px 16px 8px 12px;
+    border: 1px solid rgba($cream, 0.25);
+    border-radius: 3px;
+    font-size: 0.9rem;
+
+    &.saved {
+      border-color: rgba($amber, 0.6);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .favorite svg {
+    transition: none;
+  }
+}

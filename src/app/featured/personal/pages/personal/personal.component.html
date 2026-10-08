@@ -1,0 +1,39 @@
+<section class="personal-page">
+    <header class="masthead">
+        <p class="eyebrow">Personal</p>
+        <h1>Your drinks cabinet</h1>
+
+        @switch (auth.status()) {
+            @case ('signed-in') {
+                <p class="intro">
+                    Signed in as {{ auth.user()?.email }}.
+                    <button type="button" class="text-button" [disabled]="signingOut()" (click)="signOut()">
+                        {{ signingOut() ? 'Signing out…' : 'Sign out' }}
+                    </button>
+                </p>
+            }
+            @case ('signed-out') {
+                <p class="intro">
+                    Keep the drinks you love in one place, private to you. Your own recipes will live here too, soon.
+                </p>
+                <div class="actions">
+                    <button type="button" class="primary" (click)="signIn()">Sign in</button>
+                    <button type="button" class="text-button" (click)="createAccount()">Create an account</button>
+                </div>
+            }
+            @case ('unavailable') {
+                <p class="intro">Accounts aren't switched on for this copy of By the Glass yet, so there's nothing to save to.</p>
+            }
+            @default {
+                <p class="intro" aria-busy="true">Checking whether you're signed in…</p>
+            }
+        }
+    </header>
+
+    @if (auth.status() === 'signed-in') {
+        <div class="sections">
+            <app-favorites-section></app-favorites-section>
+            <!-- Saved AI Recipes and My Drinks sections go here once they exist. -->
+        </div>
+    }
+</section>

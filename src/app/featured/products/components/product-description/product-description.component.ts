@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 
+import { FavoriteButtonComponent } from 'src/app/core/favorites/favorite-button/favorite-button.component';
 import { Recipe } from '../../models/recipe.model';
 import { kindLabel } from '../../utils/drink-filters';
 
@@ -10,6 +11,7 @@ const UNHELPFUL_CATEGORIES = ['Cocktail', 'Ordinary Drink', 'Other / Unknown'];
 @Component({
   selector: 'app-product-description',
   standalone: true,
+  imports: [FavoriteButtonComponent],
   templateUrl: './product-description.component.html',
   styleUrl: './product-description.component.scss',
 })

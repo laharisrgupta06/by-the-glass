@@ -13,6 +13,14 @@ $amber: #e9b872;
   text-transform: uppercase;
 }
 
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+}
+
 h1 {
   margin: 0;
   font: 400 clamp(2.4rem, 5vw, 4rem) / 1.02 Fraunces, Georgia, serif;

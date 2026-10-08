@@ -22,6 +22,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:by-the-glass": "node dist/by-the-glass/server/server.mjs",
+    "emulators": "npx -y firebase-tools@15 emulators:start --only auth,firestore --project demo-by-the-glass",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "prettier": "npx prettier --write src/**/*.ts"
@@ -43,6 +44,7 @@
     "@ngrx/effects": "^17.1.0",
     "@ngrx/signals": "^17.1.0",
     "express": "^4.18.2",
+    "firebase": "^11.10.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

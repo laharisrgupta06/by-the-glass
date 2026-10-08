@@ -1,0 +1,122 @@
+$ink: #120e0b;
+$cream: #f6efe6;
+$amber: #e9b872;
+
+dialog {
+  width: min(26rem, calc(100vw - 32px));
+  padding: 0;
+  border: 1px solid rgba($cream, 0.14);
+  border-radius: 4px;
+  background: #1a1410;
+  color: $cream;
+
+  &::backdrop {
+    background: rgba($ink, 0.75);
+  }
+}
+
+.panel {
+  position: relative;
+  padding: 32px 28px 24px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: 0;
+  background: none;
+  color: rgba($cream, 0.6);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+h2 {
+  margin: 0;
+  font: 400 1.8rem Fraunces, Georgia, serif;
+}
+
+.reason {
+  margin: 8px 0 24px;
+  color: rgba($cream, 0.7);
+  line-height: 1.5;
+}
+
+label {
+  display: block;
+  margin-bottom: 18px;
+
+  span {
+    color: rgba($cream, 0.55);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  small {
+    color: rgba($cream, 0.45);
+  }
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid rgba($cream, 0.3);
+  outline: 0;
+  background: none;
+  color: $cream;
+  font: inherit;
+  font-size: 1rem;
+
+  &:focus {
+    border-color: $amber;
+  }
+}
+
+.error {
+  margin: 0 0 16px;
+  color: #f0a58c;
+  font-size: 0.9rem;
+}
+
+.submit {
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  border-radius: 3px;
+  background: $amber;
+  color: $ink;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+}
+
+.switch {
+  margin: 20px 0 0;
+  color: rgba($cream, 0.6);
+  font-size: 0.9rem;
+
+  button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: $amber;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid $amber;
+  outline-offset: 3px;
+}

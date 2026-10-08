@@ -1,7 +1,8 @@
+<!-- The heart sits beside the link, not inside it, so saving never opens the drink. -->
 <a class="drink-card" [routerLink]="['/product-details', recipe.id]">
     <div class="media">
         @if (recipe.thumbnail) {
-            <img [src]="recipe.thumbnail" alt="" width="350" height="350" loading="lazy" decoding="async" />
+            <img [src]="recipe.thumbnail" alt="" width="350" height="350" [attr.loading]="eager ? 'eager' : 'lazy'" decoding="async" />
         }
     </div>
     <h2 class="name">{{ recipe.name }} <span class="arrow" aria-hidden="true">&rarr;</span></h2>
@@ -9,3 +10,4 @@
         <p class="detail">{{ detail }}</p>
     }
 </a>
+<app-favorite-button class="favorite" [drink]="recipe"></app-favorite-button>

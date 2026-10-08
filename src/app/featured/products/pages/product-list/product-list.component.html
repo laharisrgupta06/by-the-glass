@@ -39,7 +39,7 @@
                 @if (cards().length) {
                     <ul class="grid">
                         @for (card of cards(); track card.recipe.source + card.recipe.id) {
-                            <li><app-product-card [recipe]="card.recipe" [detail]="card.detail"></app-product-card></li>
+                            <li><app-product-card [recipe]="card.recipe" [detail]="card.detail" [eager]="$index < 6"></app-product-card></li>
                         }
                     </ul>
                 } @else {
