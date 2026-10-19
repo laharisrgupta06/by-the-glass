@@ -30,10 +30,19 @@ export function toSteps(instructions: string | undefined): string[] {
     .filter(Boolean);
 }
 
-const ML_PER_UNIT: Record<string, number> = { oz: 30, cl: 10 };
+// The 30 ml bar ounce; kitchen spoons and cups as usually measured.
+const ML_PER_UNIT: Record<string, number> = {
+  oz: 30,
+  cl: 10,
+  tsp: 5,
+  tbsp: 15,
+  tblsp: 15,
+  cup: 240,
+  cups: 240,
+};
 const QUANTITY = String.raw`(\d+\s+\d+\/\d+|\d+\/\d+|\d+(?:\.\d+)?)`;
 const SIMPLE_MEASURE = new RegExp(
-  `^${QUANTITY}(?:\\s*-\\s*${QUANTITY})?\\s*(oz|cl)\\.?$`,
+  `^${QUANTITY}(?:\\s*-\\s*${QUANTITY})?\\s*(oz|cl|tsp|tbsp|tblsp|cups?)\\.?$`,
   'i'
 );
 
@@ -52,8 +61,9 @@ function formatMl(value: number): string {
 }
 
 /**
- * Metric equivalent for plain oz/cl measures, e.g. "1 1/2 oz" → "≈ 45 ml" using the
- * 30 ml bar ounce. Anything less precise ("1 shot", "Juice of 1/2") gets no hint.
+ * Metric equivalent for plain measures, e.g. "1 1/2 oz" → "≈ 45 ml" using the 30 ml
+ * bar ounce, "2 tsp" → "≈ 10 ml", "1 cup" → "≈ 240 ml". Anything less precise
+ * ("1 shot", "Juice of 1/2") gets no hint.
  */
 export function metricHint(measure: string | undefined): string | undefined {
   const match = measure?.trim().match(SIMPLE_MEASURE);
@@ -64,7 +74,8 @@ export function metricHint(measure: string | undefined): string | undefined {
     .filter(Boolean)
     .map(q => formatMl(parseQuantity(q) * factor))
     .join('–');
-  return unit.toLowerCase() === 'oz' ? `≈ ${amount} ml` : `${amount} ml`;
+  // Centilitres convert exactly; the others are customary sizes.
+  return unit.toLowerCase() === 'cl' ? `${amount} ml` : `≈ ${amount} ml`;
 }
 
 function capitalise(text: string): string {

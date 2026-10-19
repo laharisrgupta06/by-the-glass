@@ -12,6 +12,7 @@ import { ProductService } from './featured/products/services/product.service';
 import { DrinkRepository } from './featured/products/data/drink.repository';
 import { CocktailDbSource } from './featured/products/data/cocktaildb.source';
 import { CuratedSource } from './featured/products/data/curated.source';
+import { CabinetStore } from './featured/what-can-i-make/store/cabinet.store';
 
 // Each drinks route gets its own store; the data layer underneath is the same.
 const DRINK_DATA_PROVIDERS = [
@@ -62,6 +63,7 @@ export const routes: Routes = [
   },
   {
     path: 'what-can-i-make',
+    providers: [...DRINK_DATA_PROVIDERS, CabinetStore],
     loadComponent: () =>
       import(
         './featured/what-can-i-make/pages/what-can-i-make/what-can-i-make.component'
@@ -73,6 +75,35 @@ export const routes: Routes = [
       import('./featured/personal/pages/personal/personal.component').then(
         m => m.PersonalComponent
       ),
+  },
+  // My recipes: written by the person, private to them.
+  {
+    path: 'personal/recipes/new',
+    loadComponent: () =>
+      import(
+        './featured/personal/pages/recipe-editor/recipe-editor.component'
+      ).then(m => m.RecipeEditorComponent),
+  },
+  {
+    path: 'personal/recipes/:id/edit',
+    loadComponent: () =>
+      import(
+        './featured/personal/pages/recipe-editor/recipe-editor.component'
+      ).then(m => m.RecipeEditorComponent),
+  },
+  {
+    path: 'personal/recipes/:id',
+    loadComponent: () =>
+      import('./featured/personal/pages/my-recipe/my-recipe.component').then(
+        m => m.MyRecipeComponent
+      ),
+  },
+  {
+    path: 'personal/saved-recipes/:id',
+    loadComponent: () =>
+      import(
+        './featured/personal/pages/saved-recipe/saved-recipe.component'
+      ).then(m => m.SavedRecipeComponent),
   },
   {
     path: '**',

@@ -1,0 +1,152 @@
+<section class="editor-page">
+    <a class="back" routerLink="/personal">&larr; Personal</a>
+    <h1>{{ id() ? 'Edit your recipe' : 'Create a recipe' }}</h1>
+    <p class="lead">Your own recipe, private to you. Fields marked * are needed to save it.</p>
+
+    @if (notFound()) {
+        <div class="message" role="alert">
+            <p>We couldn't find that recipe among yours. It may have been deleted.</p>
+            <a routerLink="/personal">Back to Personal</a>
+        </div>
+    } @else if (id() && auth.status() === 'signed-out') {
+        <div class="message">
+            <p>Sign in to edit your recipes.</p>
+            <a routerLink="/personal">Go to Personal</a>
+        </div>
+    } @else if (id() && recipes.status() !== 'ready') {
+        <p class="message" role="status">Opening your recipe…</p>
+    } @else {
+        <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+            @if (attempted() && problemCount()) {
+                <p class="summary" role="alert" tabindex="-1">
+                    {{ problemCount() === 1 ? 'One thing needs' : problemCount() + ' things need' }} fixing before this can be saved.
+                </p>
+            }
+
+            <div class="field">
+                <label for="recipe-name">Name *</label>
+                <input id="recipe-name" formControlName="name" [attr.maxlength]="limits.name" autocomplete="off"
+                    [attr.aria-invalid]="!!error('name') || null" aria-describedby="recipe-name-error" />
+                <p class="error" id="recipe-name-error">{{ error('name') }}</p>
+            </div>
+
+            <div class="field">
+                <label for="recipe-description">Short description *</label>
+                <textarea id="recipe-description" formControlName="description" rows="2" [attr.maxlength]="limits.description"
+                    placeholder="What it tastes like, in a sentence."
+                    [attr.aria-invalid]="!!error('description') || null" aria-describedby="recipe-description-error"></textarea>
+                <p class="error" id="recipe-description-error">{{ error('description') }}</p>
+            </div>
+
+            <div class="field">
+                <span class="label" id="photo-label">Photo <small>optional</small></span>
+                @if (!photosAvailable) {
+                    <p class="hint">Photos can't be added in this copy of By the Glass yet.</p>
+                } @else {
+                    @if (photo(); as p) {
+                        <app-product-image class="photo-preview" [src]="p.url" alt="Your recipe photo"></app-product-image>
+                        <div class="photo-actions">
+                            <button type="button" class="add" (click)="fileInput.click()">Replace photo</button>
+                            <button type="button" class="add" (click)="removePhoto()">Remove photo</button>
+                        </div>
+                    } @else {
+                        <button type="button" class="add" [disabled]="preparingPhoto()" (click)="fileInput.click()">
+                            {{ preparingPhoto() ? 'Preparing photo…' : '+ Add a photo' }}
+                        </button>
+                    }
+                    <input #fileInput type="file" class="visually-hidden" accept="image/jpeg,image/png,image/webp"
+                        aria-labelledby="photo-label" (change)="choosePhoto($event)" />
+                    <p class="hint">JPEG, PNG or WebP, up to 10 MB. It's resized before it's uploaded.</p>
+                    <p class="error" role="alert">{{ photoError() }}</p>
+                }
+            </div>
+
+            <fieldset class="field kind">
+                <legend>Type *</legend>
+                <label><input type="radio" formControlName="kind" value="cocktail" /> Cocktail</label>
+                <label><input type="radio" formControlName="kind" value="mocktail" /> Mocktail</label>
+            </fieldset>
+
+            <fieldset class="field" formArrayName="ingredients">
+                <legend>Ingredients *</legend>
+                @for (row of ingredients.controls; track row; let i = $index) {
+                    <div class="ingredient" [formGroupName]="i">
+                        <label class="visually-hidden" [for]="'ingredient-name-' + i">Ingredient {{ i + 1 }}</label>
+                        <input [id]="'ingredient-name-' + i" class="name" formControlName="name" placeholder="Ingredient, e.g. Gin"
+                            [attr.maxlength]="limits.ingredientName" autocomplete="off"
+                            [attr.aria-invalid]="!!ingredientError(i, 'name') || null" />
+                        <label class="visually-hidden" [for]="'ingredient-quantity-' + i">Amount for ingredient {{ i + 1 }}</label>
+                        <input [id]="'ingredient-quantity-' + i" class="quantity" formControlName="quantity" inputmode="decimal"
+                            [placeholder]="needsQuantity(i) ? 'e.g. 45' : '—'" [attr.maxlength]="limits.quantity"
+                            [attr.aria-invalid]="!!ingredientError(i, 'quantity') || null" />
+                        <label class="visually-hidden" [for]="'ingredient-unit-' + i">Unit for ingredient {{ i + 1 }}</label>
+                        <select [id]="'ingredient-unit-' + i" formControlName="unit">
+                            @for (unit of units; track unit) {
+                                <option [value]="unit">{{ unit }}</option>
+                            }
+                        </select>
+                        <button type="button" class="remove" [disabled]="ingredients.length === 1"
+                            [attr.aria-label]="'Remove ingredient ' + (i + 1)" (click)="removeIngredient(i)">&times;</button>
+                        @if (ingredientError(i, 'name') || ingredientError(i, 'quantity')) {
+                            <p class="error">{{ ingredientError(i, 'name') }} {{ ingredientError(i, 'quantity') }}</p>
+                        }
+                    </div>
+                }
+                <p class="error">{{ error('ingredients') }}</p>
+                <button type="button" class="add" [disabled]="ingredients.length >= limits.ingredients" (click)="addIngredient()">
+                    + Add ingredient
+                </button>
+            </fieldset>
+
+            <div class="field">
+                <label for="recipe-method">Method *</label>
+                <textarea id="recipe-method" formControlName="method" rows="5" placeholder="One step per line."
+                    [attr.aria-invalid]="!!error('steps') || null" aria-describedby="recipe-method-hint recipe-method-error"></textarea>
+                <p class="hint" id="recipe-method-hint">One step per line; they're numbered for you.</p>
+                <p class="error" id="recipe-method-error">{{ error('steps') }}</p>
+            </div>
+
+            <div class="optional">
+                <div class="field">
+                    <label for="recipe-glass">Glass <small>optional</small></label>
+                    <input id="recipe-glass" formControlName="glass" [attr.maxlength]="limits.glass" placeholder="e.g. Coupe" />
+                    <p class="error">{{ error('glass') }}</p>
+                </div>
+                <div class="field">
+                    <label for="recipe-ice">Ice <small>optional</small></label>
+                    <input id="recipe-ice" formControlName="ice" [attr.maxlength]="limits.ice" placeholder="e.g. Shaken with ice; served up" />
+                    <p class="error">{{ error('ice') }}</p>
+                </div>
+                <div class="field">
+                    <label for="recipe-garnish">Garnish <small>optional</small></label>
+                    <input id="recipe-garnish" formControlName="garnish" [attr.maxlength]="limits.garnish" placeholder="e.g. Lime wheel" />
+                    <p class="error">{{ error('garnish') }}</p>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="primary" [disabled]="recipes.busy()">
+                    {{ recipes.busy() ? 'Saving…' : id() ? 'Save changes' : 'Save recipe' }}
+                </button>
+                <button type="button" class="secondary" [attr.aria-expanded]="previewing()" aria-controls="recipe-preview"
+                    (click)="togglePreview()">{{ previewing() ? 'Hide preview' : 'Preview' }}</button>
+                <a class="cancel" [routerLink]="id() ? ['/personal/recipes', id()] : '/personal'">Cancel</a>
+            </div>
+            @if (recipes.saveError(); as message) {
+                <p class="save-error" role="alert">{{ message }}</p>
+            }
+        </form>
+
+        @if (previewing()) {
+            <section id="recipe-preview" class="preview" aria-label="Preview">
+                <p class="preview-label">Preview</p>
+                <app-product-image class="photo-preview" [src]="preview().image" [alt]="preview().name"></app-product-image>
+                <app-product-description [recipe]="preview()" [headingLevel]="2"></app-product-description>
+                <div class="columns">
+                    <app-product-ingredients [ingredients]="preview().ingredients"></app-product-ingredients>
+                    <app-product-instructions [stepList]="preview().steps"></app-product-instructions>
+                </div>
+            </section>
+        }
+    }
+</section>

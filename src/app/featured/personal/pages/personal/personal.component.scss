@@ -1,20 +1,100 @@
 $ink: #120e0b;
 $cream: #f6efe6;
 $amber: #e9b872;
+$error: #f0a58c;
 $gutter: clamp(16px, 4vw, 48px);
 
 // Bleed past the app's .container margin so the page runs edge to edge.
 .personal-page {
   min-height: calc(100svh - 64px);
   margin: -15px -2px;
-  padding: clamp(48px, 7vw, 96px) $gutter 96px;
+  padding: clamp(40px, 6vw, 80px) $gutter 96px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: $ink;
   color: $cream;
   box-sizing: border-box;
 }
 
+// A drink photo fading out of the top right corner into the page's own dark brown.
+// Decoration only: content sits above it, and the text never relies on it for contrast.
+.backdrop {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  width: min(1180px, 88%);
+  height: clamp(460px, 56vw, 760px);
+  object-fit: cover;
+  object-position: 72% 38%;
+  opacity: 0.2;
+  filter: blur(1.5px) saturate(0.8) sepia(0.2);
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: radial-gradient(ellipse 62% 62% at 74% 28%, #000 15%, transparent 72%);
+  mask-image: radial-gradient(ellipse 62% 62% at 74% 28%, #000 15%, transparent 72%);
+}
+
+@media (max-width: 640px) {
+  .backdrop {
+    width: 100%;
+    height: 420px;
+    object-position: 78% 40%;
+    opacity: 0.16;
+    -webkit-mask-image: linear-gradient(to bottom, #000 10%, transparent 92%);
+    mask-image: linear-gradient(to bottom, #000 10%, transparent 92%);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (forced-colors: active) {
+  .backdrop {
+    display: none;
+  }
+}
+
+.profile,
+.sections,
+.tiles {
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px 32px;
+  padding-bottom: clamp(32px, 5vw, 48px);
+  border-bottom: 1px solid rgba($cream, 0.12);
+}
+
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border: 1px solid rgba($amber, 0.6);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, rgba($amber, 0.22), rgba($amber, 0.04));
+  color: $amber;
+  font: 400 2rem Fraunces, Georgia, serif;
+
+  svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+  }
+}
+
+.who {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
 .eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   color: $amber;
   font-size: 0.75rem;
   letter-spacing: 0.18em;
@@ -23,67 +103,177 @@ $gutter: clamp(16px, 4vw, 48px);
 
 h1 {
   margin: 0;
-  font: 400 clamp(2.6rem, 6vw, 4.25rem) / 1.02 Fraunces, Georgia, serif;
+  overflow-wrap: anywhere;
+  font: 400 clamp(2.2rem, 5vw, 3.6rem) / 1.05 Fraunces, Georgia, serif;
   letter-spacing: -0.02em;
 }
 
+.email,
 .intro {
-  max-width: 34rem;
-  margin: 16px 0 0;
-  color: rgba($cream, 0.75);
+  margin: 10px 0 0;
+  color: rgba($cream, 0.7);
+  overflow-wrap: anywhere;
+}
+
+.intro {
+  max-width: 36rem;
   font-size: 1.05rem;
   line-height: 1.6;
 }
 
-.actions {
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 4px 12px;
+    border: 1px solid rgba($cream, 0.18);
+    border-radius: 999px;
+    color: rgba($cream, 0.75);
+    font-size: 0.8rem;
+  }
+}
+
+.profile-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px 24px;
-  margin-top: 28px;
+  gap: 12px;
+
+  &.inline {
+    margin-top: 24px;
+  }
+}
+
+.primary,
+.ghost {
+  padding: 11px 22px;
+  border-radius: 999px;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary:disabled,
+.ghost:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 
 .primary {
-  padding: 12px 28px;
   border: 0;
-  border-radius: 3px;
   background: $amber;
   color: $ink;
-  font: inherit;
   font-weight: 500;
-  cursor: pointer;
 
   &:hover {
     background: $cream;
   }
 }
 
-.text-button {
-  padding: 0;
-  border: 0;
+.ghost {
+  border: 1px solid rgba($cream, 0.3);
   background: none;
-  color: $amber;
-  font: inherit;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  cursor: pointer;
+  color: $cream;
 
   &:hover {
-    color: $cream;
+    border-color: $amber;
+    color: $amber;
   }
 }
 
-button:focus-visible {
-  outline: 2px solid $amber;
-  outline-offset: 3px;
+// Edit profile: under the name, lined up with it.
+.name-form {
+  flex: 1 1 100%;
+  max-width: 30rem;
+  margin-left: 120px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgba($cream, 0.75);
+    font-size: 0.85rem;
+  }
+
+  input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba($cream, 0.25);
+    border-radius: 4px;
+    background: rgba($ink, 0.7);
+    color: $cream;
+    font: inherit;
+
+    &:focus {
+      border-color: $amber;
+      outline: none;
+    }
+
+    &[aria-invalid='true'] {
+      border-color: $error;
+    }
+  }
+
+  .hint {
+    margin: 8px 0 0;
+    color: rgba($cream, 0.6);
+    font-size: 0.85rem;
+  }
+
+  .name-error {
+    min-height: 1.2em;
+    margin: 6px 0 12px;
+    color: $error;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .name-form {
+    margin-left: 0;
+  }
 }
 
 .sections {
-  margin-top: 56px;
+  display: grid;
+  gap: 72px;
+  margin-top: 48px;
 }
 
-@media (max-width: 599px) {
-  .personal-page {
-    min-height: calc(100svh - 96px);
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 20px;
+    border: 1px solid rgba($cream, 0.12);
+    border-radius: 4px;
+    background: rgba($cream, 0.03);
   }
+
+  h2 {
+    margin: 0 0 6px;
+    font: 400 1.25rem Fraunces, Georgia, serif;
+  }
+
+  p {
+    margin: 0;
+    color: rgba($cream, 0.65);
+  }
+}
+
+button:focus-visible,
+a:focus-visible,
+.name-form input:focus-visible {
+  outline: 2px solid $amber;
+  outline-offset: 3px;
 }

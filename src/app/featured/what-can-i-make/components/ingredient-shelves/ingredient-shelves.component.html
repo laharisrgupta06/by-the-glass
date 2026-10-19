@@ -1,0 +1,33 @@
+@if (shelves().length) {
+    <p class="label" id="shelves-label">Or browse the shelves</p>
+    <ul class="shelves" aria-labelledby="shelves-label">
+        @for (shelf of shelves(); track shelf.category.id) {
+            <li>
+                <button type="button" class="shelf" [class.open]="openId() === shelf.category.id"
+                    [attr.aria-expanded]="openId() === shelf.category.id"
+                    [attr.aria-controls]="panelId(shelf.category.id)" (click)="toggleShelf(shelf.category.id)">
+                    {{ shelf.category.label }}
+                    @if (pickedOn(shelf); as n) {
+                        <span class="picked">{{ n }}<span class="visually-hidden"> added</span></span>
+                    }
+                </button>
+            </li>
+        }
+    </ul>
+
+    @if (open(); as shelf) {
+        <div class="panel" role="region" [id]="panelId(shelf.category.id)" [attr.aria-label]="shelf.category.label">
+            <ul class="ingredients">
+                @for (option of shelf.options; track option.key) {
+                    <li>
+                        <button type="button" class="ingredient" [class.added]="isPicked(option.key)"
+                            [attr.aria-pressed]="isPicked(option.key)" (click)="toggle(option)">
+                            <span class="mark" aria-hidden="true">{{ isPicked(option.key) ? '✓' : '+' }}</span>
+                            {{ option.label }}
+                        </button>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+}

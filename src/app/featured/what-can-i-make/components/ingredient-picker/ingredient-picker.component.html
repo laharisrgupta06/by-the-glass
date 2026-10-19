@@ -1,0 +1,51 @@
+<div class="field" [class.invalid]="invalid">
+    <label class="visually-hidden" for="cabinet-input">Add an ingredient</label>
+    <input #input id="cabinet-input" type="text" role="combobox" autocomplete="off" autocapitalize="none"
+        spellcheck="false" enterkeyhint="done" placeholder="Lime, gin, mint…"
+        aria-autocomplete="list" aria-controls="cabinet-options" aria-describedby="cabinet-hint"
+        [attr.aria-expanded]="open()" [attr.aria-activedescendant]="open() ? optionId(active()) : null"
+        [attr.aria-invalid]="invalid || null"
+        [value]="text()" (input)="onInput($any($event.target).value)" (keydown)="onKeydown($event)"
+        (focus)="expanded.set(true)" (blur)="expanded.set(false)" />
+
+    <div class="options" [hidden]="!open()">
+        <ul id="cabinet-options" role="listbox" aria-label="Matching ingredients">
+            @for (s of suggestions(); track s.option.key; let i = $index) {
+                <!-- Combobox pattern: focus stays in the input, which handles the keys (aria-activedescendant). -->
+                <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+                <li role="option" [id]="optionId(i)" [attr.aria-selected]="i === active()" [class.active]="i === active()"
+                    (mousedown)="$event.preventDefault()" (mouseenter)="active.set(i)" (click)="pick(s.option)">
+                    <span class="option-name">{{ s.before }}<mark>{{ s.match }}</mark>{{ s.after }}</span>
+                    <span class="option-count">{{ s.option.count }} {{ s.option.count === 1 ? 'drink' : 'drinks' }}</span>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+<p id="cabinet-hint" class="hint" aria-live="polite">{{ hint() }}</p>
+@if (ownTerm(); as own) {
+    <button type="button" class="own" (click)="pickOwn(own)">
+        <span aria-hidden="true">+</span> Add “{{ own }}” as your own ingredient
+    </button>
+}
+@if (assistTerm(); as term) {
+    <app-ingredient-assist class="assist" [term]="term" [options]="options$()" [selected]="selected$()"
+        (add)="pick($event)"></app-ingredient-assist>
+}
+
+@if (chips().length) {
+    <div class="cabinet">
+        <ul class="chips" aria-label="Your ingredients">
+            @for (chip of chips(); track chip.key) {
+                <li @chip [class.own-chip]="isOwn(chip.key)" [attr.title]="isOwn(chip.key) ? 'Your own ingredient: none of our recipes use it' : null">
+                    <span>{{ chip.label }}</span>
+                    <button type="button" [attr.aria-label]="'Remove ' + chip.label" (click)="removeChip(chip)">
+                        <svg viewBox="0 0 10 10" width="10" height="10" aria-hidden="true"><path d="M1 1l8 8M9 1l-8 8" /></svg>
+                    </button>
+                </li>
+            }
+        </ul>
+        <button type="button" class="clear" (click)="clearAll()">Clear all</button>
+    </div>
+}
+<p class="visually-hidden" aria-live="polite">{{ announcement() }}</p>

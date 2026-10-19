@@ -1,39 +1,94 @@
 <section class="personal-page">
-    <header class="masthead">
-        <p class="eyebrow">Personal</p>
-        <h1>Your drinks cabinet</h1>
-
-        @switch (auth.status()) {
-            @case ('signed-in') {
-                <p class="intro">
-                    Signed in as {{ auth.user()?.email }}.
-                    <button type="button" class="text-button" [disabled]="signingOut()" (click)="signOut()">
+    <!-- Decoration only: one swappable photo, masked into the page's own colour. -->
+    <img class="backdrop" [src]="backdrop" alt="" width="2000" height="1336" decoding="async" fetchpriority="low" />
+    @switch (auth.status()) {
+        @case ('signed-in') {
+            <header class="profile">
+                <div class="avatar" aria-hidden="true">{{ initials() }}</div>
+                <div class="who">
+                    <p class="eyebrow">{{ hasName() ? 'Your profile' : 'Personal' }}</p>
+                    <h1>{{ name() }}</h1>
+                    @if (auth.user()?.email; as email) {
+                        <p class="email">{{ email }}</p>
+                    }
+                    @if (stats().length) {
+                        <ul class="stats" aria-label="Your collection">
+                            @for (stat of stats(); track stat) {
+                                <li>{{ stat }}</li>
+                            }
+                        </ul>
+                    }
+                </div>
+                <div class="profile-actions">
+                    @if (!editing()) {
+                        <button #editButton type="button" class="ghost" (click)="startEditing()">Edit profile</button>
+                    }
+                    <button type="button" class="ghost" [disabled]="signingOut() || savingName()" (click)="signOut()">
                         {{ signingOut() ? 'Signing out…' : 'Sign out' }}
                     </button>
-                </p>
-            }
-            @case ('signed-out') {
-                <p class="intro">
-                    Keep the drinks you love in one place, private to you. Your own recipes will live here too, soon.
-                </p>
-                <div class="actions">
-                    <button type="button" class="primary" (click)="signIn()">Sign in</button>
-                    <button type="button" class="text-button" (click)="createAccount()">Create an account</button>
                 </div>
-            }
-            @case ('unavailable') {
-                <p class="intro">Accounts aren't switched on for this copy of By the Glass yet, so there's nothing to save to.</p>
-            }
-            @default {
-                <p class="intro" aria-busy="true">Checking whether you're signed in…</p>
-            }
-        }
-    </header>
+                @if (editing()) {
+                    <form class="name-form" novalidate (submit)="saveName($event)">
+                        <label for="display-name">Display name</label>
+                        <input #nameInput id="display-name" type="text" autocomplete="name" [maxLength]="maxNameLength"
+                            [value]="draftName()" (input)="draftName.set(nameInput.value); nameError.set('')" (keydown.escape)="stopEditing()"
+                            [attr.aria-invalid]="!!nameError() || null" aria-describedby="display-name-hint display-name-error" />
+                        <p class="hint" id="display-name-hint">Shown on your profile. Your email and password don't change.</p>
+                        <p class="name-error" id="display-name-error" role="alert">{{ nameError() }}</p>
+                        <div class="profile-actions">
+                            <button type="submit" class="primary" [disabled]="savingName()">{{ savingName() ? 'Saving…' : 'Save' }}</button>
+                            <button type="button" class="ghost" [disabled]="savingName()" (click)="stopEditing()">Cancel</button>
+                        </div>
+                    </form>
+                }
+            </header>
 
-    @if (auth.status() === 'signed-in') {
-        <div class="sections">
-            <app-favorites-section></app-favorites-section>
-            <!-- Saved AI Recipes and My Drinks sections go here once they exist. -->
-        </div>
+            <div class="sections">
+                <!-- Kept apart: drinks you saved, AI recipes you saved, and recipes you wrote. -->
+                <app-favorites-section></app-favorites-section>
+                <app-saved-recipes-section></app-saved-recipes-section>
+                <app-my-recipes-section></app-my-recipes-section>
+            </div>
+        }
+        @case ('signed-out') {
+            <header class="profile">
+                <div class="avatar" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="30" height="30"><path d="M6 3h12l-1.4 7.5A4.6 4.6 0 0 1 13 14.2V19h3v2H8v-2h3v-4.8a4.6 4.6 0 0 1-3.6-3.7Z" /></svg>
+                </div>
+                <div class="who">
+                    <p class="eyebrow">Personal</p>
+                    <h1>Your drinks cabinet</h1>
+                    <p class="intro">
+                        Keep the drinks you love, the AI recipes you save and the recipes you create in one place, private to you.
+                    </p>
+                    <div class="profile-actions inline">
+                        <button type="button" class="primary" (click)="signIn()">Sign in</button>
+                        <button type="button" class="ghost" (click)="createAccount()">Create an account</button>
+                    </div>
+                </div>
+            </header>
+            <ul class="tiles" aria-label="What you'll find here">
+                <li><h2>Saved drinks</h2><p>Tap the heart on any drink and it waits for you here.</p></li>
+                <li><h2>Saved AI recipes</h2><p>Drinks the AI Bartender creates from what you have.</p></li>
+                <li><h2>My recipes</h2><p>Your own recipes, with amounts, method and a photo.</p></li>
+            </ul>
+        }
+        @case ('unavailable') {
+            <header class="profile">
+                <div class="who">
+                    <p class="eyebrow">Personal</p>
+                    <h1>Your drinks cabinet</h1>
+                    <p class="intro">Accounts aren't switched on for this copy of By the Glass yet, so there's nothing to save to.</p>
+                </div>
+            </header>
+        }
+        @default {
+            <header class="profile">
+                <div class="who">
+                    <p class="eyebrow">Personal</p>
+                    <p class="intro" aria-busy="true">Checking whether you're signed in…</p>
+                </div>
+            </header>
+        }
     }
 </section>

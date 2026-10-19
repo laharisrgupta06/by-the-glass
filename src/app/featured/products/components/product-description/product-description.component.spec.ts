@@ -49,4 +49,61 @@ describe('ProductDescriptionComponent', () => {
     );
     expect(labels).toEqual(['Glass']);
   });
+
+  it('can render the name as a level-2 heading inside another page', () => {
+    component.headingLevel = 2;
+    fixture.detectChanges();
+    expect(element.querySelector('h1')).toBeNull();
+    expect(element.querySelector('h2')!.textContent).toContain('Margarita');
+  });
+
+  it('shows a description when the drink has one, and none otherwise', () => {
+    expect(element.querySelector('.description')).toBeNull();
+    component.recipe = {
+      ...recipe,
+      description: 'A sour tequila cocktail with triple sec and lime juice.',
+    };
+    fixture.detectChanges();
+    expect(element.querySelector('.description')!.textContent).toContain(
+      'A sour tequila cocktail with triple sec and lime juice.'
+    );
+  });
+
+  it('lists ice and serving only when an approximate recipe gives them', () => {
+    component.recipe = {
+      ...recipe,
+      completeness: 'approximate',
+      ice: 'Shaken with ice; served without',
+      serving: 'Straight up',
+    };
+    fixture.detectChanges();
+    const labels = Array.from(element.querySelectorAll('dt')).map(
+      dt => dt.textContent
+    );
+    expect(labels).toEqual(['Glass', 'Ice', 'Serving']);
+  });
+
+  it('shows derived taste, ice and serving for TheCocktailDB, and says where they come from', () => {
+    component.recipe = {
+      ...recipe,
+      tastes: ['sour'],
+      ice: 'Shaken with ice; strained',
+    };
+    fixture.detectChanges();
+    const labels = Array.from(element.querySelectorAll('dt')).map(
+      dt => dt.textContent
+    );
+    expect(labels).toEqual(['Taste', 'Glass', 'Ice']);
+    expect(element.querySelector('dd')!.textContent).toBe('Sour');
+    expect(element.querySelector('.derived')!.textContent).toContain(
+      'Taste and ice are read from the recipe’s ingredients and method.'
+    );
+  });
+
+  it('adds no such note to venue drinks or recipes without derived details', () => {
+    expect(element.querySelector('.derived')).toBeNull();
+    component.recipe = { ...recipe, source: 'venue-menu', ice: 'Over ice' };
+    fixture.detectChanges();
+    expect(element.querySelector('.derived')).toBeNull();
+  });
 });

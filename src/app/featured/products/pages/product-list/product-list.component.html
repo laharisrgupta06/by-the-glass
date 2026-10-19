@@ -25,6 +25,12 @@
             @for (note of notes(); track note) {
                 <p class="note">{{ note }}</p>
             }
+            @if (catalogueGap()) {
+                <p class="note" role="status">
+                    {{ catalogueGap() }}
+                    <button type="button" class="text-button" (click)="retry()">Try again</button>
+                </p>
+            }
         </div>
 
         @switch (productsStore.status()) {

@@ -11,6 +11,23 @@ service cloud.firestore {
       allow create: if isOwner(userId) && validFavorite(userId, favoriteId);
     }
 
+    // Complete recipes saved to Personal (AI-curated today). The id is a hash of the
+    // recipe's content, so the same recipe can't be saved twice. Saved or not: no updates.
+    match /users/{userId}/savedRecipes/{recipeId} {
+      allow read, delete: if isOwner(userId);
+      allow create: if isOwner(userId) && validSavedRecipe(userId, recipeId);
+    }
+
+    // Recipes people write themselves (My recipes): private, editable, deletable.
+    // The creation time is set once and can't be changed afterwards.
+    match /users/{userId}/myRecipes/{recipeId} {
+      allow read, delete: if isOwner(userId);
+      allow create: if isOwner(userId) && validMyRecipe(userId, recipeId)
+        && request.resource.data.createdAt == request.time;
+      allow update: if isOwner(userId) && validMyRecipe(userId, recipeId)
+        && request.resource.data.createdAt == resource.data.createdAt;
+    }
+
     function isOwner(userId) {
       return request.auth != null && request.auth.uid == userId;
     }
@@ -20,13 +37,66 @@ service cloud.firestore {
       return data.keys().hasAll(['userId', 'source', 'drinkId', 'name', 'createdAt'])
         && data.keys().hasOnly(['userId', 'source', 'drinkId', 'name', 'thumbnail', 'kind', 'createdAt'])
         && data.userId == userId
-        && data.source in ['cocktaildb', 'curated']
+        && data.source in ['cocktaildb', 'curated', 'venue-menu']
         && data.drinkId is string && data.drinkId.size() > 0 && data.drinkId.size() <= 64
         && favoriteId == data.source + '_' + data.drinkId
         && data.name is string && data.name.size() > 0 && data.name.size() <= 200
         && (!('thumbnail' in data) || (data.thumbnail is string && data.thumbnail.size() <= 500))
         && (!('kind' in data) || data.kind in ['cocktail', 'mocktail', 'optional'])
         && data.createdAt == request.time;
+    }
+
+    function validSavedRecipe(userId, recipeId) {
+      let data = request.resource.data;
+      let fields = ['userId', 'origin', 'schemaVersion', 'recipe', 'basedOn', 'createdAt'];
+      let recipeFields = ['name', 'kind', 'description', 'ingredients', 'steps', 'glass', 'ice', 'garnish', 'serving'];
+      return recipeId.matches('ai-[0-9a-f]{16}')
+        && data.keys().hasAll(fields) && data.keys().hasOnly(fields)
+        && data.userId == userId
+        && data.origin == 'ai-curated'
+        && data.schemaVersion == 1
+        && data.createdAt == request.time
+        && data.basedOn is list && data.basedOn.size() >= 1 && data.basedOn.size() <= 20
+        && data.recipe is map
+        && data.recipe.keys().hasAll(recipeFields) && data.recipe.keys().hasOnly(recipeFields)
+        && data.recipe.name is string && data.recipe.name.size() > 0 && data.recipe.name.size() <= 60
+        && data.recipe.kind in ['cocktail', 'mocktail']
+        && data.recipe.description is string && data.recipe.description.size() <= 280
+        && data.recipe.ingredients is list && data.recipe.ingredients.size() >= 1 && data.recipe.ingredients.size() <= 14
+        && data.recipe.steps is list && data.recipe.steps.size() >= 1 && data.recipe.steps.size() <= 10
+        && data.recipe.glass is string && data.recipe.glass.size() <= 60
+        && data.recipe.ice is string && data.recipe.ice.size() <= 160
+        && data.recipe.garnish is string && data.recipe.garnish.size() <= 160
+        && data.recipe.serving is string && data.recipe.serving.size() <= 240;
+    }
+
+    function validMyRecipe(userId, recipeId) {
+      let data = request.resource.data;
+      let fields = ['userId', 'schemaVersion', 'name', 'description', 'kind', 'ingredients',
+        'steps', 'glass', 'ice', 'garnish', 'createdAt', 'updatedAt'];
+      return recipeId.matches('[A-Za-z0-9]{20}')
+        && data.keys().hasAll(fields) && data.keys().hasOnly(fields.concat(['image']))
+        && data.userId == userId
+        && data.schemaVersion == 1
+        && (!('image' in data) || validRecipeImage(data.image, userId, recipeId))
+        && data.updatedAt == request.time
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 60
+        && data.description is string && data.description.size() > 0 && data.description.size() <= 280
+        && data.kind in ['cocktail', 'mocktail']
+        && data.ingredients is list && data.ingredients.size() >= 1 && data.ingredients.size() <= 20
+        && data.steps is list && data.steps.size() >= 1 && data.steps.size() <= 15
+        && data.glass is string && data.glass.size() <= 60
+        && data.ice is string && data.ice.size() <= 120
+        && data.garnish is string && data.garnish.size() <= 120;
+    }
+
+    // A photo in Cloud Storage, in the owner's own folder for this recipe (storage.rules).
+    function validRecipeImage(image, userId, recipeId) {
+      return image is map
+        && image.keys().hasAll(['path', 'url']) && image.keys().hasOnly(['path', 'url'])
+        && image.path is string
+        && image.path.matches('users/' + userId + '/myRecipes/' + recipeId + '/[A-Za-z0-9._-]{1,60}')
+        && image.url is string && image.url.size() > 0 && image.url.size() <= 2000;
     }
 
     // Everything else is closed.

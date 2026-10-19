@@ -1,0 +1,76 @@
+<section class="bartender" aria-labelledby="bartender-title" [attr.aria-busy]="state().kind === 'creating'">
+    <h2 id="bartender-title" class="visually-hidden">AI Bartender</h2>
+    <div class="ask">
+        <button type="button" class="ai" [disabled]="state().kind === 'creating' || !available()" (click)="create()">
+            <span aria-hidden="true">&#10022;</span> {{ state().kind === 'creating' ? 'Creating your drink…' : 'Ask AI Bartender to Create a Drink' }}
+        </button>
+        <p class="hint">
+            @if (!available()) {
+                The AI Bartender isn't available right now.
+                @if (devMode) { It needs <code>npm run api:dev</code> with a Gemini key. }
+            } @else {
+                Creates a new drink from your ingredients, even when none of our recipes use them.
+            }
+        </p>
+    </div>
+    @if (needIngredients()) {
+        <p class="error" role="alert">Add at least one ingredient first, then ask the AI Bartender.</p>
+    }
+
+    @switch (state().kind) {
+        @case ('creating') {
+            <p class="status" role="status">
+                The AI Bartender is creating a drink from {{ list(ingredients) }}…
+                @if (slow()) { <span>Still mixing; this can take up to a minute.</span> }
+            </p>
+        }
+        @case ('failed') {
+            @if (failure(); as f) {
+                <p class="status" role="alert">
+                    @switch (f.code) {
+                        @case ('busy') { Gemini is very busy right now. Try again in {{ waitText(f.retryAfter) }}. }
+                        @case ('quota') { The Gemini usage limit for this key has been reached. Try again in {{ waitText(f.retryAfter) }}. }
+                        @case ('rate-limited') { Too many requests at once. Try again in {{ waitText(f.retryAfter) }}. }
+                        @case ('timeout') { The AI Bartender took too long to answer. }
+                        @case ('misconfigured') { The AI Bartender isn't set up correctly. The server log has the details. }
+                        @case ('offline') {
+                            Can't reach the AI Bartender.
+                            @if (devMode) { Start it with <code>npm run api:dev</code>. }
+                        }
+                        @case ('unavailable') { The AI Bartender isn't in right now. }
+                        @default { The AI Bartender's answer didn't pass our checks, so nothing is shown. }
+                    }
+                    No drink was created.
+                    @if (retryable(f.code)) {
+                        <button type="button" class="text-button" (click)="create()">Try again</button>
+                    }
+                </p>
+            }
+        }
+        @case ('ready') {
+            @if (answer(); as a) {
+                <div class="result" #result tabindex="-1" aria-live="polite">
+                    <h3 class="section-title">AI-created drink</h3>
+                    <p class="based-on">From your {{ list(a.basedOn) }}.
+                        @if (needed().length) {
+                            <strong>You'd also need {{ list(needed()) }}.</strong>
+                        } @else {
+                            You have everything it needs (optional extras aside).
+                        }
+                    </p>
+                    <app-ai-recipe-card [recipe]="a.recipe" label="AI-curated" givenLabel="You have"
+                        extraLabel="You'd need" [disclaimer]="disclaimer">
+                        <div class="actions">
+                            @if (saved.isSaved(a.recipe)) {
+                                <span class="saved">Saved to Personal</span>
+                            } @else {
+                                <button type="button" class="save" [disabled]="saved.isBusy(a.recipe)" (click)="save(a)">Save to Personal</button>
+                            }
+                            <button type="button" class="text-button" (click)="create()">Create another</button>
+                        </div>
+                    </app-ai-recipe-card>
+                </div>
+            }
+        }
+    }
+</section>

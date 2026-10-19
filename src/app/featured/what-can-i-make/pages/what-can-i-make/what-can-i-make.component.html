@@ -1,0 +1,90 @@
+<section class="make-page">
+    <header class="intro">
+        <p class="eyebrow">What can I make?</p>
+        <h1>What have you <em>got</em>?</h1>
+        <p class="lead">
+            Tell us what's sitting in your kitchen, bar cart or fridge. We'll find the drinks that make sense.
+        </p>
+        <!-- Pouring animation experiment: one line to move or remove. -->
+        <app-pour-animation class="intro-pour"></app-pour-animation>
+    </header>
+
+    <div class="panel">
+        <div class="step">
+            <h2 class="step-label"><span aria-hidden="true">01</span>Your ingredients</h2>
+            <app-ingredient-picker [options]="index()" [selected]="have()" [status]="store.status()"
+                [customLabels]="labels()" [invalid]="showMissing()" [reduceMotion]="reduceMotion"
+                (add)="addIngredient($event)" (addOwn)="addOwnIngredient($event)"
+                (remove)="removeIngredient($event)" (clear)="clearIngredients()">
+            </app-ingredient-picker>
+            <app-ingredient-shelves class="shelves" [options]="index()" [categories]="categories" [selected]="have()"
+                (add)="addIngredient($event)" (remove)="removeIngredient($event)"></app-ingredient-shelves>
+        </div>
+
+        <div class="step">
+            <h2 class="step-label" id="type-label"><span aria-hidden="true">02</span>Pouring</h2>
+            <div class="options" role="group" aria-labelledby="type-label">
+                @for (option of types; track option.value) {
+                    <button type="button" [class.active]="params().type === option.value"
+                        [attr.aria-pressed]="params().type === option.value" (click)="setType(option.value)">{{ option.label }}</button>
+                }
+            </div>
+        </div>
+
+        <div class="step">
+            <h2 class="step-label" id="taste-label"><span aria-hidden="true">03</span>In the mood for <small>optional</small></h2>
+            <div class="options" role="group" aria-labelledby="taste-label" aria-describedby="taste-basis">
+                @for (taste of tastes; track taste.id) {
+                    <button type="button" [class.active]="params().tastes.includes(taste.id)"
+                        [attr.aria-pressed]="params().tastes.includes(taste.id)" (click)="toggleTaste(taste.id)">{{ taste.label }}</button>
+                }
+            </div>
+            <p class="basis" id="taste-basis">
+                @if (pickedTastes().length) {
+                    Read from the ingredients:
+                    @for (taste of pickedTastes(); track taste.id) {
+                        {{ taste.label }} means {{ taste.basis }}.
+                    }
+                } @else {
+                    Most recipes don't come with tasting notes, so we read taste from what goes in. Menu drinks use the menu's own notes.
+                }
+            </p>
+        </div>
+
+        <div class="action">
+            <div class="buttons">
+                <button type="button" class="cta" (click)="find()">
+                    See what I can make <span class="arrow" aria-hidden="true">&rarr;</span>
+                </button>
+                <span class="or" aria-hidden="true">or</span>
+                <button type="button" class="surprise" (click)="surprise()">
+                    <span class="spark" aria-hidden="true">&#10022;</span> Surprise me with a {{ surpriseNoun() }}
+                </button>
+            </div>
+            @if (showMissing()) {
+                <p class="error" role="alert">Add at least one ingredient first. Even one will do.</p>
+            }
+            <p class="hint">Can't decide? Surprise me picks a complete recipe at random, no ingredients needed.</p>
+        </div>
+    </div>
+
+    <app-bartender-panel class="bartender-panel" [ingredients]="haveLabels()" [type]="params().type"
+        [tastes]="pickedTasteLabels()"></app-bartender-panel>
+
+    @if (surpriseState(); as state) {
+        <app-surprise-panel class="surprise-panel" [state]="state" [recipe]="surpriseRecipe()" [noun]="surpriseNoun()"
+            (another)="surprise()" (closed)="closeSurprise()" (retry)="retrySurprise()"></app-surprise-panel>
+    }
+    <p class="visually-hidden" aria-live="polite">{{ surpriseAnnouncement() }}</p>
+
+    @if (showResults() || store.status() === 'error') {
+        <div class="results">
+            <h2 class="visually-hidden" #resultsHeading tabindex="-1">Your drinks</h2>
+            <app-cabinet-results [status]="store.status()" [results]="results()" [labels]="labels()"
+                [own]="ownLabels()" [gaps]="store.gaps()"
+                [next]="next()" [noun]="noun()" [narrowed]="narrowed()"
+                (add)="addIngredient($event)" (retry)="retry()" (widen)="widen()">
+            </app-cabinet-results>
+        </div>
+    }
+</section>

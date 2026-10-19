@@ -46,6 +46,11 @@ h2 {
     color: rgba($cream, 0.7);
   }
 
+  code {
+    color: $amber;
+    font-size: 0.9em;
+  }
+
   .empty-title {
     color: $cream;
     font: 400 1.4rem Fraunces, Georgia, serif;

@@ -3,9 +3,18 @@
         <p class="eyebrow">{{ eyebrow }}</p>
     }
     <div class="title">
-        <h1>{{ recipe.name }}</h1>
-        <app-favorite-button [drink]="recipe" variant="labelled"></app-favorite-button>
+        @if (headingLevel === 2) {
+            <h2>{{ recipe.name }}</h2>
+        } @else {
+            <h1>{{ recipe.name }}</h1>
+        }
+        @if (favorite; as drink) {
+            <app-favorite-button [drink]="drink" variant="labelled"></app-favorite-button>
+        }
     </div>
+    @if (recipe.description) {
+        <p class="description">{{ recipe.description }}</p>
+    }
 </header>
 
 @if (facts.length) {
@@ -17,4 +26,7 @@
             </div>
         }
     </dl>
+}
+@if (derivedNote) {
+    <p class="derived">{{ derivedNote }}</p>
 }

@@ -1,4 +1,4 @@
-import { Recipe } from '../models/recipe.model';
+import { Recipe, isMenuDescription } from '../models/recipe.model';
 
 /**
  * Decides which recipes are worth showing in discovery. Nothing is deleted:
@@ -19,6 +19,10 @@ const TRIVIAL_METHOD_LENGTH = 40;
 export function qualityIssues(recipe: Recipe): QualityIssue[] {
   // List entries without details can't be judged yet, so they're given the benefit of the doubt.
   if (!recipe.hasDetails) return [];
+  // A menu description has no method or measures by nature; it only needs ingredients.
+  // It is never shown as a recipe, so the recipe checks below don't apply.
+  if (isMenuDescription(recipe))
+    return recipe.ingredients.length ? [] : ['single-ingredient'];
 
   const issues: QualityIssue[] = [];
   const meaningful = recipe.ingredients.filter(
@@ -65,7 +69,10 @@ export function curate(recipes: Recipe[]): CuratedList {
       hidden++;
       continue;
     }
-    const key = nameKey(recipe.name);
+    // A venue's drink can differ from the generic recipe, so the two never merge,
+    // even when they share a name.
+    const group = isMenuDescription(recipe) ? 'menu' : 'recipe';
+    const key = `${group}:${nameKey(recipe.name)}`;
     const existing = best.get(key);
     if (!existing) {
       best.set(key, recipe);

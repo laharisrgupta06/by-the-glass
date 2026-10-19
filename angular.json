@@ -35,6 +35,9 @@
             ],
             "scripts": [],
             "server": "src/main.server.ts",
+            "externalDependencies": [
+              "@google/genai"
+            ],
             "allowedCommonJsDependencies": [
               "@grpc/grpc-js",
               "@grpc/proto-loader"
@@ -49,6 +52,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/featured/products/data/venue-menu/venue-menu.data.ts",
+                  "with": "src/app/featured/products/data/venue-menu/venue-menu.data.disabled.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -71,6 +80,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.development.ts"
+                },
+                {
+                  "replace": "src/app/featured/products/data/venue-menu/venue-menu.data.ts",
+                  "with": "src/app/featured/products/data/venue-menu/venue-menu.data.local.ts"
                 }
               ]
             }
@@ -79,6 +92,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "by-the-glass:build:production"
@@ -103,6 +119,12 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "fileReplacements": [
+              {
+                "replace": "src/app/featured/products/data/venue-menu/venue-menu.data.ts",
+                "with": "src/app/featured/products/data/venue-menu/venue-menu.data.local.ts"
+              }
+            ],
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",

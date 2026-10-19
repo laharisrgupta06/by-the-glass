@@ -10,7 +10,18 @@ export const environment = {
     authDomain: '',
     projectId: '',
     appId: '',
+    /**
+     * Cloud Storage bucket for photos on people's own recipes. Empty keeps photo
+     * uploads switched off. New Firebase Storage buckets need the pay-as-you-go
+     * (Blaze) plan; deploy storage.rules with it.
+     */
+    storageBucket: '',
   },
   /** Point Auth and Firestore at the local Firebase emulators. */
   useFirebaseEmulators: false,
+  /**
+   * The venue-menu drinks. Off in production until permission to republish the menu
+   * is confirmed; production builds also swap out its data (angular.json).
+   */
+  venueMenu: false,
 };

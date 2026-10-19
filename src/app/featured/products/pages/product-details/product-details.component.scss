@@ -47,6 +47,14 @@ $gutter: clamp(16px, 4vw, 48px);
   border-top: 1px solid rgba($cream, 0.12);
 }
 
+// A quiet note, in the same voice as the credit line.
+.approximation {
+  margin: 28px 0 0;
+  color: rgba($cream, 0.55);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
 .credit {
   margin: 40px 0 0;
   color: rgba($cream, 0.45);

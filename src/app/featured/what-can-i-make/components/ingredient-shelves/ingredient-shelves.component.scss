@@ -1,0 +1,126 @@
+$cream: #f6efe6;
+$amber: #e9b872;
+
+:host {
+  display: block;
+}
+
+.label {
+  margin: 0 0 12px;
+  color: rgba($cream, 0.5);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shelves {
+  gap: 8px;
+}
+
+button {
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+
+  &:focus-visible {
+    outline: 2px solid $amber;
+    outline-offset: 2px;
+  }
+}
+
+.shelf {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid rgba($cream, 0.2);
+  border-radius: 2px;
+  color: rgba($cream, 0.8);
+  font-size: 0.875rem;
+
+  &:hover {
+    border-color: rgba($amber, 0.6);
+    color: $cream;
+  }
+
+  &.open {
+    border-color: $amber;
+    background: rgba($amber, 0.1);
+    color: $amber;
+  }
+}
+
+.picked {
+  color: $amber;
+  font: italic 0.85rem Fraunces, Georgia, serif;
+}
+
+.panel {
+  margin-top: 16px;
+  padding: 18px 0 4px;
+  border-top: 1px solid rgba($amber, 0.25);
+  animation: open 0.18s ease-out;
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.ingredients {
+  gap: 4px 22px;
+}
+
+.ingredient {
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  color: rgba($cream, 0.8);
+  font: 400 1rem Fraunces, Georgia, serif;
+  text-align: left;
+
+  &:hover {
+    color: $amber;
+    border-bottom-color: rgba($amber, 0.6);
+  }
+
+  &.added {
+    color: $amber;
+  }
+}
+
+.mark {
+  display: inline-block;
+  width: 1em;
+  color: $amber;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}

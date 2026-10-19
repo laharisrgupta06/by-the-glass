@@ -1,0 +1,205 @@
+$ink: #120e0b;
+$cream: #f6efe6;
+$amber: #e9b872;
+$error: #f0a58c;
+
+.editor-page {
+  display: block;
+  min-height: calc(100svh - 64px);
+  margin: -15px -2px;
+  padding: 28px clamp(16px, 4vw, 48px) 96px;
+  background: $ink;
+  color: $cream;
+}
+
+form,
+.preview,
+h1,
+.lead,
+.message {
+  max-width: 720px;
+}
+
+.back,
+.cancel,
+.lead,
+.hint {
+  color: rgba($cream, 0.65);
+}
+
+h1 {
+  margin: 20px 0 8px;
+  font: 400 clamp(2rem, 4vw, 3rem) / 1.1 Fraunces, Georgia, serif;
+}
+
+.field {
+  margin: 0 0 20px;
+  padding: 0;
+  border: 0;
+}
+
+label,
+legend,
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  color: rgba($cream, 0.8);
+}
+
+input:not([type='radio']),
+textarea,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid rgba($cream, 0.25);
+  border-radius: 3px;
+  background: rgba($cream, 0.04);
+  color: $cream;
+  font: inherit;
+
+}
+
+[aria-invalid='true'] {
+  border-color: $error;
+}
+
+.kind label {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.ingredient {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 5.5rem 7.5rem 2rem;
+  gap: 8px;
+  margin-bottom: 8px;
+
+  .error {
+    grid-column: 1 / -1;
+  }
+}
+
+.optional {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0 16px;
+}
+
+.error {
+  margin: 4px 0 0;
+  color: $error;
+  font-size: 0.85rem;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.summary {
+  padding: 10px 14px;
+  border-left: 2px solid $error;
+  color: $error;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.remove,
+.add,
+.secondary {
+  border: 1px solid rgba($cream, 0.3);
+  border-radius: 3px;
+  background: none;
+  color: $cream;
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.add {
+  padding: 8px 14px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.save-error {
+  max-width: 40rem;
+  margin: 16px 0 0;
+  padding: 12px 16px;
+  border-left: 3px solid $error;
+  background: rgba($error, 0.08);
+  color: $cream;
+  line-height: 1.5;
+}
+
+.primary {
+  padding: 12px 24px;
+  border: 0;
+  border-radius: 999px;
+  background: $amber;
+  color: $ink;
+}
+
+.secondary {
+  padding: 11px 20px;
+  border-radius: 999px;
+}
+
+.preview {
+  margin-top: 40px;
+  padding: 24px;
+  border: 1px solid rgba($amber, 0.35);
+}
+
+.preview-label {
+  margin: 0 0 12px;
+  color: $amber;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (max-width: 559px) {
+  .ingredient {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 2rem;
+
+    .name {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+.photo-preview {
+  max-width: 220px;
+  margin-bottom: 10px;
+}
+
+.photo-actions {
+  display: flex;
+  gap: 10px;
+}

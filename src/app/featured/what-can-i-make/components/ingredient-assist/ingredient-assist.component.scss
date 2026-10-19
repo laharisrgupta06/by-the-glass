@@ -1,0 +1,144 @@
+$cream: #f6efe6;
+$amber: #e9b872;
+
+:host {
+  display: block;
+}
+
+button {
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+
+  &:focus-visible {
+    outline: 2px solid $amber;
+    outline-offset: 3px;
+  }
+}
+
+.ask,
+.text-button {
+  padding: 4px 0;
+  color: $amber;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &:hover {
+    color: $cream;
+  }
+}
+
+.status {
+  margin: 0;
+  color: rgba($cream, 0.65);
+  font-size: 0.85rem;
+}
+
+.slow {
+  color: rgba($cream, 0.45);
+}
+
+code {
+  color: $amber;
+}
+
+.answer {
+  margin-top: 4px;
+  padding: 16px 18px;
+  border: 1px solid rgba($amber, 0.3);
+  border-radius: 3px;
+  background: rgba($amber, 0.04);
+  animation: open 0.18s ease-out;
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.title {
+  margin: 0;
+  font: 400 1.15rem Fraunces, Georgia, serif;
+}
+
+.summary,
+.lead {
+  margin: 8px 0 0;
+  color: rgba($cream, 0.75);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.suggestions {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    padding: 10px 0;
+    border-top: 1px solid rgba($cream, 0.1);
+  }
+}
+
+.relation {
+  margin-right: 10px;
+  color: rgba($amber, 0.85);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.name {
+  font: 400 1.05rem Fraunces, Georgia, serif;
+}
+
+.reason {
+  display: block;
+  margin-top: 2px;
+  color: rgba($cream, 0.55);
+  font-size: 0.8rem;
+}
+
+.add {
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 1px solid rgba($amber, 0.6);
+  border-radius: 2px;
+  color: $amber;
+  font-size: 0.85rem;
+
+  &:hover {
+    background: rgba($amber, 0.12);
+    color: $cream;
+  }
+}
+
+.added {
+  color: rgba($cream, 0.5);
+  font-size: 0.85rem;
+}
+
+.credit {
+  margin: 12px 0 0;
+  color: rgba($cream, 0.45);
+  font-size: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answer {
+    animation: none;
+  }
+}

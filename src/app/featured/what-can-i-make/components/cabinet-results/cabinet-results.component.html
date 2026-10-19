@@ -1,0 +1,91 @@
+@switch (status) {
+    @case ('error') {
+        <div class="message" role="alert">
+            <h2>The bar's closed for a moment.</h2>
+            <p>We couldn't reach the drinks list, so we can't check your cabinet. Check your connection and try again.</p>
+            <button type="button" class="text-button" (click)="retry.emit()">Try again</button>
+        </div>
+    }
+    @case ('ready') {
+        @if (results; as r) {
+            <p class="summary" aria-live="polite">
+                {{ r.ready.length }} ready to make, {{ r.almost.length }} almost there, from {{ r.checked }} {{ noun }} checked.
+            </p>
+            @if (gapNote(); as note) {
+                <p class="stands" role="status">
+                    {{ note }}
+                    <button type="button" class="text-button" (click)="retry.emit()">Try again</button>
+                </p>
+            }
+
+            @if (r.ready.length) {
+                <section class="group" aria-labelledby="ready-title">
+                    <h2 id="ready-title">Ready to make <span class="count">{{ r.ready.length }}</span></h2>
+                    <p class="lede">Everything these need is in your cabinet.</p>
+                    @if (standsNote(); as note) {
+                        <p class="stands">{{ note }}</p>
+                    }
+                    <ul class="grid">
+                        @for (match of r.ready; track match.recipe.source + match.recipe.id) {
+                            <li><app-product-card [recipe]="match.recipe" [detail]="detail(match.recipe)" [eager]="$index < 4"></app-product-card></li>
+                        }
+                    </ul>
+                </section>
+            }
+
+            @if (!r.ready.length && r.almost.length) {
+                <p class="lede">Nothing you can pour outright yet, but you're close.</p>
+            }
+
+            @if (r.almost.length) {
+                <section class="group" aria-labelledby="almost-title">
+                    <h2 id="almost-title">Almost there: missing ingredients <span class="count">{{ r.almost.length }}</span></h2>
+                    <p class="lede">
+                        These use something you have. Get the ingredients listed as missing on each and you can make it.
+                        @if (next && next.count > 1) {
+                            {{ label(next.key) }} would finish {{ next.count }} of these.
+                            <button type="button" class="text-button" (click)="add.emit(next.key)">I've got {{ label(next.key).toLowerCase() }}</button>
+                        }
+                    </p>
+                    <ul class="grid">
+                        @for (match of almostVisible(r.almost); track match.recipe.source + match.recipe.id) {
+                            <li><app-product-card [recipe]="match.recipe" [detail]="detail(match.recipe)" [note]="missing(match)"></app-product-card></li>
+                        }
+                    </ul>
+                    @if (r.almost.length > almostShown && !showAllAlmost()) {
+                        <p class="lede">
+                            Showing the {{ almostShown }} closest.
+                            <button type="button" class="text-button" (click)="showAllAlmost.set(true)">Show all {{ r.almost.length }}</button>
+                        </p>
+                    }
+                </section>
+            }
+
+            @if (!r.ready.length && !r.almost.length) {
+                <div class="message">
+                    <h2>Nothing poured from that combination.</h2>
+                    <p>
+                        @if (own.length) {
+                            None of our recipes use {{ ownList() }} yet. The AI Bartender can create a drink with {{ own.length === 1 ? 'it' : 'them' }}.
+                        }
+                        Most drinks need a few things working together. Try adding a mixer or some citrus from the shelves above.
+                        @if (narrowed) {
+                            Or loosen the filters.
+                            <button type="button" class="text-button" (click)="widen.emit()">Show every drink</button>
+                        }
+                    </p>
+                </div>
+            }
+        }
+    }
+    @default {
+        <div aria-busy="true">
+            <p class="summary" role="status">Checking your cabinet…</p>
+            <div class="grid" aria-hidden="true">
+                @for (i of skeletons; track i) {
+                    <div><div class="skeleton-media"></div><div class="skeleton-line"></div></div>
+                }
+            </div>
+        </div>
+    }
+}

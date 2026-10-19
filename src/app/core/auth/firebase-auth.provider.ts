@@ -35,7 +35,13 @@ export class FirebaseAuthProvider implements AuthProvider {
     firebaseServices().then(({ auth, authInstance }) => {
       if (stopped) return;
       unsubscribe = auth.onAuthStateChanged(authInstance, user =>
-        onChange(user && { id: user.uid, email: user.email })
+        onChange(
+          user && {
+            id: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+          }
+        )
       );
     }, onError);
     return () => {
@@ -61,5 +67,15 @@ export class FirebaseAuthProvider implements AuthProvider {
   async signOut(): Promise<void> {
     const { auth, authInstance } = await firebaseServices();
     await auth.signOut(authInstance);
+  }
+
+  /** Stored on the Firebase Auth profile; email and password aren't touched. */
+  async updateDisplayName(name: string): Promise<void> {
+    const { auth, authInstance } = await firebaseServices();
+    const user = authInstance.currentUser;
+    if (!user) throw new AuthError('signed-out');
+    await auth
+      .updateProfile(user, { displayName: name })
+      .catch(error => Promise.reject(toAuthError(error)));
   }
 }

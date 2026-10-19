@@ -53,6 +53,17 @@ export function refineNameMatches(recipes: Recipe[], query: string): Recipe[] {
   return wholeMatches.length ? wholeMatches : prefixMatches;
 }
 
+/**
+ * Alcohol-free stand-ins such as "Sober gin" or "non-alcoholic rum" name a spirit but
+ * contain none, so they never count for a spirit filter.
+ */
+const ALCOHOL_FREE =
+  /(^|[^\p{L}])(sober|non[- ]?alcoholic|alcohol[- ]free|zero[- ]proof)([^\p{L}]|$)/iu;
+
+export function isAlcoholFree(ingredient: string): boolean {
+  return ALCOHOL_FREE.test(ingredient);
+}
+
 /** The ingredient that makes this recipe count for the spirit, if any. */
 export function spiritIngredient(
   recipe: Recipe,
@@ -62,7 +73,9 @@ export function spiritIngredient(
   const excluded = new Set(spirit.exclude?.map(e => e.toLowerCase()));
   return recipe.ingredients.find(
     ({ name }) =>
-      !excluded.has(name.toLowerCase()) && terms.some(t => t.test(name))
+      !excluded.has(name.toLowerCase()) &&
+      !isAlcoholFree(name) &&
+      terms.some(t => t.test(name))
   )?.name;
 }
 
@@ -84,6 +97,15 @@ const KIND_LABELS: Record<DrinkKind, string> = {
 
 export function kindLabel(kind: DrinkKind | undefined): string | undefined {
   return kind && KIND_LABELS[kind];
+}
+
+/** Like kindLabel, but names a zero-proof cocktail as one (its kind is 'mocktail'). */
+export function drinkLabel(
+  recipe: Pick<Recipe, 'kind' | 'style'>
+): string | undefined {
+  return recipe.style === 'zero-proof'
+    ? 'Zero-proof cocktail'
+    : kindLabel(recipe.kind);
 }
 
 export function parseFilters(

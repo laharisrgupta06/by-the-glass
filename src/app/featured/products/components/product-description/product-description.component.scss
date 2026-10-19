@@ -21,10 +21,23 @@ $amber: #e9b872;
   gap: 16px 24px;
 }
 
-h1 {
+h1,
+h2 {
   margin: 0;
   font: 400 clamp(2.4rem, 5vw, 4rem) / 1.02 Fraunces, Georgia, serif;
   letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.description {
+  max-width: 40rem;
+  margin: 16px 0 0;
+  color: rgba($cream, 0.78);
+  font-size: 1.05rem;
+  line-height: 1.55;
 }
 
 .facts {
@@ -44,4 +57,10 @@ h1 {
     margin: 4px 0 0;
     font-size: 0.95rem;
   }
+}
+
+.derived {
+  margin: 12px 0 0;
+  color: rgba($cream, 0.45);
+  font-size: 0.8rem;
 }

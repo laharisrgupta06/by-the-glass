@@ -20,4 +20,6 @@ export abstract class AuthProvider {
   /** Rejects with AuthError. */
   abstract signIn(email: string, password: string): Promise<void>;
   abstract signOut(): Promise<void>;
+  /** Changes the signed-in account's display name only. Rejects with AuthError. */
+  abstract updateDisplayName(name: string): Promise<void>;
 }

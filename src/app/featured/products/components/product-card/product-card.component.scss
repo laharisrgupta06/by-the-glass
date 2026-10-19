@@ -40,6 +40,8 @@ $amber: #e9b872;
 }
 
 .media {
+  display: grid;
+  place-items: center;
   aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: 3px;
@@ -55,6 +57,11 @@ $amber: #e9b872;
       transform 0.5s ease,
       filter 0.3s;
   }
+}
+
+.no-photo {
+  color: rgba($cream, 0.4);
+  font: italic 0.95rem Fraunces, Georgia, serif;
 }
 
 .name,
@@ -80,6 +87,25 @@ $amber: #e9b872;
 .detail {
   margin: 6px 0 0;
   color: rgba($cream, 0.55);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.description {
+  display: -webkit-box;
+  margin: 6px 0 0;
+  overflow: hidden;
+  color: rgba($cream, 0.7);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.note {
+  margin: 4px 0 0;
+  padding-right: 32px;
+  color: $amber;
   font-size: 0.8rem;
   letter-spacing: 0.02em;
 }

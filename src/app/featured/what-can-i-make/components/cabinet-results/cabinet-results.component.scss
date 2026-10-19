@@ -1,0 +1,137 @@
+$cream: #f6efe6;
+$amber: #e9b872;
+
+:host {
+  display: block;
+}
+
+.summary {
+  margin: 0 0 8px;
+  color: rgba($cream, 0.55);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+.group {
+  padding-top: 40px;
+  animation: rise 0.35s ease-out both;
+
+  & + & {
+    margin-top: 56px;
+    border-top: 1px solid rgba($cream, 0.12);
+    animation-delay: 0.06s;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+h2 {
+  margin: 0;
+  font: 400 clamp(1.7rem, 3.5vw, 2.3rem) / 1.15 Fraunces, Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.count {
+  margin-left: 6px;
+  color: $amber;
+  font: italic 1rem Fraunces, Georgia, serif;
+  vertical-align: super;
+}
+
+.lede,
+.stands {
+  max-width: 40rem;
+  margin: 8px 0 0;
+  color: rgba($cream, 0.68);
+  line-height: 1.6;
+}
+
+.stands {
+  color: rgba($amber, 0.85);
+  font-size: 0.85rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 44px 24px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.text-button {
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: $amber;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+
+  &:hover {
+    color: $cream;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $amber;
+    outline-offset: 3px;
+  }
+}
+
+.message {
+  max-width: 34rem;
+  padding: 32px 0;
+  animation: rise 0.35s ease-out both;
+
+  p {
+    margin: 10px 0 28px;
+    color: rgba($cream, 0.7);
+    line-height: 1.6;
+  }
+}
+
+.skeleton-media,
+.skeleton-line {
+  border-radius: 3px;
+  background: rgba($cream, 0.06);
+  animation: shimmer 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes shimmer {
+  to {
+    background: rgba($cream, 0.1);
+  }
+}
+
+.skeleton-media {
+  aspect-ratio: 4 / 5;
+}
+
+.skeleton-line {
+  width: 60%;
+  height: 16px;
+  margin-top: 14px;
+}
+
+@media (max-width: 599px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group,
+  .message,
+  .skeleton-media,
+  .skeleton-line {
+    animation: none;
+  }
+}

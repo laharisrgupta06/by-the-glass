@@ -3,23 +3,41 @@
 
     @switch (productsStore.recipeStatus()) {
         @case ('ready') {
-            @if (productsStore.recipe(); as recipe) {
+            @if (shown(); as recipe) {
                 <div class="recipe">
-                    <app-product-image class="photo" [src]="recipe.image" [alt]="recipe.name"></app-product-image>
+                    @if (recipe.source === 'venue-menu') {
+                        <!-- Venue drinks have no photo; an illustration, labelled as one, once supplied. -->
+                        <app-product-image class="photo" [src]="illustration()?.url" [alt]="'Illustration of ' + recipe.name"
+                            [caption]="illustration() ? 'AI-generated illustration' : ''"></app-product-image>
+                    } @else {
+                        <app-product-image class="photo" [src]="recipe.image" [alt]="recipe.name"></app-product-image>
+                    }
 
                     <div class="body">
                         <app-product-description [recipe]="recipe"></app-product-description>
 
                         <div class="columns">
                             <app-product-ingredients [title]="productDetailConfig.ingredientsTitle"
+                                [note]="isMenuDescription(recipe) ? 'The venue doesn’t list amounts.' : ''"
                                 [ingredients]="recipe.ingredients"></app-product-ingredients>
-                            <app-product-instructions [title]="productDetailConfig.methodTitle"
-                                [translationsLabel]="productDetailConfig.translationsLabel"
-                                [instructions]="recipe.instructions" [translations]="recipe.translations">
-                            </app-product-instructions>
+                            @if (isMenuDescription(recipe)) {
+                                <app-menu-curation [drink]="recipe" (recipe)="menuRecipe.set($event)"
+                                    (illustration)="illustration.set($event)"></app-menu-curation>
+                            } @else {
+                                <app-product-instructions [title]="productDetailConfig.methodTitle"
+                                    [translationsLabel]="productDetailConfig.translationsLabel"
+                                    [instructions]="recipe.instructions" [stepList]="recipe.steps"
+                                    [translations]="recipe.translations">
+                                </app-product-instructions>
+                            }
                         </div>
 
-                        <p class="credit">Recipe from {{ recipe.credit }}</p>
+                        @if (isApproximate(recipe)) {
+                            <p class="approximation">
+                                Amounts and method are an AI-suggested approximation based on the venue’s ingredient list, not verified by the venue.
+                            </p>
+                        }
+                        <p class="credit">{{ recipe.source === 'venue-menu' ? 'From' : 'Recipe from' }} {{ recipe.credit }}</p>
                     </div>
                 </div>
             }

@@ -12,6 +12,8 @@ import { metricHint } from '../../utils/recipe-text';
 })
 export class ProductIngredientsComponent {
   @Input() title = 'Ingredients';
+  /** Replaces the usual note about blank amounts, e.g. for a menu description. */
+  @Input() note = '';
   @Input() set ingredients(value: RecipeIngredient[]) {
     this.rows = value.map(ingredient => ({
       ...ingredient,

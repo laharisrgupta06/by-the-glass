@@ -1,0 +1,111 @@
+$cream: #f6efe6;
+$amber: #e9b872;
+
+.card {
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid rgba($cream, 0.14);
+  border-radius: 4px;
+  background: rgba($cream, 0.03);
+  color: $cream;
+}
+
+.eyebrow {
+  margin: 0;
+  color: rgba($cream, 0.6);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge {
+  margin-right: 6px;
+  padding: 2px 8px;
+  border: 1px solid $amber;
+  border-radius: 999px;
+  color: $amber;
+}
+
+.title {
+  margin: 10px 0 6px;
+  font: 400 1.6rem / 1.2 Fraunces, Georgia, serif;
+}
+
+.description,
+.disclaimer {
+  margin: 0;
+  color: rgba($cream, 0.75);
+  line-height: 1.55;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+h4 {
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba($cream, 0.6);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+.ingredients li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba($cream, 0.08);
+  list-style: none;
+}
+
+.amount {
+  min-width: 5.5em;
+  color: $amber;
+}
+
+.tag {
+  margin-left: auto;
+  color: rgba($cream, 0.5);
+  font-size: 0.8rem;
+}
+
+.extra .tag {
+  color: #e48a6f;
+}
+
+.steps {
+  padding-left: 1.2em;
+  line-height: 1.55;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px 24px;
+  margin: 20px 0;
+
+  dt {
+    color: rgba($cream, 0.5);
+    font-size: 0.8rem;
+  }
+
+  dd {
+    margin: 2px 0 0;
+  }
+}
+
+.disclaimer {
+  padding: 10px 14px;
+  border-left: 2px solid $amber;
+  background: rgba($amber, 0.06);
+  font-size: 0.875rem;
+}

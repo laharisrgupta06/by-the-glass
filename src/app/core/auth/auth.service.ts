@@ -7,10 +7,34 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
+import { usingFirebaseEmulators } from '../firebase/firebase';
 import { AppUser, AuthError, AuthErrorCode, AuthStatus } from './auth.models';
 import { AuthProvider } from './auth-provider';
 
 export const MIN_PASSWORD_LENGTH = 8;
+export const MAX_DISPLAY_NAME_LENGTH = 50;
+
+/** Why a display name can't be used, or null when it's fine. */
+export function displayNameProblem(name: string): string | null {
+  const trimmed = name.trim();
+  if (!trimmed) return 'Enter a name, or cancel to keep things as they are.';
+  if (trimmed.length > MAX_DISPLAY_NAME_LENGTH)
+    return `Keep your name to ${MAX_DISPLAY_NAME_LENGTH} characters or fewer.`;
+  // eslint-disable-next-line no-control-regex
+  if (/[\u0000-\u001f\u007f]/.test(trimmed))
+    return 'Use letters, numbers, spaces and ordinary punctuation.';
+  return null;
+}
+
+/**
+ * Development builds talk to the local emulators, so "can't reach the server" there
+ * almost always means they aren't running. Say so, instead of blaming the connection.
+ */
+export function networkMessage(usingEmulators: boolean): string {
+  return usingEmulators
+    ? 'Can’t reach the local Firebase emulators. Start them with npm run emulators, then try again.'
+    : 'We can’t reach the server. Check your connection and try again.';
+}
 
 const MESSAGES: Record<AuthErrorCode, string> = {
   'invalid-credentials': "That email and password don't match.",
@@ -19,7 +43,8 @@ const MESSAGES: Record<AuthErrorCode, string> = {
   'weak-password': `Use at least ${MIN_PASSWORD_LENGTH} characters for your password.`,
   'invalid-email': 'That email address doesn’t look quite right.',
   'too-many-requests': 'Too many attempts. Wait a moment, then try again.',
-  network: 'We can’t reach the server. Check your connection and try again.',
+  network: networkMessage(usingFirebaseEmulators),
+  'signed-out': 'You’ve been signed out. Sign in again, then try once more.',
   unknown: 'Something went wrong. Please try again.',
 };
 
@@ -61,6 +86,24 @@ export class AuthService {
 
   signOut(): Promise<string | null> {
     return this.attempt(() => this.provider.signOut());
+  }
+
+  /** Changes the name shown on the profile. Resolves with an error message, or null. */
+  async updateDisplayName(name: string): Promise<string | null> {
+    const problem = displayNameProblem(name);
+    if (problem) return problem;
+    const user = this.user();
+    if (!user) return MESSAGES['signed-out'];
+    const clean = name.trim().replace(/\s+/g, ' ');
+    const error = await this.attempt(() =>
+      this.provider.updateDisplayName(clean)
+    );
+    // The provider doesn't announce profile changes, so update the signal here.
+    if (!error)
+      this.user.update(current =>
+        current?.id === user.id ? { ...current, displayName: clean } : current
+      );
+    return error;
   }
 
   private async attempt(action: () => Promise<void>): Promise<string | null> {

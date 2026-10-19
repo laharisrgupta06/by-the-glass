@@ -1,6 +1,8 @@
 export interface AppUser {
   id: string;
   email: string | null;
+  /** The name on the account, when it has one (email sign-up accounts usually don't). */
+  displayName?: string | null;
 }
 
 /** 'unavailable' means this build has no auth backend configured. */
@@ -13,6 +15,7 @@ export type AuthErrorCode =
   | 'invalid-email'
   | 'too-many-requests'
   | 'network'
+  | 'signed-out'
   | 'unknown';
 
 /** Provider-neutral error so the app never depends on a provider's error codes. */

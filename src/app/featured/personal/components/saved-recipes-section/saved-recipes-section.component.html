@@ -1,0 +1,47 @@
+<section aria-labelledby="saved-recipes-title">
+    <div class="section-head">
+        <h2 id="saved-recipes-title">Saved AI recipes</h2>
+        @if (saved.status() === 'ready' && cards().length) {
+            <p class="count">{{ cards().length }} saved</p>
+        }
+    </div>
+
+    @switch (saved.status()) {
+        @case ('ready') {
+            @if (cards().length) {
+                <ul class="grid">
+                    @for (card of cards(); track card.id) {
+                        <li>
+                            <app-product-card [recipe]="card.recipe" [detail]="card.detail"
+                                [description]="card.recipe.description ?? ''"
+                                [link]="['/personal/saved-recipes', card.id]"></app-product-card>
+                        </li>
+                    }
+                </ul>
+            } @else {
+                <div class="empty">
+                    <p class="empty-title">No saved AI recipes yet.</p>
+                    <p>Ask the AI Bartender in What can I make? and save a drink you like. It'll wait for you here.</p>
+                </div>
+            }
+        }
+        @case ('error') {
+            <div class="empty" role="alert">
+                <p class="empty-title">We couldn't open your saved recipes.</p>
+                @if (usingEmulators) {
+                    <p>This development build saves to the local Firebase emulators, and they aren't reachable. Start them with <code>npm run emulators</code>, then try again.</p>
+                } @else {
+                    <p>Check your connection and try again.</p>
+                }
+                <button type="button" (click)="saved.reload()">Try again</button>
+            </div>
+        }
+        @default {
+            <div class="grid" aria-hidden="true">
+                @for (i of [0, 1, 2]; track i) {
+                    <div class="skeleton"></div>
+                }
+            </div>
+        }
+    }
+</section>

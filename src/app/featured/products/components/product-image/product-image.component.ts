@@ -9,4 +9,6 @@ import { Component, Input } from '@angular/core';
 export class ProductImageComponent {
   @Input() src?: string;
   @Input() alt = '';
+  /** Shown under the picture, e.g. "AI-generated illustration". */
+  @Input() caption = '';
 }

@@ -1,6 +1,6 @@
 /** What's needed to save a drink. Recipe satisfies this shape. */
 export interface FavoriteDrink {
-  source: 'cocktaildb' | 'curated';
+  source: 'cocktaildb' | 'curated' | 'venue-menu';
   id: string;
   name: string;
   thumbnail?: string;

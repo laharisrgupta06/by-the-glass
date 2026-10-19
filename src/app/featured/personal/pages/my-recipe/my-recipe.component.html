@@ -1,0 +1,54 @@
+<article class="my-recipe-page">
+    <a class="back" routerLink="/personal">&larr; Personal</a>
+
+    @if (auth.status() === 'signed-out') {
+        <div class="message">
+            <h1>Your recipes are private.</h1>
+            <p>Sign in to open them.</p>
+            <button type="button" class="primary" (click)="signIn()">Sign in</button>
+        </div>
+    } @else if (recipes.status() === 'error') {
+        <div class="message" role="alert">
+            <h1>We couldn't open your recipes.</h1>
+            <p>Check your connection and try again.</p>
+            <button type="button" class="secondary" (click)="recipes.reload()">Try again</button>
+        </div>
+    } @else if (recipes.status() !== 'ready') {
+        <p class="message" role="status">Opening your recipe…</p>
+    } @else {
+        @if (shown(); as recipe) {
+        <div class="recipe">
+        <app-product-image class="photo" [src]="recipe.image" [alt]="recipe.name"></app-product-image>
+        <div class="body">
+            <app-product-description [recipe]="recipe"></app-product-description>
+            <div class="columns">
+                <app-product-ingredients [ingredients]="recipe.ingredients"></app-product-ingredients>
+                <app-product-instructions [stepList]="recipe.steps"></app-product-instructions>
+            </div>
+            <p class="credit">Your recipe, private to you.</p>
+
+            <div class="actions">
+                <a class="primary" [routerLink]="['/personal/recipes', id(), 'edit']">Edit</a>
+                @if (confirming()) {
+                    <span class="confirm" role="alert">
+                        Delete this recipe? This can't be undone.
+                        <button type="button" class="danger" [disabled]="recipes.busy()" (click)="remove()">
+                            {{ recipes.busy() ? 'Deleting…' : 'Delete' }}
+                        </button>
+                        <button type="button" class="secondary" (click)="confirming.set(false)">Keep it</button>
+                    </span>
+                } @else {
+                    <button type="button" class="secondary" (click)="confirming.set(true)">Delete</button>
+                }
+            </div>
+        </div>
+        </div>
+        } @else {
+        <div class="message" role="alert">
+            <h1>That glass is empty.</h1>
+            <p>We couldn't find this recipe among yours. It may have been deleted.</p>
+            <a routerLink="/personal">Back to Personal</a>
+        </div>
+        }
+    }
+</article>

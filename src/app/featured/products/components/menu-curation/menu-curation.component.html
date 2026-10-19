@@ -1,0 +1,35 @@
+<h2>Method</h2>
+@switch (state().kind) {
+    @case ('none') {
+        <p class="note">No method yet: the venue lists the ingredients only.</p>
+        <button type="button" class="suggest" (click)="create()">Suggest an approximate recipe</button>
+    }
+    @case ('creating') {
+        <p class="note" role="status">Working out approximate amounts and a method from these ingredients… This can take up to a minute.</p>
+    }
+    @case ('failed') {
+        @if (state(); as s) {
+            @if (s.kind === 'failed') {
+                <p class="note" role="alert">
+                    @switch (s.reason.code) {
+                        @case ('busy') { Gemini is very busy right now, so no recipe was suggested. }
+                        @case ('quota') { The Gemini usage limit for this key has been reached, so no recipe was suggested. }
+                        @case ('rate-limited') { Too many requests at once. Wait a minute and try again. }
+                        @case ('timeout') { That took too long, so no recipe was suggested. }
+                        @case ('offline') { Can't reach the AI service. @if (devMode) { Start it with <code>npm run api:dev</code>. } }
+                        @default { The suggestion didn't pass our checks, so nothing was saved. }
+                    }
+                    @if (retryable(s.reason.code)) {
+                        <button type="button" class="text-button" (click)="create()">Try again</button>
+                    }
+                </p>
+            }
+        }
+    }
+    @case ('loading') {
+        <p class="note" role="status">Loading…</p>
+    }
+    @default {
+        <p class="note">No method yet: the venue lists the ingredients only.</p>
+    }
+}

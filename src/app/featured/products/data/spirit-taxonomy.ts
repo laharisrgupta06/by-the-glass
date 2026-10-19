@@ -18,12 +18,25 @@ export const DEFAULT_SPIRITS: SpiritDefinition[] = [
   { id: 'gin', label: 'Gin', terms: ['gin'] },
   { id: 'vodka', label: 'Vodka', terms: ['vodka'] },
   { id: 'rum', label: 'Rum', terms: ['rum', 'bacardi'] },
-  { id: 'tequila', label: 'Tequila', terms: ['tequila'] },
+  {
+    id: 'tequila',
+    label: 'Tequila',
+    // Brands from the venue menu, listed there under "Tequila".
+    terms: ['tequila', 'camino blanco', 'camino gold'],
+  },
   { id: 'mezcal', label: 'Mezcal', terms: ['mezcal'] },
   {
     id: 'whiskey',
     label: 'Whiskey',
-    terms: ['whiskey', 'whisky', 'bourbon', 'scotch', 'jack daniels'],
+    // Dewar's is listed under "Blended Whiskey" on the venue menu.
+    terms: [
+      'whiskey',
+      'whisky',
+      'bourbon',
+      'scotch',
+      'jack daniels',
+      "dewar's",
+    ],
   },
   {
     id: 'brandy',
