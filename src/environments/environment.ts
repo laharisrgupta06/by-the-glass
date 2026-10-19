@@ -6,10 +6,10 @@
  */
 export const environment = {
   firebase: {
-    apiKey: '',
-    authDomain: '',
-    projectId: '',
-    appId: '',
+    apiKey: 'AIzaSyD3ZBoIhF8oYFmPvuXd1rHRQ_8VD7zZq8o',
+    authDomain: 'by-the-glass-9418d.firebaseapp.com',
+    projectId: 'by-the-glass-9418d',
+    appId: '1:737118422804:web:634bd2ba9334514ed9a401',
     /**
      * Cloud Storage bucket for photos on people's own recipes. Empty keeps photo
      * uploads switched off. New Firebase Storage buckets need the pay-as-you-go
