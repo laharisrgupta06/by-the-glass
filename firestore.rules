@@ -90,13 +90,19 @@ service cloud.firestore {
         && data.garnish is string && data.garnish.size() <= 120;
     }
 
-    // A photo in Cloud Storage, in the owner's own folder for this recipe (storage.rules).
+    // A recipe's photo: kept in the document itself as a small JPEG or WebP data URL
+    // (path "inline"; at most 300,000 characters, well inside Firestore's 1 MiB document
+    // limit), or, for older photos, in Cloud Storage in the owner's own folder for this
+    // recipe (storage.rules).
     function validRecipeImage(image, userId, recipeId) {
       return image is map
         && image.keys().hasAll(['path', 'url']) && image.keys().hasOnly(['path', 'url'])
-        && image.path is string
-        && image.path.matches('users/' + userId + '/myRecipes/' + recipeId + '/[A-Za-z0-9._-]{1,60}')
-        && image.url is string && image.url.size() > 0 && image.url.size() <= 2000;
+        && image.path is string && image.url is string
+        && ((image.path == 'inline'
+              && image.url.size() <= 300000
+              && image.url.matches('data:image/(jpeg|webp);base64,[A-Za-z0-9+/]+={0,2}'))
+          || (image.path.matches('users/' + userId + '/myRecipes/' + recipeId + '/[A-Za-z0-9._-]{1,60}')
+              && image.url.size() > 0 && image.url.size() <= 2000));
     }
 
     // Everything else is closed.

@@ -25,9 +25,8 @@ ui-debug.log
 # menu:recipes / menu:illustrate). Kept out of Git while menu republishing rights are
 # unconfirmed; keep a copy elsewhere if they matter.
 /venue-menu-generated
-# The venue menu's own text, for the same reason. It lives only in this local file,
-# which development builds and tests swap in (angular.json); the tracked
-# venue-menu.data.ts is an empty placeholder, and production builds never use either.
+# A leftover local copy of the venue menu from before it was published. The published
+# menu is the tracked venue-menu.data.ts; this file is no longer used by any build.
 /src/app/featured/products/data/venue-menu/venue-menu.data.local.ts
 yarn-error.log
 

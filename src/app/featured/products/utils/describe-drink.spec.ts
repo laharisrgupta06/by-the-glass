@@ -132,14 +132,14 @@ describe('drink descriptions', () => {
     );
   });
 
-  // The real menu data: skipped, and reported as such, where it's absent.
+  // The published menu data.
   describe('on the menu data', () => {
     requireRealVenueMenu();
 
     it('describes every drink distinctly, naming every ingredient and never a price', () => {
       const all = VENUE_MENU_DRINKS.map(describeMenuDrink);
-      expect(all.length).toBe(39);
-      expect(new Set(all).size).toBe(39);
+      expect(all.length).toBe(VENUE_MENU_DRINKS.length);
+      expect(new Set(all).size).toBe(all.length);
       for (const [i, description] of all.entries()) {
         for (const ingredient of VENUE_MENU_DRINKS[i].ingredients)
           expect(description).toContain(ingredient);

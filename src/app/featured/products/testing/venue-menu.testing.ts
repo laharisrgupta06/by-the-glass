@@ -7,24 +7,23 @@ import {
 /**
  * Helpers for specs that involve venue-menu drinks. Only imported by specs.
  *
- * Tests swap in venue-menu.data.local.ts (angular.json). On a machine with the real
- * menu that's the real data; in a fresh clone it's a copy of the empty placeholder.
+ * The published menu is venue-menu.data.ts. Behavioural tests swap fictional drinks in
+ * (useVenueMenu) so they don't depend on its contents.
  */
 
-/** Whether the real venue menu is in this checkout (checked before any swap). */
+/** Whether the published venue menu has any drinks (checked before any swap). */
 export const REAL_VENUE_MENU_PRESENT = VENUE_MENU_DRINKS.length > 0;
 
 /**
- * For checks of the real menu data itself. Where it's absent, each test in the
- * enclosing describe is reported as skipped, with the reason, rather than passing
- * against no data.
+ * For checks of the published menu data itself. The menu is part of the repository,
+ * so it must be there: if it's ever emptied by mistake, these checks fail rather than
+ * passing against no data.
  */
 export function requireRealVenueMenu(): void {
   beforeEach(() => {
-    if (!REAL_VENUE_MENU_PRESENT)
-      pending(
-        'Needs the real venue menu (venue-menu.data.local.ts), which isn’t in this checkout.'
-      );
+    expect(REAL_VENUE_MENU_PRESENT)
+      .withContext('The published venue menu (venue-menu.data.ts) is empty.')
+      .toBeTrue();
   });
 }
 

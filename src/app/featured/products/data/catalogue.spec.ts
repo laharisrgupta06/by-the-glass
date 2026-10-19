@@ -17,6 +17,7 @@ import { Catalogue, preferDetailed } from './catalogue';
 import { CocktailDbSource } from './cocktaildb.source';
 import { CuratedSource } from './curated.source';
 import { DrinkRepository } from './drink.repository';
+import { VENUE_MENU_DRINKS } from './venue-menu/venue-menu.data';
 import { VENUE_MENU_ENABLED } from './venue-menu/venue-menu.source';
 import {
   answerLetters,
@@ -250,11 +251,11 @@ describe('the drinks catalogue', () => {
     });
   });
 
-  // The real menu data: skipped, and reported as such, where it's absent.
+  // The published menu data.
   describe('with the menu data', () => {
     requireRealVenueMenu();
 
-    it('adds all 39 menu drinks as menu descriptions', async () => {
+    it('adds every published menu drink as a menu description', async () => {
       const { http, repository } = setUp(true);
       const pending = firstValueFrom(repository.catalogue());
       answerLists(http, {});
@@ -262,7 +263,7 @@ describe('the drinks catalogue', () => {
       const menu = (await pending).recipes.filter(
         r => r.source === 'venue-menu'
       );
-      expect(menu.length).toBe(39);
+      expect(menu.length).toBe(VENUE_MENU_DRINKS.length);
       expect(menu.every(r => r.completeness === 'menu-description')).toBeTrue();
     });
   });

@@ -19,9 +19,6 @@ export const environment = {
   },
   /** Point Auth and Firestore at the local Firebase emulators. */
   useFirebaseEmulators: false,
-  /**
-   * The venue-menu drinks. Off in production until permission to republish the menu
-   * is confirmed; production builds also swap out its data (angular.json).
-   */
-  venueMenu: false,
+  /** The venue-menu drinks (venue-menu.data.ts), published with the owner's permission. */
+  venueMenu: true,
 };

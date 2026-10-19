@@ -89,8 +89,12 @@ describe('RecipeEditorComponent', () => {
     expect(
       el().querySelector<HTMLButtonElement>('.remove')!.disabled
     ).toBeTrue();
-    el().querySelector<HTMLButtonElement>('.add')!.click();
-    el().querySelector<HTMLButtonElement>('.add')!.click();
+    const addIngredient = () =>
+      Array.from(el().querySelectorAll<HTMLButtonElement>('button.add'))
+        .find(b => b.textContent!.includes('Add ingredient'))!
+        .click();
+    addIngredient();
+    addIngredient();
     fixture.detectChanges();
     expect(rows()).toBe(3);
     el().querySelectorAll<HTMLButtonElement>('.remove')[1].click();
@@ -279,8 +283,12 @@ describe('RecipeEditorComponent', () => {
       return service.save.calls.mostRecent().args[2];
     };
 
-    it('says plainly when this copy can’t take photos (no storage bucket configured)', () => {
+    it('says plainly when this copy can’t take photos (accounts switched off)', () => {
       setUp(SAVED.id);
+      (
+        fixture.componentInstance as { photosAvailable: boolean }
+      ).photosAvailable = false;
+      fixture.detectChanges();
       expect(text()).toContain(
         "Photos can't be added in this copy of By the Glass yet."
       );

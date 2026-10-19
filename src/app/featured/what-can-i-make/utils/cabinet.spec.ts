@@ -763,7 +763,8 @@ describe('ingredient aliases for the venue menu', () => {
   });
 });
 
-// The real menu's ingredients: skipped, and reported as such, where it's absent.
+// The published menu's ingredients. A new ingredient that lands in Everything else
+// should be given a shelf in ingredient-categories.ts (or listed here if it's unclear).
 describe('shelves for venue-menu ingredients', () => {
   requireRealVenueMenu();
   const categories = defaultCategories(DEFAULT_SPIRITS.flatMap(s => s.terms));

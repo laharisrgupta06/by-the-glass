@@ -48,18 +48,12 @@ const codeOf = (error: unknown) => (error as { code?: string })?.code ?? '';
 export function photoFailure(error: unknown): string {
   const keep = 'Nothing was saved yet; your recipe and photo are still here.';
   switch (codeOf(error)) {
-    case 'storage/emulator-unavailable':
-      return `Photo uploads need the local Storage emulator, and it isn’t running. Restart the emulators with npm run emulators, then save again. ${keep}`;
-    case 'storage/unauthorized':
-    case 'storage/unauthenticated':
-      return `The photo was refused. Check you’re still signed in, and use a JPEG, PNG or WebP photo. ${keep}`;
-    case 'storage/retry-limit-exceeded':
-    case 'storage/canceled':
-      return `Uploading the photo took too long. Check your connection and try again, or remove the photo to save without it. ${keep}`;
-    case 'storage/quota-exceeded':
-      return `Photo storage isn’t available right now. Remove the photo to save without it. ${keep}`;
+    case 'photo/too-large':
+      return `That photo is too detailed to save. Try a smaller one, or remove the photo to save without it. ${keep}`;
+    case 'photo/unsupported':
+      return `That photo couldn’t be prepared. Choose it again, or try a JPEG. ${keep}`;
     default:
-      return `Couldn’t upload the photo. Try again, or remove the photo to save without it. ${keep}`;
+      return `Couldn’t add the photo. Try again, or remove the photo to save without it. ${keep}`;
   }
 }
 
@@ -67,6 +61,9 @@ export function photoFailure(error: unknown): string {
 function recipeFailure(error: unknown): string {
   if (error instanceof SaveTimeout)
     return 'Saving is taking too long, so we stopped waiting. Check your connection; if the recipe shows up in My recipes it was saved, otherwise save again.';
+  // Firebase's free plan has daily limits; past them, saving waits for the reset.
+  if (codeOf(error) === 'resource-exhausted')
+    return 'Saving is paused because today’s free limit has been reached. Try again tomorrow; everything you entered is still here.';
   if (codeOf(error) === 'permission-denied')
     return 'Your recipe was refused. Check you’re still signed in, then try again.';
   return 'Couldn’t save your recipe. Check your connection and try again; everything you entered is still here.';

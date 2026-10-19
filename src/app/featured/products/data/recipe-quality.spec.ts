@@ -37,14 +37,14 @@ describe('recipe quality with menu descriptions', () => {
     expect(curate(menu).recipes.length).toBe(3);
   });
 
-  // The real menu data: skipped, and reported as such, where it's absent.
+  // The published menu data.
   describe('on the menu data', () => {
     requireRealVenueMenu();
 
-    it('keeps all 39 menu descriptions', () => {
+    it('keeps every published menu description', () => {
       const menu = VENUE_MENU_DRINKS.map(fromVenueMenu);
       expect(menu.every(r => qualityIssues(r).length === 0)).toBeTrue();
-      expect(curate(menu).recipes.length).toBe(39);
+      expect(curate(menu).recipes.length).toBe(VENUE_MENU_DRINKS.length);
     });
   });
 

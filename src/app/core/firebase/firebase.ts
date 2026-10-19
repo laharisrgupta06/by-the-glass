@@ -5,9 +5,11 @@ export const firebaseConfigured =
   environment.useFirebaseEmulators ||
   !!(environment.firebase.apiKey && environment.firebase.projectId);
 
-/** Photos on people's own recipes need a Storage bucket (the emulator's in development). */
-export const recipePhotosAvailable =
-  firebaseConfigured && !!environment.firebase.storageBucket;
+/**
+ * Photos on people's own recipes are kept in the recipe's Firestore document, so they
+ * work wherever accounts do: no Cloud Storage bucket (or paid plan) needed.
+ */
+export const recipePhotosAvailable = firebaseConfigured;
 
 /** True for development builds, which talk to the local emulators (npm run emulators). */
 export const usingFirebaseEmulators = environment.useFirebaseEmulators;
@@ -49,22 +51,6 @@ async function initFirebase() {
 
 const STORAGE_EMULATOR_PORT = 9199;
 const STORAGE_RETRY_MS = 30_000;
-
-/**
- * Development only: whether the local Storage emulator answers. Without it an upload
- * would just keep retrying, so check first and say what's wrong.
- */
-export async function storageEmulatorRunning(): Promise<boolean> {
-  try {
-    await fetch(`http://127.0.0.1:${STORAGE_EMULATOR_PORT}/`, {
-      mode: 'no-cors',
-      signal: AbortSignal.timeout(3000),
-    });
-    return true;
-  } catch {
-    return false;
-  }
-}
 
 let storage: Promise<{
   storageModule: typeof import('firebase/storage');

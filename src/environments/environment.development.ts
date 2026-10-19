@@ -12,6 +12,6 @@ export const environment = {
     storageBucket: 'demo-by-the-glass.appspot.com',
   },
   useFirebaseEmulators: true,
-  /** The venue-menu drinks: development only until republishing is permitted. */
+  /** The venue-menu drinks (venue-menu.data.ts). */
   venueMenu: true,
 };

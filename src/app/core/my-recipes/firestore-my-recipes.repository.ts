@@ -1,25 +1,28 @@
 import { Injectable } from '@angular/core';
 
+import { environment } from '../../../environments/environment';
+import { firebaseServices, firebaseStorage } from '../firebase/firebase';
 import {
-  firebaseServices,
-  firebaseStorage,
-  storageEmulatorRunning,
-  usingFirebaseEmulators,
-} from '../firebase/firebase';
-import {
+  INLINE_PHOTO_MAX_URL_LENGTH,
+  INLINE_PHOTO_PATH,
   MY_RECIPE_SCHEMA_VERSION,
   MyRecipe,
   MyRecipeDraft,
   MyRecipeImage,
   readMyRecipe,
 } from './my-recipe.model';
-
-const EXTENSIONS: Record<string, string> = {
-  'image/jpeg': 'jpg',
-  'image/png': 'png',
-  'image/webp': 'webp',
-};
 import type { MyRecipesRepository } from './my-recipes-repository';
+
+// The types firestore.rules accepts for an inline photo (preparePhoto makes these).
+const INLINE_TYPES = ['image/webp', 'image/jpeg'];
+
+async function toBase64(blob: Blob): Promise<string> {
+  const bytes = new Uint8Array(await blob.arrayBuffer());
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 0x8000)
+    binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return btoa(binary);
+}
 
 /** The fields stored for a recipe: exactly these, trimmed (firestore.rules checks them). */
 function fields(userId: string, draft: MyRecipeDraft) {
@@ -109,26 +112,32 @@ export class FirestoreMyRecipesRepository implements MyRecipesRepository {
     });
   }
 
+  /**
+   * Keeps the photo in the recipe document itself, as a data: URL: no Cloud Storage,
+   * so it works on Firebase's free plan. The recipe write that follows stores it.
+   */
   async uploadImage(
-    userId: string,
-    recipeId: string,
+    _userId: string,
+    _recipeId: string,
     blob: Blob,
     contentType: string
   ): Promise<MyRecipeImage> {
-    if (usingFirebaseEmulators && !(await storageEmulatorRunning()))
-      throw Object.assign(new Error('Storage emulator not running'), {
-        code: 'storage/emulator-unavailable',
+    if (!INLINE_TYPES.includes(contentType))
+      throw Object.assign(new Error('Unsupported photo type'), {
+        code: 'photo/unsupported',
       });
-    const { storageModule, storage } = await firebaseStorage();
-    // A new name each time, so a replaced photo is never served from an old cache.
-    const extension = EXTENSIONS[contentType] ?? 'jpg';
-    const path = `users/${userId}/myRecipes/${recipeId}/photo-${Date.now()}.${extension}`;
-    const ref = storageModule.ref(storage, path);
-    await storageModule.uploadBytes(ref, blob, { contentType });
-    return { path, url: await storageModule.getDownloadURL(ref) };
+    const url = `data:${contentType};base64,${await toBase64(blob)}`;
+    if (url.length > INLINE_PHOTO_MAX_URL_LENGTH)
+      throw Object.assign(new Error('Photo too large'), {
+        code: 'photo/too-large',
+      });
+    return { path: INLINE_PHOTO_PATH, url };
   }
 
+  /** Inline photos go with their recipe; older ones in Cloud Storage are deleted there. */
   async deleteImage(path: string): Promise<void> {
+    if (path === INLINE_PHOTO_PATH || !environment.firebase.storageBucket)
+      return;
     const { storageModule, storage } = await firebaseStorage();
     await storageModule.deleteObject(storageModule.ref(storage, path));
   }

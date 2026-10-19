@@ -17,9 +17,6 @@
   ],
   "scripts": {
     "ng": "ng",
-    "postinstall": "node scripts/ensure-venue-menu-local.mjs",
-    "prestart": "node scripts/ensure-venue-menu-local.mjs",
-    "pretest": "node scripts/ensure-venue-menu-local.mjs",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

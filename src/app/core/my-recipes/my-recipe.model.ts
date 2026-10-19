@@ -74,7 +74,11 @@ export interface MyRecipeDraft {
  * document): where it is, and a URL to show it.
  */
 export interface MyRecipeImage {
-  /** users/{userId}/myRecipes/{recipeId}/{file} */
+  /**
+   * INLINE_PHOTO_PATH for a photo kept in the recipe document itself (url is then a
+   * data: URL). Older photos in Cloud Storage have their object path here:
+   * users/{userId}/myRecipes/{recipeId}/{file}.
+   */
   path: string;
   url: string;
 }
@@ -93,8 +97,18 @@ export type ImageChange =
   | { kind: 'remove' };
 
 export const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
-/** Before it's shrunk in the browser; what's uploaded is far smaller. */
+/** Before it's shrunk in the browser; what's stored is far smaller. */
 export const MAX_PHOTO_BYTES = 10 * 1024 * 1024;
+
+/**
+ * Photos are stored inside the recipe's own Firestore document, as a data: URL, so
+ * they need no Cloud Storage (and no paid plan). A document can hold at most 1 MiB, so
+ * the shrunk photo is kept to 150 KB (about 200 KB as base64); firestore.rules allows
+ * up to INLINE_PHOTO_MAX_URL_LENGTH characters.
+ */
+export const INLINE_PHOTO_PATH = 'inline';
+export const MAX_STORED_PHOTO_BYTES = 150 * 1024;
+export const INLINE_PHOTO_MAX_URL_LENGTH = 300_000;
 
 /** Why a chosen file can't be used as a recipe photo, or null. */
 export function photoProblem(file: {

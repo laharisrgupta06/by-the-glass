@@ -42,6 +42,7 @@ class FakeRepository implements MyRecipesRepository {
   calls: string[] = [];
   failUpload = false;
   failSave = false;
+  saveFailure: unknown = new Error('offline');
   hangSave = false;
   finishSave?: () => void;
   uploadError: unknown = new Error('storage unavailable');
@@ -69,7 +70,7 @@ class FakeRepository implements MyRecipesRepository {
     this.calls.push(`create ${id}`);
     if (this.hangSave)
       return new Promise<void>(resolve => (this.finishSave = resolve));
-    if (this.failSave) throw new Error('offline');
+    if (this.failSave) throw this.saveFailure;
     this.store(userId).set(id, {
       id,
       ...draft,
@@ -307,13 +308,13 @@ describe('MyRecipesService', () => {
     it('explains a failed upload, frees the button, and saves nothing', fakeAsync(() => {
       signIn();
       repository.failUpload = true;
-      repository.uploadError = { code: 'storage/emulator-unavailable' };
+      repository.uploadError = { code: 'photo/too-large' };
       let result: string | null | undefined;
       service.save(DRAFT, undefined, photo).then(v => (result = v));
       flushMicrotasks();
       expect(result).toBeNull();
       expect(service.busy()).toBeFalse();
-      expect(service.saveError()).toContain('npm run emulators');
+      expect(service.saveError()).toContain('too detailed to save');
       expect(repository.calls).toEqual(['upload']);
     }));
 
@@ -347,21 +348,28 @@ describe('MyRecipesService', () => {
       flush();
     }));
 
-    it('gives an actionable message for each kind of upload failure', () => {
-      expect(photoFailure({ code: 'storage/unauthorized' })).toContain(
-        'refused'
+    it('gives an actionable message for each kind of photo failure', () => {
+      expect(photoFailure({ code: 'photo/too-large' })).toContain(
+        'too detailed to save'
       );
-      expect(photoFailure({ code: 'storage/retry-limit-exceeded' })).toContain(
-        'took too long'
+      expect(photoFailure({ code: 'photo/unsupported' })).toContain(
+        'try a JPEG'
       );
-      expect(photoFailure({ code: 'storage/quota-exceeded' })).toContain(
-        'Remove the photo'
-      );
-      expect(photoFailure(new Error('?'))).toContain(
-        'Couldn’t upload the photo'
-      );
-      for (const code of ['storage/unauthorized', 'x'])
+      expect(photoFailure(new Error('?'))).toContain('Couldn’t add the photo');
+      for (const code of ['photo/too-large', 'x'])
         expect(photoFailure({ code })).toContain('still here');
     });
+
+    it('says when the free plan’s daily limit stops a save, and keeps the form', fakeAsync(() => {
+      signIn();
+      repository.failSave = true;
+      repository.saveFailure = { code: 'resource-exhausted' };
+      let result: string | null | undefined;
+      service.save(DRAFT).then(v => (result = v));
+      flushMicrotasks();
+      expect(result).toBeNull();
+      expect(service.busy()).toBeFalse();
+      expect(service.saveError()).toContain('today’s free limit');
+    }));
   });
 });
