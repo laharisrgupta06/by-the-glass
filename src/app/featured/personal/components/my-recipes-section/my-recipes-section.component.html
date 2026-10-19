@@ -1,0 +1,61 @@
+<section aria-labelledby="my-recipes-title">
+    <div class="section-head">
+        <h2 id="my-recipes-title">My recipes</h2>
+        <div class="head-side">
+            @if (recipes.status() === 'ready' && cards().length) {
+                <p class="count">{{ cards().length }} created</p>
+            }
+            <a class="create" routerLink="/personal/recipes/new">+ Create a recipe</a>
+        </div>
+    </div>
+
+    @switch (recipes.status()) {
+        @case ('ready') {
+            @if (cards().length) {
+                <ul class="grid">
+                    @for (card of cards(); track card.id) {
+                        <li>
+                            <app-product-card [recipe]="card.recipe" [detail]="card.detail"
+                                [description]="card.recipe.description ?? ''" [link]="['/personal/recipes', card.id]">
+                                <div card-actions class="card-actions">
+                                    @if (confirming() === card.id) {
+                                        <span class="confirm" role="alert">Delete for good?</span>
+                                        <button type="button" class="danger" [disabled]="recipes.busy()" (click)="remove(card.id)">Delete</button>
+                                        <button type="button" (click)="confirming.set(null)">Keep</button>
+                                    } @else {
+                                        <a [routerLink]="['/personal/recipes', card.id, 'edit']" [attr.aria-label]="'Edit ' + card.recipe.name">Edit</a>
+                                        <button type="button" [attr.aria-label]="'Delete ' + card.recipe.name" (click)="confirming.set(card.id)">Delete</button>
+                                    }
+                                </div>
+                            </app-product-card>
+                        </li>
+                    }
+                </ul>
+            } @else {
+                <div class="empty">
+                    <p class="empty-title">You haven't created a recipe yet.</p>
+                    <p>Write down a drink you make, with your own amounts, method and photo. Only you can see it.</p>
+                    <a routerLink="/personal/recipes/new">Create your first recipe</a>
+                </div>
+            }
+        }
+        @case ('error') {
+            <div class="empty" role="alert">
+                <p class="empty-title">We couldn't open your recipes.</p>
+                @if (usingEmulators) {
+                    <p>This development build saves to the local Firebase emulators, and they aren't reachable. Start them with <code>npm run emulators</code>, then try again.</p>
+                } @else {
+                    <p>Check your connection and try again.</p>
+                }
+                <button type="button" (click)="recipes.reload()">Try again</button>
+            </div>
+        }
+        @default {
+            <div class="grid" aria-hidden="true">
+                @for (i of [0, 1, 2]; track i) {
+                    <div class="skeleton"></div>
+                }
+            </div>
+        }
+    }
+</section>

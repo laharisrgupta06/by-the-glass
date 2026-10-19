@@ -1,3 +1,73 @@
-.example-spacer {
-    flex: 1 1 auto;
+$ink: #120e0b;
+$cream: #f6efe6;
+$amber: #e9b872;
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 64px;
+  padding: 0 clamp(16px, 4vw, 48px);
+  background: $ink;
+  border-bottom: 1px solid rgba($cream, 0.1);
+  color: $cream;
+}
+
+.brand {
+  color: inherit;
+  font: 400 1.4rem Fraunces, Georgia, serif;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: clamp(16px, 2.5vw, 32px);
+
+  a {
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    color: rgba($cream, 0.7);
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+
+    &:hover {
+      color: $cream;
+    }
+
+    &.nav-link-active {
+      color: $amber;
+      border-bottom-color: $amber;
+    }
   }
+}
+
+.navbar a:focus-visible {
+  outline: 2px solid $amber;
+  outline-offset: 4px;
+}
+
+// Narrow screens: brand on top, links on a second row that can scroll if needed.
+@media (max-width: 599px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 6px;
+    height: 96px;
+  }
+
+  .nav-links {
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+    overflow-x: auto;
+  }
+}

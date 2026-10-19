@@ -1,0 +1,94 @@
+$ink: #120e0b;
+$cream: #f6efe6;
+$amber: #e9b872;
+
+.my-recipe-page {
+  display: block;
+  min-height: calc(100svh - 64px);
+  margin: -15px -2px;
+  padding: 28px clamp(16px, 4vw, 48px) 96px;
+  background: $ink;
+  color: $cream;
+}
+
+.back {
+  color: rgba($cream, 0.65);
+  font-size: 0.875rem;
+}
+
+// Photo and recipe side by side, like a drink's own page.
+.recipe {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+  max-width: 1240px;
+  margin: 28px auto 0;
+}
+
+.message {
+  max-width: 880px;
+  margin-top: 28px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 40px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba($cream, 0.12);
+}
+
+.credit {
+  margin: 40px 0 0;
+  color: rgba($cream, 0.45);
+  font-size: 0.8rem;
+}
+
+.actions,
+.confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.actions {
+  margin-top: 24px;
+}
+
+.primary,
+.secondary,
+.danger {
+  padding: 10px 20px;
+  border-radius: 999px;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary {
+  border: 0;
+  background: $amber;
+  color: $ink;
+}
+
+.secondary {
+  border: 1px solid rgba($cream, 0.3);
+  background: none;
+  color: $cream;
+}
+
+.danger {
+  border: 1px solid #f0a58c;
+  background: none;
+  color: #f0a58c;
+}
+
+@media (max-width: 719px) {
+  .recipe,
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

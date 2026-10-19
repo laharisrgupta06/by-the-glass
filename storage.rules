@@ -1,0 +1,20 @@
+rules_version = '2';
+
+// Photos people add to their own recipes (My recipes). Private: only the owner can
+// read, add, replace or delete them. Images only, and small (the app shrinks them first).
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /users/{userId}/myRecipes/{recipeId}/{fileName} {
+      allow read, delete: if request.auth != null && request.auth.uid == userId;
+      allow create, update: if request.auth != null && request.auth.uid == userId
+        && recipeId.matches('[A-Za-z0-9]{20}')
+        && request.resource.size < 2 * 1024 * 1024
+        && request.resource.contentType.matches('image/(jpeg|png|webp)');
+    }
+
+    // Everything else is closed.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -24,6 +24,7 @@ export type ProductDetialsModel = ProductModel & {
   strInstructionsES?: string;
   strInstructionsDE?: string;
   strInstructionsFR?: string;
+  strInstructionsIT?: string;
   'strInstructionsZH-HANS'?: string;
   'strInstructionsZH-HANT'?: string;
   strIngredient1?: string;
@@ -59,28 +60,13 @@ export type ProductDetialsModel = ProductModel & {
 };
 
 export interface ProductListConfigModel {
-  components: string[];
-  layouts: {
-    display: string;
-    'flex-wrap': string;
-    margin: string;
-    'justify-content': string;
-    'flex-direction': string;
-  };
+  title: string;
+  intro: string;
 }
 
 export interface ProductDetailConfigModel {
-  cardsLayout: {
-    display: string;
-    'flex-wrap': string;
-    'box-sizing': string;
-    'justify-content': string;
-    margin: string;
-  };
-  loadingTextSpinner: {
-    position: string;
-    top: string;
-    left: string;
-    'font-weight': string;
-  };
+  backLabel: string;
+  ingredientsTitle: string;
+  methodTitle: string;
+  translationsLabel: string;
 }

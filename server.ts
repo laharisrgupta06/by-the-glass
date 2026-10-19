@@ -4,6 +4,7 @@ import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
+import { API_PREFIX, ingredientApi } from './src/server/ingredient-interpreter/express';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -17,8 +18,14 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
+  // Behind a hosting proxy, TRUST_PROXY (e.g. 1) lets rate limits see the visitor's IP.
+  const trustProxy = process.env['TRUST_PROXY']?.trim();
+  if (trustProxy)
+    server.set('trust proxy', /^\d+$/.test(trustProxy) ? Number(trustProxy) : trustProxy);
+
+  // Server-only API. Secrets like GEMINI_API_KEY stay in this process.
+  server.use(API_PREFIX, ingredientApi());
+
   // Serve static files from /browser
   server.get('*.*', express.static(browserDistFolder, {
     maxAge: '1y'

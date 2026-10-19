@@ -1,0 +1,35 @@
+<article class="my-recipe-page">
+    <a class="back" routerLink="/personal">&larr; Personal</a>
+
+    @if (auth.status() === 'signed-out') {
+        <div class="message">
+            <h1>Your saved recipes are private.</h1>
+            <p>Sign in to open them.</p>
+            <button type="button" class="primary" (click)="signIn()">Sign in</button>
+        </div>
+    } @else if (saved.status() === 'error') {
+        <div class="message" role="alert">
+            <h1>We couldn't open your saved recipes.</h1>
+            <p>Check your connection and try again.</p>
+            <button type="button" class="secondary" (click)="saved.reload()">Try again</button>
+        </div>
+    } @else if (saved.status() !== 'ready') {
+        <p class="message" role="status">Opening your recipe…</p>
+    } @else {
+        @if (item(); as saved) {
+            <div class="message">
+                <app-ai-recipe-card [recipe]="saved.recipe" label="AI-curated" givenLabel="You had"
+                    extraLabel="You'd need" [disclaimer]="disclaimer"></app-ai-recipe-card>
+                <div class="actions">
+                    <button type="button" class="secondary" (click)="remove()">Remove from saved</button>
+                </div>
+            </div>
+        } @else {
+            <div class="message" role="alert">
+                <h1>That glass is empty.</h1>
+                <p>We couldn't find this recipe among your saved ones. It may have been removed.</p>
+                <a routerLink="/personal">Back to Personal</a>
+            </div>
+        }
+    }
+</article>

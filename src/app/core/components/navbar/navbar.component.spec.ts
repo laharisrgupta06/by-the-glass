@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { NavbarComponent } from './navbar.component';
 import {
@@ -14,6 +15,7 @@ describe('NavbarComponent', () => {
     await TestBed.configureTestingModule({
       imports: [NavbarComponent],
       providers: [
+        provideRouter([]),
         {
           provide: GENERAL_CONFIG_DATA,
           useValue: GeneralConfig,
@@ -31,7 +33,7 @@ describe('NavbarComponent', () => {
   });
 
   it('should find the title of app based on general config value', () => {
-    const span = fixture.nativeElement.querySelector('span');
-    expect(span.textContent).toContain(component.generalConfig.appTitle);
+    const brand = fixture.nativeElement.querySelector('.brand');
+    expect(brand.textContent).toContain(component.generalConfig.appTitle);
   });
 });

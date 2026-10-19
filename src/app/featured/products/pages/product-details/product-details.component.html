@@ -1,25 +1,70 @@
-<div [style]="productDetailConfig.layouts">
-    @for (config of productDetailConfig.components; track $index) {
-            @switch (config) {
-                @case ('image') {
-                        <app-product-image></app-product-image>
-                }
-                @case ('description') {
-                        <app-product-description></app-product-description>
-                }
-                @case ('ingredients') {
-                        <mat-divider role="separator"></mat-divider>
-                        <app-product-ingredients></app-product-ingredients>
-                }
-                @case ('instructions') {
-                        <mat-divider role="separator"></mat-divider>
-                        <app-product-instructions></app-product-instructions>
-                }
-                @case ('tags') {
-                        <app-product-tags></app-product-tags>
-                }
-                @default { <p>Unknown Fruit.</p> }
+<article class="recipe-page">
+    <a class="back" routerLink="/drinks" (click)="back($event)">&larr; {{ productDetailConfig.backLabel }}</a>
 
+    @switch (productsStore.recipeStatus()) {
+        @case ('ready') {
+            @if (shown(); as recipe) {
+                <div class="recipe">
+                    @if (recipe.source === 'venue-menu') {
+                        <!-- Venue drinks have no photo; an illustration, labelled as one, once supplied. -->
+                        <app-product-image class="photo" [src]="illustration()?.url" [alt]="'Illustration of ' + recipe.name"
+                            [caption]="illustration() ? 'AI-generated illustration' : ''"></app-product-image>
+                    } @else {
+                        <app-product-image class="photo" [src]="recipe.image" [alt]="recipe.name"></app-product-image>
+                    }
+
+                    <div class="body">
+                        <app-product-description [recipe]="recipe"></app-product-description>
+
+                        <div class="columns">
+                            <app-product-ingredients [title]="productDetailConfig.ingredientsTitle"
+                                [note]="isMenuDescription(recipe) ? 'The venue doesn’t list amounts.' : ''"
+                                [ingredients]="recipe.ingredients"></app-product-ingredients>
+                            @if (isMenuDescription(recipe)) {
+                                <app-menu-curation [drink]="recipe" (recipe)="menuRecipe.set($event)"
+                                    (illustration)="illustration.set($event)"></app-menu-curation>
+                            } @else {
+                                <app-product-instructions [title]="productDetailConfig.methodTitle"
+                                    [translationsLabel]="productDetailConfig.translationsLabel"
+                                    [instructions]="recipe.instructions" [stepList]="recipe.steps"
+                                    [translations]="recipe.translations">
+                                </app-product-instructions>
+                            }
+                        </div>
+
+                        @if (isApproximate(recipe)) {
+                            <p class="approximation">
+                                Amounts and method are an AI-suggested approximation based on the venue’s ingredient list, not verified by the venue.
+                            </p>
+                        }
+                        <p class="credit">{{ recipe.source === 'venue-menu' ? 'From' : 'Recipe from' }} {{ recipe.credit }}</p>
+                    </div>
+                </div>
             }
+        }
+        @case ('not-found') {
+            <div class="message">
+                <h1>That glass is empty.</h1>
+                <p>We couldn't find this drink. It may have been removed from the source.</p>
+                <a class="text-link" routerLink="/drinks">Browse all drinks</a>
+            </div>
+        }
+        @case ('error') {
+            <div class="message" role="alert">
+                <h1>The bar's closed for a moment.</h1>
+                <p>We couldn't load this recipe. Check your connection and try again.</p>
+                <button type="button" class="text-link" (click)="retry()">Try again</button>
+            </div>
+        }
+        @default {
+            <div class="recipe" aria-hidden="true">
+                <div class="skeleton photo-skeleton"></div>
+                <div>
+                    <div class="skeleton line wide"></div>
+                    <div class="skeleton line"></div>
+                    <div class="skeleton line"></div>
+                </div>
+            </div>
+        }
     }
-</div>
+</article>

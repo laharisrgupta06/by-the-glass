@@ -1,16 +1,27 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatChipsModule } from '@angular/material/chips';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { ProductsStore } from '../../store/product.store';
+import { RecipeIngredient } from '../../models/recipe.model';
+import { metricHint } from '../../utils/recipe-text';
 
 @Component({
   selector: 'app-product-ingredients',
   standalone: true,
-  imports: [MatChipsModule],
   templateUrl: './product-ingredients.component.html',
   styleUrl: './product-ingredients.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductIngredientsComponent {
-  readonly productsStore = inject(ProductsStore);
+  @Input() title = 'Ingredients';
+  /** Replaces the usual note about blank amounts, e.g. for a menu description. */
+  @Input() note = '';
+  @Input() set ingredients(value: RecipeIngredient[]) {
+    this.rows = value.map(ingredient => ({
+      ...ingredient,
+      metric: metricHint(ingredient.measure),
+    }));
+    this.missingMeasures = value.some(ingredient => !ingredient.measure);
+  }
+
+  rows: (RecipeIngredient & { metric?: string })[] = [];
+  missingMeasures = false;
 }

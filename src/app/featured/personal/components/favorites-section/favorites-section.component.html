@@ -1,0 +1,44 @@
+<section aria-labelledby="favorites-title">
+    <div class="section-head">
+        <h2 id="favorites-title">Saved drinks</h2>
+        @if (favorites.status() === 'ready' && cards().length) {
+            <p class="count">{{ cards().length }} saved</p>
+        }
+    </div>
+
+    @switch (favorites.status()) {
+        @case ('ready') {
+            @if (cards().length) {
+                <ul class="grid">
+                    @for (card of cards(); track card.recipe.source + card.recipe.id) {
+                        <li><app-product-card [recipe]="card.recipe" [detail]="card.detail" [eager]="$index < 6"></app-product-card></li>
+                    }
+                </ul>
+            } @else {
+                <div class="empty">
+                    <p class="empty-title">Nothing on the shelf yet.</p>
+                    <p>Tap the heart on any drink and it'll wait for you here.</p>
+                    <a routerLink="/drinks">Browse drinks</a>
+                </div>
+            }
+        }
+        @case ('error') {
+            <div class="empty" role="alert">
+                <p class="empty-title">We couldn't open your favorites.</p>
+                @if (usingEmulators) {
+                    <p>This development build saves to the local Firebase emulators, and they aren't reachable. Start them with <code>npm run emulators</code>, then try again.</p>
+                } @else {
+                    <p>Check your connection and try again.</p>
+                }
+                <button type="button" (click)="favorites.reload()">Try again</button>
+            </div>
+        }
+        @default {
+            <div class="grid" aria-hidden="true">
+                @for (i of skeletons; track i) {
+                    <div class="skeleton"></div>
+                }
+            </div>
+        }
+    }
+</section>

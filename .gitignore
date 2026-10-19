@@ -9,6 +9,26 @@
 # Node
 /node_modules
 npm-debug.log
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+# Local secrets (GEMINI_API_KEY etc.). Commit .env.example instead.
+.env
+.env.*
+!.env.example
+# Local Firebase emulator data (dev accounts and favorites)
+/.firebase-emulator
+/.firebase-emulator-backups
+# Temporary folders firebase-tools leaves behind when an export is interrupted
+/firebase-export-*
+# AI-curated recipes and illustrations for venue-menu drinks (made by npm run
+# menu:recipes / menu:illustrate). Kept out of Git while menu republishing rights are
+# unconfirmed; keep a copy elsewhere if they matter.
+/venue-menu-generated
+# The venue menu's own text, for the same reason. It lives only in this local file,
+# which development builds and tests swap in (angular.json); the tracked
+# venue-menu.data.ts is an empty placeholder, and production builds never use either.
+/src/app/featured/products/data/venue-menu/venue-menu.data.local.ts
 yarn-error.log
 
 # IDEs and editors

@@ -1,28 +1,24 @@
-  <h3>Instructions</h3>
-  <mat-list role="list">
-    <mat-list-item role="listitem">
-      <span matListItemTitle> English</span>
-      <span matListItemLine> {{productsStore.selectedProductDetailsInstructions().strInstructions ?? 'N/A'}}</span>
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span matListItemTitle> Spain </span>
-      <span matListItemLine> {{productsStore.selectedProductDetailsInstructions().strInstructionsES ?? 'N/A'}}</span>
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span matListItemTitle> Germany </span>
-      <span matListItemLine> {{productsStore.selectedProductDetailsInstructions().strInstructionsDE ?? 'N/A'}}</span>
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span matListItemTitle> France </span>
-      <span matListItemLine> {{productsStore.selectedProductDetailsInstructions().strInstructionsFR ?? 'N/A'}}</span>
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span matListItemTitle> Chinese (Simplified) </span>
-      <span matListItemLine> {{productsStore.selectedProductDetailsInstructions()['strInstructionsZH-HANS'] ?? 'N/A'}}</span>
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <span matListItemTitle> Chinese (Traditional) </span>
-      <span matListItemLine> {{productsStore.selectedProductDetailsInstructions()['strInstructionsZH-HANT'] ?? 'N/A'}}</span>
-    </mat-list-item>
-      
-</mat-list>
+<h2>{{ title }}</h2>
+@if (steps.length > 1) {
+    <ol class="steps">
+        @for (step of steps; track $index) {
+            <li>{{ step }}</li>
+        }
+    </ol>
+} @else if (steps.length) {
+    <p class="method">{{ steps[0] }}</p>
+} @else {
+    <p class="note">The source doesn't include a method for this one.</p>
+}
+
+@if (translations.length) {
+    <details>
+        <summary>{{ translationsLabel }}</summary>
+        @for (translation of translations; track translation.lang) {
+            <div class="translation" [attr.lang]="translation.lang">
+                <h3>{{ translation.label }}</h3>
+                <p>{{ translation.text }}</p>
+            </div>
+        }
+    </details>
+}

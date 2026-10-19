@@ -1,0 +1,42 @@
+<article class="card" [attr.aria-labelledby]="titleId">
+    <p class="eyebrow"><span class="badge">{{ label }}</span> {{ recipe.kind === 'mocktail' ? 'Mocktail' : 'Cocktail' }}</p>
+    <h3 class="title" [id]="titleId">{{ recipe.name }}</h3>
+    <p class="description">{{ recipe.description }}</p>
+
+    <div class="columns">
+        <section>
+            <h4>Ingredients <small>approximate</small></h4>
+            <ul class="ingredients">
+                @for (ingredient of recipe.ingredients; track ingredient.name) {
+                    <li [class.extra]="ingredient.origin === 'extra'">
+                        <span class="amount">{{ ingredient.amount }}</span>
+                        <span class="name">{{ ingredient.name }}</span>
+                        <span class="tag">{{ tag(ingredient) }}</span>
+                    </li>
+                }
+            </ul>
+        </section>
+        <section>
+            <h4>Method</h4>
+            <ol class="steps">
+                @for (step of recipe.steps; track $index) {
+                    <li>{{ step }}</li>
+                }
+            </ol>
+        </section>
+    </div>
+
+    <dl class="facts">
+        <div><dt>Glass</dt><dd>{{ recipe.glass }}</dd></div>
+        <div><dt>Ice</dt><dd>{{ recipe.ice }}</dd></div>
+        @if (recipe.garnish) {
+            <div><dt>Garnish</dt><dd>{{ recipe.garnish }}</dd></div>
+        }
+        <div><dt>Serving</dt><dd>{{ recipe.serving }}</dd></div>
+    </dl>
+
+    @if (disclaimer) {
+        <p class="disclaimer" role="note">{{ disclaimer }}</p>
+    }
+    <ng-content></ng-content>
+</article>

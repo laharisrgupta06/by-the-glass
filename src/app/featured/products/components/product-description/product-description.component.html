@@ -1,1 +1,32 @@
-<p>{{productsStore.selectedProductDetailsDescription() ?? 'N/A'}}</p>
+<header>
+    @if (eyebrow) {
+        <p class="eyebrow">{{ eyebrow }}</p>
+    }
+    <div class="title">
+        @if (headingLevel === 2) {
+            <h2>{{ recipe.name }}</h2>
+        } @else {
+            <h1>{{ recipe.name }}</h1>
+        }
+        @if (favorite; as drink) {
+            <app-favorite-button [drink]="drink" variant="labelled"></app-favorite-button>
+        }
+    </div>
+    @if (recipe.description) {
+        <p class="description">{{ recipe.description }}</p>
+    }
+</header>
+
+@if (facts.length) {
+    <dl class="facts">
+        @for (fact of facts; track fact.label) {
+            <div>
+                <dt>{{ fact.label }}</dt>
+                <dd>{{ fact.value }}</dd>
+            </div>
+        }
+    </dl>
+}
+@if (derivedNote) {
+    <p class="derived">{{ derivedNote }}</p>
+}

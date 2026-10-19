@@ -1,14 +1,25 @@
-<mat-card role="group" class="{{generalConfig.exampleCard}}">
-    <img mat-card-image role="img"  src="{{productData.strDrinkThumb}}" alt="product" width="250" height="200"/>
-    <mat-card-content role="contentinfo" class="{{generalConfig.exampleCardContent}}">
-        <h4>
-        {{ productData.strDrink}}
-        </h4>
-    </mat-card-content>
-    <mat-card-actions role="group" class="{{generalConfig.exampleCardAction}}">
-        <a class="button" role="button" mat-stroked-button color="{{generalConfig.button}}" [routerLink]="['/product-details', productData.idDrink]"
-           >
-                More Info
-        </a>
-      </mat-card-actions>
-</mat-card>
+<!-- The heart sits beside the link, not inside it, so saving never opens the drink. -->
+<a class="drink-card" [routerLink]="target">
+    <div class="media">
+        @if (recipe.thumbnail) {
+            <img [src]="recipe.thumbnail" alt="" width="350" height="350" [attr.loading]="eager ? 'eager' : 'lazy'" decoding="async" />
+        } @else {
+            <span class="no-photo">No photo</span>
+        }
+    </div>
+    <h2 class="name">{{ recipe.name }} <span class="arrow" aria-hidden="true">&rarr;</span></h2>
+    @if (detail) {
+        <p class="detail">{{ detail }}</p>
+    }
+    @if (description) {
+        <p class="description">{{ description }}</p>
+    }
+    @if (note) {
+        <p class="note">{{ note }}</p>
+    }
+</a>
+@if (favorite; as drink) {
+    <app-favorite-button class="favorite" [drink]="drink"></app-favorite-button>
+}
+<!-- Actions (e.g. Edit, Delete) sit outside the link, so they never open the card. -->
+<ng-content select="[card-actions]"></ng-content>

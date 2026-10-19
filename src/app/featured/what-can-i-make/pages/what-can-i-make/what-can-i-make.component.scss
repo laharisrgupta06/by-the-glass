@@ -1,0 +1,317 @@
+$ink: #120e0b;
+$cream: #f6efe6;
+$amber: #e9b872;
+$gutter: clamp(16px, 4vw, 48px);
+
+// Bleed past the app's .container margin so the page runs edge to edge.
+.make-page {
+  min-height: calc(100svh - 64px);
+  margin: -15px -2px;
+  padding: clamp(48px, 7vw, 96px) $gutter 96px;
+  background: $ink;
+  color: $cream;
+  box-sizing: border-box;
+}
+
+.intro,
+.panel {
+  max-width: 56rem;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: $amber;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font: 400 clamp(2.6rem, 6vw, 4.5rem) / 1.02 Fraunces, Georgia, serif;
+  letter-spacing: -0.02em;
+
+  em {
+    color: $amber;
+  }
+}
+
+// The pour sits beside the heading; on phones it follows the intro.
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 32px;
+
+  > :not(.intro-pour) {
+    grid-column: 1;
+  }
+}
+
+.intro-pour {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: end;
+  width: 120px;
+  height: 120px;
+}
+
+@media (max-width: 559px) {
+  .intro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .intro-pour {
+    grid-column: 1;
+    grid-row: auto;
+    width: 80px;
+    height: 80px;
+    margin-top: 20px;
+  }
+}
+
+.lead {
+  max-width: 34rem;
+  margin: 18px 0 0;
+  color: rgba($cream, 0.75);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.panel {
+  margin-top: clamp(40px, 6vw, 64px);
+}
+
+// Numbered rows, like the list on Home.
+.step {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  gap: 12px 32px;
+  padding: 28px 0;
+  border-top: 1px solid rgba($cream, 0.14);
+
+  > :not(.step-label) {
+    grid-column: 2;
+  }
+}
+
+.step-label {
+  margin: 0;
+  padding-top: 8px;
+  color: rgba($cream, 0.6);
+  font: 400 0.75rem Roboto, sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  span {
+    margin-right: 12px;
+    color: $amber;
+    font: italic 0.95rem Fraunces, Georgia, serif;
+    letter-spacing: 0;
+  }
+
+  small {
+    display: block;
+    margin-top: 6px;
+    color: rgba($cream, 0.4);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: none;
+  }
+}
+
+.shelves {
+  margin-top: 24px;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+
+  button {
+    padding: 6px 0;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    background: none;
+    color: rgba($cream, 0.65);
+    font: 400 1.25rem Fraunces, Georgia, serif;
+    cursor: pointer;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+
+    &:hover {
+      color: $cream;
+    }
+
+    &.active {
+      color: $amber;
+      border-bottom-color: $amber;
+    }
+  }
+}
+
+.basis {
+  margin: 0;
+  color: rgba($cream, 0.5);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.action {
+  padding-top: 32px;
+  border-top: 1px solid rgba($cream, 0.14);
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+
+.or {
+  color: rgba($cream, 0.45);
+  font: italic 1rem Fraunces, Georgia, serif;
+}
+
+// Secondary to "See what I can make", but still plainly a button.
+.surprise {
+  display: inline-flex;
+  gap: 10px;
+  padding: 15px 28px;
+  border: 1px solid rgba($amber, 0.7);
+  border-radius: 999px;
+  background: none;
+  color: $amber;
+  font: 500 1rem Roboto, sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+
+  &:hover {
+    background: rgba($amber, 0.12);
+    color: $cream;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.hint {
+  margin: 14px 0 0;
+  color: rgba($cream, 0.5);
+  font-size: 0.85rem;
+}
+
+.surprise-panel,
+.bartender-panel {
+  display: block;
+  margin-top: 48px;
+}
+
+.cta {
+  display: inline-flex;
+  gap: 10px;
+  padding: 16px 32px;
+  border: 0;
+  border-radius: 999px;
+  background: $amber;
+  color: $ink;
+  font: 500 1rem Roboto, sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+
+  &:hover {
+    background: $cream;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.arrow {
+  transition: transform 0.2s;
+
+  .cta:hover & {
+    transform: translateX(4px);
+  }
+}
+
+button:focus-visible {
+  outline: 2px solid $amber;
+  outline-offset: 3px;
+}
+
+.cta:focus-visible {
+  outline-color: $cream;
+}
+
+.error {
+  margin: 14px 0 0;
+  color: #f0a58c;
+  font-size: 0.9rem;
+}
+
+.results {
+  margin-top: 56px;
+  padding-top: 8px;
+  border-top: 1px solid rgba($amber, 0.3);
+
+  h2:focus {
+    outline: 0;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 719px) {
+  .step {
+    grid-template-columns: minmax(0, 1fr);
+
+    > :not(.step-label) {
+      grid-column: 1;
+    }
+  }
+
+  .step-label small {
+    display: inline;
+    margin-left: 8px;
+  }
+
+  .cta,
+  .surprise {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .or {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 599px) {
+  .make-page {
+    min-height: calc(100svh - 96px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta,
+  .arrow {
+    transition: none;
+  }
+}

@@ -1,0 +1,71 @@
+<div class="assist" [attr.aria-busy]="state().kind === 'asking'">
+    @switch (state().kind) {
+        @case ('idle') {
+            <button type="button" class="ask" (click)="ask()">
+                Ask our bartender about “{{ displayTerm() }}”
+            </button>
+        }
+        @case ('asking') {
+            <p class="status" role="status">
+                Asking the bartender about “{{ displayTerm() }}”…
+                @if (slow()) { <span class="slow">Still thinking.</span> }
+            </p>
+        }
+        @case ('failed') {
+            @if (failure(); as f) {
+                <p class="status" role="alert">
+                    @switch (f.code) {
+                        @case ('busy') { Gemini is very busy right now. Try again in {{ waitText(f.retryAfter) }}. }
+                        @case ('quota') { We've hit the question limit for now. Try again in {{ waitText(f.retryAfter) }}. }
+                        @case ('rate-limited') { Too many questions at once. Try again in {{ waitText(f.retryAfter) }}. }
+                        @case ('timeout') { The bartender took too long to answer. }
+                        @case ('misconfigured') { The bartender isn't set up correctly. The server log has the details. }
+                        @case ('offline') {
+                            Can't reach the bartender service.
+                            @if (devMode) { Start it with <code>npm run api:dev</code>. }
+                        }
+                        @case ('unavailable') { The bartender isn't in right now. }
+                        @default { The bartender couldn't answer just now. }
+                    }
+                    @if (retryable(f.code)) {
+                        <button type="button" class="text-button" (click)="ask()">Try again</button>
+                    }
+                </p>
+            }
+        }
+        @case ('answered') {
+            <section class="answer" aria-labelledby="assist-title" aria-live="polite">
+                <h3 id="assist-title" class="title">About “{{ displayTerm() }}”</h3>
+                @if (answer()?.summary; as summary) {
+                    <p class="summary">{{ summary }}</p>
+                }
+                @if (suggestions().length) {
+                    <p class="lead">Related ingredients our drinks use. Optional extras: they don't replace “{{ displayTerm() }}”.</p>
+                    <ul class="suggestions">
+                        @for (s of suggestions(); track s.option.key) {
+                            <li>
+                                <div>
+                                    <span class="relation">{{ relationLabels[s.relation] }}</span>
+                                    <span class="name">{{ s.option.label }}</span>
+                                    @if (s.reason) {
+                                        <span class="reason">{{ s.reason }}</span>
+                                    }
+                                </div>
+                                @if (s.added) {
+                                    <span class="added">Already in</span>
+                                } @else {
+                                    <button type="button" class="add" (click)="add.emit(s.option)">
+                                        <span aria-hidden="true">+</span> Add {{ s.option.label }}
+                                    </button>
+                                }
+                            </li>
+                        }
+                    </ul>
+                } @else {
+                    <p class="lead">None of our recipes use it or anything close, so there's nothing to add.</p>
+                }
+                <p class="credit">Suggested by Gemini. It can be wrong, so check before you pour.</p>
+            </section>
+        }
+    }
+</div>

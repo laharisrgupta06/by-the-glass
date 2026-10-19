@@ -1,0 +1,23 @@
+<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+    <defs>
+        <clipPath id="pour-glass-inside">
+            <path d="M31 72 L69 72 L65.5 107.5 Q65.3 109 63.8 109 L36.2 109 Q34.7 109 34.5 107.5 Z" />
+        </clipPath>
+    </defs>
+
+    <!-- The stream: drawn from the bottle's lip down into the glass. -->
+    <line class="stream" x1="45.5" y1="63" x2="45.5" y2="104" />
+
+    <!-- The glass, and what's in it. -->
+    <g clip-path="url(#pour-glass-inside)">
+        <rect class="liquid" x="28" y="72" width="44" height="38" />
+    </g>
+    <path class="glass" d="M30 70 L70 70 L66 108 Q65.7 110.5 63.5 110.5 L36.5 110.5 Q34.3 110.5 34 108 Z" />
+
+    <!-- The bottle tips around a point low on its body. -->
+    <g class="bottle">
+        <path class="bottle-body"
+            d="M84.5 6 L91.5 6 L91.5 15 Q91.5 19 95 22 Q98.5 25 98.5 30 L98.5 62 Q98.5 65 95.5 65 L80.5 65 Q77.5 65 77.5 62 L77.5 30 Q77.5 25 81 22 Q84.5 19 84.5 15 Z" />
+        <rect class="bottle-label" x="80.5" y="36" width="15" height="14" rx="1.5" />
+    </g>
+</svg>

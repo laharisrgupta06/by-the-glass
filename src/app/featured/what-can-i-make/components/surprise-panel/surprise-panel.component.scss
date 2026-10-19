@@ -1,0 +1,196 @@
+$cream: #f6efe6;
+$amber: #e9b872;
+
+:host {
+  display: block;
+}
+
+.surprise {
+  padding: 24px 0 8px;
+  border-top: 1px solid rgba($amber, 0.3);
+  animation: rise 0.35s ease-out both;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $amber;
+    outline-offset: 8px;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: $amber;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button {
+  border: 0;
+  background: none;
+  color: $cream;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+
+  &:focus-visible {
+    outline: 2px solid $amber;
+    outline-offset: 3px;
+  }
+}
+
+.again {
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid rgba($amber, 0.6);
+  border-radius: 999px;
+  color: $amber;
+  font-size: 0.9rem;
+
+  &:hover {
+    border-color: $cream;
+    color: $cream;
+  }
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: rgba($cream, 0.6);
+
+  &:hover {
+    color: $amber;
+  }
+
+  path {
+    stroke: currentColor;
+    stroke-width: 1.4;
+  }
+}
+
+.recipe {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+  margin-top: 24px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 40px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba($cream, 0.12);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin: 36px 0 0;
+}
+
+.credit {
+  color: rgba($cream, 0.45);
+  font-size: 0.8rem;
+}
+
+.text-link {
+  padding: 0;
+  color: $amber;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &:hover {
+    color: $cream;
+  }
+}
+
+.message {
+  max-width: 32rem;
+  padding: 24px 0;
+
+  h2 {
+    margin: 0 0 8px;
+    font: 400 1.75rem / 1.2 Fraunces, Georgia, serif;
+  }
+
+  p {
+    margin: 0 0 16px;
+    color: rgba($cream, 0.7);
+  }
+}
+
+.skeleton {
+  border-radius: 3px;
+  background: rgba($cream, 0.06);
+}
+
+.photo-skeleton {
+  aspect-ratio: 1;
+}
+
+.line {
+  height: 18px;
+  margin-bottom: 16px;
+
+  &.wide {
+    width: 70%;
+    height: 44px;
+  }
+}
+
+.status {
+  margin: 16px 0 0;
+  color: rgba($cream, 0.55);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 1099px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+}
+
+@media (max-width: 759px) {
+  .recipe {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .surprise {
+    animation: none;
+  }
+}

@@ -1,15 +1,5 @@
 {
-    "appTitle": "Eliq Drinks App",
-    "logo": "https://www.thecocktaildb.com/images/logo.png",
-    "logoStyle": {
-        "width": "20%",
-        "margin": "0px 10px"
-    },
-    "navbarColor": "accent",
-    "button": "accent", 
+    "appTitle": "By the Glass",
     "routerLinkActiveColor": "router-link-active-color",
-    "ariaCurrentWhenActiveColor": "ria-Current-when-active-color",
-    "exampleCardAction": "example-card-action",
-    "exampleCardContent": "example-card-content",
-    "exampleCard": "example-card"
+    "ariaCurrentWhenActiveColor": "ria-Current-when-active-color"
 }

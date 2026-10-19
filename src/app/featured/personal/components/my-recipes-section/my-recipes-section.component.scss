@@ -1,0 +1,117 @@
+// Matches the Saved drinks section, so the Personal page reads as one collection.
+$cream: #f6efe6;
+$amber: #e9b872;
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 16px;
+  padding-bottom: 14px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid rgba($cream, 0.12);
+}
+
+h2 {
+  margin: 0;
+  font: 400 1.75rem Fraunces, Georgia, serif;
+}
+
+.head-side {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.count {
+  margin: 0;
+  color: rgba($cream, 0.55);
+  font-size: 0.85rem;
+}
+
+.create {
+  padding: 8px 16px;
+  border: 1px solid $amber;
+  border-radius: 999px;
+  color: $amber;
+  text-decoration: none;
+
+  &:hover {
+    background: $amber;
+    color: #120e0b;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 44px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skeleton {
+  aspect-ratio: 4 / 5;
+  border-radius: 3px;
+  background: rgba($cream, 0.06);
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+
+  a,
+  button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: $amber;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  .danger {
+    color: #f0a58c;
+  }
+}
+
+.confirm {
+  color: rgba($cream, 0.75);
+}
+
+.empty {
+  max-width: 30rem;
+  padding: 16px 0 32px;
+  color: rgba($cream, 0.7);
+
+  .empty-title {
+    color: $cream;
+    font: 400 1.4rem Fraunces, Georgia, serif;
+  }
+
+  a,
+  button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: $amber;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 599px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 14px;
+  }
+}

@@ -1,16 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ProductDetailsComponent } from './product-details.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-
-import { ProductDetailsComponent } from './product-details.component';
-import { ProductService } from '../../services/product.service';
 import {
   API_URL,
   ApiURL,
   PRODUCT_DETIAL_CONFIG_DATA,
   ProductDetailConfig,
 } from '../../config/product.config';
+import { CocktailDbSource } from '../../data/cocktaildb.source';
+import { CuratedSource } from '../../data/curated.source';
+import { DrinkRepository } from '../../data/drink.repository';
+import { ProductService } from '../../services/product.service';
 import { ProductsStore } from '../../store/product.store';
 
 describe('ProductDetailsComponent', () => {
@@ -21,18 +24,18 @@ describe('ProductDetailsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ProductDetailsComponent],
       providers: [
-        ProductService,
         ProductsStore,
-        provideHttpClientTesting(),
+        ProductService,
+        DrinkRepository,
+        CocktailDbSource,
+        CuratedSource,
         provideHttpClient(),
+        provideHttpClientTesting(),
         provideRouter([]),
+        { provide: API_URL, useValue: ApiURL },
         {
           provide: PRODUCT_DETIAL_CONFIG_DATA,
           useValue: ProductDetailConfig,
-        },
-        {
-          provide: API_URL,
-          useValue: ApiURL,
         },
       ],
     }).compileComponents();

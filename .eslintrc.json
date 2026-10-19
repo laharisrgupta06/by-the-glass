@@ -35,6 +35,30 @@
     },
     {
       "files": [
+        "src/app/**/*.ts"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "@google/genai",
+                "message": "Gemini is server-only. Call the /api endpoint through IngredientInterpreterService."
+              }
+            ],
+            "patterns": [
+              {
+                "group": ["**/server/**"],
+                "message": "Browser code must not import server code (src/server): it may hold secrets."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
         "*.html"
       ],
       "extends": [

@@ -1,5 +1,10 @@
-<mat-card class="example-card">
-    <img src="{{productsStore.selectedProductDetailsImage()}}" width="250" height="200" alt="image drink" role="img"/>
-</mat-card>
-
- 
+<div class="frame">
+    @if (src) {
+        <img [src]="src" [alt]="alt" width="700" height="700" />
+    } @else {
+        <span class="no-photo">No photo</span>
+    }
+</div>
+@if (src && caption) {
+    <p class="caption">{{ caption }}</p>
+}
