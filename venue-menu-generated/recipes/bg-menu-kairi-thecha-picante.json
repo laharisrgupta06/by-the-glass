@@ -1,0 +1,44 @@
+{
+  "drinkId": "bg-menu-kairi-thecha-picante",
+  "drinkName": "Kairi Thecha Picante",
+  "menuIngredients": [
+    "Camino Blanco",
+    "kairi thecha cordial"
+  ],
+  "recipe": {
+    "name": "Kairi Thecha Picante",
+    "kind": "cocktail",
+    "description": "A fiery and mouth-puckering tequila cocktail combining the sharp, tangy punch of green mango with the bold, savory heat of traditional thecha.",
+    "ingredients": [
+      {
+        "name": "Camino Blanco",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "kairi thecha cordial",
+        "amount": "35 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Fresh lime juice",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Add the Camino Blanco, kairi thecha cordial, and fresh lime juice into a cocktail shaker.",
+      "Fill the shaker with cubed ice and shake vigorously for 10-12 seconds until well-chilled.",
+      "Strain the mixture into a rocks glass over a large ice cube."
+    ],
+    "glass": "Rocks glass",
+    "ice": "Large ice cube",
+    "garnish": "Slit green chili or raw mango slice",
+    "serving": "Serve immediately over a large ice block with a chili garnish."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:04:41.970Z"
+}

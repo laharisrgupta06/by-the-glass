@@ -1,0 +1,65 @@
+{
+  "drinkId": "bg-menu-peru-mary",
+  "drinkName": "Peru Mary",
+  "menuIngredients": [
+    "guava juice",
+    "Worcestershire sauce",
+    "coriander",
+    "Tabasco"
+  ],
+  "recipe": {
+    "name": "Peru Mary",
+    "kind": "mocktail",
+    "description": "A spicy, fruity Mary-style mocktail: guava juice seasoned with Worcestershire sauce, Tabasco, fresh coriander and lime.",
+    "ingredients": [
+      {
+        "name": "guava juice",
+        "amount": "120 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Worcestershire sauce",
+        "amount": "2 dashes",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "coriander",
+        "amount": "4 sprigs",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Tabasco",
+        "amount": "2 dashes",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Lime juice",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": false
+      },
+      {
+        "name": "Salt and black pepper",
+        "amount": "1 pinch each",
+        "origin": "extra",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Press the coriander sprigs gently in the base of a shaker.",
+      "Add the guava juice, lime juice, Worcestershire sauce, Tabasco, salt and pepper.",
+      "Add ice and roll the drink gently between the shaker and a second tin rather than shaking.",
+      "Strain into an ice-filled highball glass."
+    ],
+    "glass": "Highball",
+    "ice": "Rolled with ice; served over fresh ice",
+    "garnish": "A coriander sprig and a lime wedge",
+    "serving": "Serve cold, straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.084Z"
+}

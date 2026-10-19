@@ -1,0 +1,54 @@
+{
+  "drinkId": "bg-menu-spice-route",
+  "drinkName": "Spice Route",
+  "menuIngredients": [
+    "gin",
+    "house-made spice syrup",
+    "lime",
+    "soda"
+  ],
+  "recipe": {
+    "name": "Spice Route",
+    "kind": "cocktail",
+    "description": "Crisp herbal botanicals from the gin blend seamlessly with zesty lime and a warming, aromatic spice syrup, lengthened with crisp soda.",
+    "ingredients": [
+      {
+        "name": "gin",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "house-made spice syrup",
+        "amount": "20 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "lime",
+        "amount": "25 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "soda",
+        "amount": "top up",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Juice the lime to yield 25 ml of fresh juice.",
+      "Add the gin, house-made spice syrup, and lime juice to a cocktail shaker filled with ice.",
+      "Shake vigorously until chilled.",
+      "Strain the mixture into a highball glass filled with fresh ice cubes.",
+      "Top up with soda and gently stir to integrate."
+    ],
+    "glass": "Highball glass",
+    "ice": "Cubed ice",
+    "garnish": "Lime wheel and a star anise",
+    "serving": "Serve immediately with a straw."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:01:07.278Z"
+}

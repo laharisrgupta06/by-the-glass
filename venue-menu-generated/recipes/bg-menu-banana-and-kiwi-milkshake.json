@@ -1,0 +1,51 @@
+{
+  "drinkId": "bg-menu-banana-and-kiwi-milkshake",
+  "drinkName": "Banana & Kiwi Milkshake",
+  "menuIngredients": [
+    "banana purée",
+    "kiwi",
+    "milk"
+  ],
+  "recipe": {
+    "name": "Banana & Kiwi Milkshake",
+    "kind": "mocktail",
+    "description": "A sweet, fruity milkshake of banana purée and fresh kiwi blended with cold milk until creamy.",
+    "ingredients": [
+      {
+        "name": "banana purée",
+        "amount": "90 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "kiwi",
+        "amount": "1 kiwi, peeled",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "milk",
+        "amount": "150 ml, cold",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Vanilla ice cream",
+        "amount": "1 scoop",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Add the banana purée, kiwi, cold milk and ice cream, if using, to a blender with a few ice cubes.",
+      "Blend until smooth and creamy.",
+      "Pour into a chilled milkshake glass."
+    ],
+    "glass": "Milkshake glass",
+    "ice": "Blended with a few ice cubes",
+    "garnish": "A kiwi slice on the rim",
+    "serving": "Serve cold, straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.088Z"
+}

@@ -1,0 +1,44 @@
+{
+  "drinkId": "bg-menu-mango-lassi",
+  "drinkName": "Mango Lassi",
+  "menuIngredients": [
+    "sweetened yoghurt",
+    "mango pulp"
+  ],
+  "recipe": {
+    "name": "Mango Lassi",
+    "kind": "mocktail",
+    "description": "A sweet, fruity classic: sweetened yoghurt blended with mango pulp until thick, smooth and frothy.",
+    "ingredients": [
+      {
+        "name": "sweetened yoghurt",
+        "amount": "150 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "mango pulp",
+        "amount": "100 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Ground cardamom",
+        "amount": "1 pinch",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Add the sweetened yoghurt, mango pulp and cardamom, if using, to a blender with a few ice cubes.",
+      "Blend until smooth and frothy.",
+      "Pour into a chilled tall glass."
+    ],
+    "glass": "Tall glass",
+    "ice": "Blended with a few ice cubes",
+    "garnish": "A pinch of ground cardamom",
+    "serving": "Serve cold, straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.087Z"
+}

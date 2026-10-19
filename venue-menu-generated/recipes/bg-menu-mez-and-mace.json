@@ -1,0 +1,44 @@
+{
+  "drinkId": "bg-menu-mez-and-mace",
+  "drinkName": "Mez & Mace",
+  "menuIngredients": [
+    "mezcal",
+    "house-made mace cordial"
+  ],
+  "recipe": {
+    "name": "Mez & Mace",
+    "kind": "cocktail",
+    "description": "A striking balance of rich agave smoke and warm, woody spice, highlighting aromatic mace alongside fiery mezcal.",
+    "ingredients": [
+      {
+        "name": "mezcal",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "house-made mace cordial",
+        "amount": "25 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "fresh lime juice",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Add mezcal, house-made mace cordial, and fresh lime juice into a shaker filled with ice.",
+      "Shake until thoroughly chilled and diluted.",
+      "Fine strain into a chilled coupe glass."
+    ],
+    "glass": "Coupe",
+    "ice": "Shaken with ice; served without",
+    "garnish": "A piece of whole mace blade floated on top",
+    "serving": "Served chilled in a stemmed coupe glass"
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:13:43.308Z"
+}

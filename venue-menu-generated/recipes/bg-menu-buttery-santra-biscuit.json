@@ -1,0 +1,52 @@
+{
+  "drinkId": "bg-menu-buttery-santra-biscuit",
+  "drinkName": "Buttery Santra Biscuit",
+  "menuIngredients": [
+    "orange juice",
+    "brown butter syrup",
+    "lime",
+    "soda"
+  ],
+  "recipe": {
+    "name": "Buttery Santra Biscuit",
+    "kind": "mocktail",
+    "description": "A sweet, fruity orange cooler with the toasty depth of brown butter syrup, brightened with lime and topped with soda.",
+    "ingredients": [
+      {
+        "name": "orange juice",
+        "amount": "60 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "brown butter syrup",
+        "amount": "20 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "lime",
+        "amount": "10 ml juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "soda",
+        "amount": "90 ml, to top up",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Add the orange juice, brown butter syrup and lime juice to a shaker and shake with ice.",
+      "Strain over fresh ice into a highball glass.",
+      "Top with chilled soda and stir gently."
+    ],
+    "glass": "Highball",
+    "ice": "Shaken with ice; served over fresh ice",
+    "garnish": "An orange twist",
+    "serving": "Serve straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.087Z"
+}

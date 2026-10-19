@@ -1,0 +1,52 @@
+{
+  "drinkId": "bg-menu-coconut-cartel",
+  "drinkName": "Coconut Cartel",
+  "menuIngredients": [
+    "vodka",
+    "tropical juice blend",
+    "coconut"
+  ],
+  "recipe": {
+    "name": "Coconut Cartel",
+    "kind": "cocktail",
+    "description": "A lush and refreshing cocktail packed with bright tropical fruit flavors and rich, creamy coconut over a crisp vodka base.",
+    "ingredients": [
+      {
+        "name": "vodka",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "tropical juice blend",
+        "amount": "60 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "coconut",
+        "amount": "30 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "fresh lime juice",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Add the vodka, tropical juice blend, coconut cream, and optional fresh lime juice to a cocktail shaker.",
+      "Fill the shaker with cubed ice and shake vigorously for about 15 seconds until chilled and frothy.",
+      "Strain the mixture into a tall glass filled with crushed ice.",
+      "Garnish with a tropical fruit slice and toasted coconut shavings."
+    ],
+    "glass": "Highball glass",
+    "ice": "Crushed ice",
+    "garnish": "Pineapple slice and toasted coconut flakes",
+    "serving": "Serve cold with a straw."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:01:19.857Z"
+}

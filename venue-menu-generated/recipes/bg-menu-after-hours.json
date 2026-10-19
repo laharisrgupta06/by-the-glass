@@ -1,0 +1,52 @@
+{
+  "drinkId": "bg-menu-after-hours",
+  "drinkName": "After Hours",
+  "menuIngredients": [
+    "Bacardi Black",
+    "coffee",
+    "white chocolate",
+    "cacao butter"
+  ],
+  "recipe": {
+    "name": "After Hours",
+    "kind": "cocktail",
+    "description": "A rich and decadent nightcap pairing dark rum and earthy coffee with creamy white chocolate and smooth cacao butter.",
+    "ingredients": [
+      {
+        "name": "Bacardi Black",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "coffee",
+        "amount": "30 ml chilled espresso",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "white chocolate",
+        "amount": "15 ml white chocolate syrup",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "cacao butter",
+        "amount": "1 bar spoon melted",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Combine Bacardi Black, chilled coffee, white chocolate syrup, and melted cacao butter in a shaker.",
+      "Fill with ice and shake vigorously until well-chilled and frothy.",
+      "Double strain into a chilled coupe glass."
+    ],
+    "glass": "Coupe",
+    "ice": "Shaken with ice; served without ice",
+    "garnish": "Grated white chocolate",
+    "serving": "Served straight up in a chilled coupe glass."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:11:08.801Z"
+}

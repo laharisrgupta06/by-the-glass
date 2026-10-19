@@ -1,0 +1,52 @@
+{
+  "drinkId": "bg-menu-peru-picante",
+  "drinkName": "Peru Picante",
+  "menuIngredients": [
+    "Camino Blanco",
+    "pink guava juice",
+    "coriander tincture",
+    "chilli shrub"
+  ],
+  "recipe": {
+    "name": "Peru Picante",
+    "kind": "cocktail",
+    "description": "A vibrant and fiery drink combining lush, tropical pink guava with the sharp heat of chilli shrub, rounded out by smooth tequila and aromatic coriander notes.",
+    "ingredients": [
+      {
+        "name": "Camino Blanco",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "pink guava juice",
+        "amount": "45 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "chilli shrub",
+        "amount": "20 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "coriander tincture",
+        "amount": "3 dashes",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Add the Camino Blanco, pink guava juice, chilli shrub, and coriander tincture to a cocktail shaker.",
+      "Fill the shaker with ice cubes and shake vigorously for 10-15 seconds until well chilled.",
+      "Strain the mixture into an ice-filled rocks glass."
+    ],
+    "glass": "Rocks glass",
+    "ice": "Cubed ice",
+    "garnish": "A slice of fresh red chilli",
+    "serving": "Serve immediately cold over fresh ice."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:03:58.908Z"
+}

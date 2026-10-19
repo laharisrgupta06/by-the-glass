@@ -1,0 +1,44 @@
+{
+  "drinkId": "bg-menu-masala-cola",
+  "drinkName": "Masala Cola",
+  "menuIngredients": [
+    "house spice mix",
+    "cola"
+  ],
+  "recipe": {
+    "name": "Masala Cola",
+    "kind": "mocktail",
+    "description": "A spicy, street-style cola: chilled cola stirred with the house spice mix and a squeeze of lime.",
+    "ingredients": [
+      {
+        "name": "house spice mix",
+        "amount": "1/4 tsp",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "cola",
+        "amount": "200 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Lime juice",
+        "amount": "10 ml",
+        "origin": "extra",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Stir the house spice mix and lime juice together in the bottom of a highball glass.",
+      "Fill the glass with ice.",
+      "Pour in the chilled cola slowly, as the spice makes it foam, then stir gently."
+    ],
+    "glass": "Highball",
+    "ice": "Built over cubed ice",
+    "garnish": "A lime wedge",
+    "serving": "Serve straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.085Z"
+}

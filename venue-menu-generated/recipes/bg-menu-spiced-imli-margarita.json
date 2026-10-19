@@ -1,0 +1,67 @@
+{
+  "drinkId": "bg-menu-spiced-imli-margarita",
+  "drinkName": "Spiced Imli Margarita",
+  "menuIngredients": [
+    "Camino Gold",
+    "tamarind",
+    "jalapeños",
+    "cilantro cordial",
+    "soda"
+  ],
+  "recipe": {
+    "name": "Spiced Imli Margarita",
+    "kind": "cocktail",
+    "description": "A tangy and fiery variation on a classic Margarita blending rich tequila with sour tamarind, spicy jalapeño, and herbaceous cilantro.",
+    "ingredients": [
+      {
+        "name": "Camino Gold",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "tamarind",
+        "amount": "15 ml tamarind paste",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "jalapeños",
+        "amount": "2 slices",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "cilantro cordial",
+        "amount": "15 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "soda",
+        "amount": "30 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Fresh lime juice",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Muddle the jalapeños in the bottom of a shaker.",
+      "Add Camino Gold, tamarind, cilantro cordial, fresh lime juice, and ice to the shaker.",
+      "Shake vigorously until well-chilled.",
+      "Double strain into a rocks glass filled with fresh ice.",
+      "Top up with soda and stir gently to combine."
+    ],
+    "glass": "Rocks glass",
+    "ice": "Cubed ice",
+    "garnish": "Jalapeño wheel and a cilantro sprig",
+    "serving": "Served cold over fresh ice in a salt-rimmed glass."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:05:34.197Z"
+}

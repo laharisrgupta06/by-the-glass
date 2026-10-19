@@ -1,0 +1,52 @@
+{
+  "drinkId": "bg-menu-grapefruit-g-and-t",
+  "drinkName": "Grapefruit G&T",
+  "menuIngredients": [
+    "Sober pink gin",
+    "grapefruit",
+    "ginger",
+    "ginger ale"
+  ],
+  "recipe": {
+    "name": "Grapefruit G&T",
+    "kind": "mocktail",
+    "description": "A bright, floral zero-proof highball: pink gin-style botanicals, fresh grapefruit and a warm lift of ginger, lengthened with ginger ale.",
+    "ingredients": [
+      {
+        "name": "Sober pink gin",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "grapefruit",
+        "amount": "60 ml fresh juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "ginger",
+        "amount": "3 thin slices",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "ginger ale",
+        "amount": "100 ml, to top up",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Press the ginger slices lightly in the bottom of a highball glass to release their oils.",
+      "Fill the glass with ice, then add the Sober pink gin and the fresh grapefruit juice.",
+      "Top with chilled ginger ale and stir once, gently, to keep the fizz."
+    ],
+    "glass": "Highball",
+    "ice": "Built over cubed ice",
+    "garnish": "Grapefruit wedge and a slice of ginger",
+    "serving": "Serve straight away, while the ginger ale is lively."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.076Z"
+}

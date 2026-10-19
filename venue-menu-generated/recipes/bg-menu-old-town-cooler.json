@@ -1,0 +1,50 @@
+{
+  "drinkId": "bg-menu-old-town-cooler",
+  "drinkName": "Old Town Cooler",
+  "menuIngredients": [
+    "fresh pineapple",
+    "house spice mix"
+  ],
+  "recipe": {
+    "name": "Old Town Cooler",
+    "kind": "mocktail",
+    "description": "A sweet, fruity cooler of fresh pineapple warmed with the house spice mix, brightened with lime and topped with soda.",
+    "ingredients": [
+      {
+        "name": "fresh pineapple",
+        "amount": "5 chunks (about 100 g)",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "house spice mix",
+        "amount": "1/4 tsp",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Lime juice",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": false
+      },
+      {
+        "name": "Soda water",
+        "amount": "60 ml, to top up",
+        "origin": "extra",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Muddle the pineapple chunks in a shaker until juicy.",
+      "Add the house spice mix and lime juice, then shake with ice.",
+      "Strain over fresh ice into a Collins glass and top with soda water."
+    ],
+    "glass": "Collins",
+    "ice": "Shaken with ice; served over fresh ice",
+    "garnish": "A pineapple wedge dusted with house spice mix",
+    "serving": "Serve straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.083Z"
+}

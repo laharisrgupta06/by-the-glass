@@ -5,8 +5,8 @@ import { Recipe, isMenuDescription } from '../../models/recipe.model';
  * A venue drink shown with its stored AI-suggested recipe, in the usual recipe layout.
  * The menu's own name, description, flavour notes, section and credit are kept; the
  * amounts, method, glass, ice, garnish and serving come from the stored recipe, which
- * is never changed. Marked 'approximate' so the page can say so. Additions the menu
- * didn't list are named as such.
+ * is never changed. Shown like any other recipe; optional ingredients are marked as
+ * optional.
  */
 export function withApproximateRecipe(
   drink: Recipe,
@@ -21,9 +21,7 @@ export function withApproximateRecipe(
     ingredients: recipe.ingredients.map(i => ({
       name: i.name,
       measure: i.amount,
-      ...(i.origin === 'extra'
-        ? { note: i.optional ? 'optional addition' : 'addition' }
-        : {}),
+      ...(i.optional ? { note: 'optional' } : {}),
     })),
     steps: [...recipe.steps],
     glass: recipe.glass,

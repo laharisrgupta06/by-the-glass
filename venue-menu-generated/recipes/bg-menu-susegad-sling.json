@@ -1,0 +1,60 @@
+{
+  "drinkId": "bg-menu-susegad-sling",
+  "drinkName": "Susegad Sling",
+  "menuIngredients": [
+    "rum",
+    "sweet lime cordial",
+    "makrut lime leaf"
+  ],
+  "recipe": {
+    "name": "Susegad Sling",
+    "kind": "cocktail",
+    "description": "A vibrant, refreshing long drink with bright citrus notes, fragrant herbal aromatics, and a balanced sweet-and-sour profile.",
+    "ingredients": [
+      {
+        "name": "rum",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "sweet lime cordial",
+        "amount": "30 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "makrut lime leaf",
+        "amount": "2 leaves",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "fresh lime juice",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": true
+      },
+      {
+        "name": "club soda",
+        "amount": "60 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Gently clap or tear one makrut lime leaf and drop it into a cocktail shaker.",
+      "Pour in the rum, sweet lime cordial, and fresh lime juice.",
+      "Fill the shaker with ice and shake vigorously until well-chilled.",
+      "Fine strain into a highball glass filled with fresh ice cubes.",
+      "Top up with club soda and give a brief, gentle stir to integrate.",
+      "Garnish with the second makrut lime leaf."
+    ],
+    "glass": "Highball glass",
+    "ice": "Cubed ice",
+    "garnish": "Makrut lime leaf floated on top",
+    "serving": "Serve chilled with a glass straw."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:01:33.814Z"
+}

@@ -21,10 +21,14 @@ ui-debug.log
 /.firebase-emulator-backups
 # Temporary folders firebase-tools leaves behind when an export is interrupted
 /firebase-export-*
-# AI-curated recipes and illustrations for venue-menu drinks (made by npm run
-# menu:recipes / menu:illustrate). Kept out of Git while menu republishing rights are
-# unconfirmed; keep a copy elsewhere if they matter.
-/venue-menu-generated
+# Recipes for the venue-menu drinks are published: venue-menu-generated/recipes/*.json
+# is tracked, and the server reads it at run time. Older versions the server set aside
+# (*.stale-*.json), temporary files and illustrations stay local.
+/venue-menu-generated/*
+!/venue-menu-generated/recipes/
+/venue-menu-generated/recipes/*
+!/venue-menu-generated/recipes/*.json
+/venue-menu-generated/recipes/*.stale-*.json
 # A leftover local copy of the venue menu from before it was published. The published
 # menu is the tracked venue-menu.data.ts; this file is no longer used by any build.
 /src/app/featured/products/data/venue-menu/venue-menu.data.local.ts

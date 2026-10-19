@@ -1,0 +1,67 @@
+{
+  "drinkId": "bg-menu-malabar-mood",
+  "drinkName": "Malabar Mood",
+  "menuIngredients": [
+    "Dewar's White Label",
+    "curry leaf",
+    "orange",
+    "pineapple",
+    "coconut"
+  ],
+  "recipe": {
+    "name": "Malabar Mood",
+    "kind": "cocktail",
+    "description": "A vibrant tropical Scotch cocktail balancing lush pineapple and coconut with citrus brightness and an earthy, herbal whisper of fresh curry leaves.",
+    "ingredients": [
+      {
+        "name": "Dewar's White Label",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "curry leaf",
+        "amount": "6 leaves",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "pineapple",
+        "amount": "45 ml pineapple juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "orange",
+        "amount": "20 ml fresh orange juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "coconut",
+        "amount": "20 ml coconut cream",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "fresh lime juice",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Place 5 curry leaves into the bottom of a cocktail shaker and muddle gently to release aromatic oils without tearing.",
+      "Add the Dewar's White Label, pineapple juice, orange juice, coconut cream, and optional lime juice.",
+      "Fill the shaker with ice and shake vigorously for 15 seconds until chilled and well integrated.",
+      "Double strain the mixture into a chilled highball glass packed with fresh crushed ice.",
+      "Garnish and serve immediately."
+    ],
+    "glass": "Highball glass",
+    "ice": "Crushed ice",
+    "garnish": "A slapped curry leaf sprig and a dehydrated orange wheel",
+    "serving": "Serve immediately with a straw"
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:02:00.312Z"
+}

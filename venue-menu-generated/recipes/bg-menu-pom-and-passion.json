@@ -1,0 +1,65 @@
+{
+  "drinkId": "bg-menu-pom-and-passion",
+  "drinkName": "Pom & Passion",
+  "menuIngredients": [
+    "passion fruit",
+    "pomegranate",
+    "curry leaf",
+    "lime",
+    "soda"
+  ],
+  "recipe": {
+    "name": "Pom & Passion",
+    "kind": "mocktail",
+    "description": "A sweet, fruity zero-proof cooler: passion fruit and pomegranate with a savoury hint of curry leaf, lifted with lime and soda.",
+    "ingredients": [
+      {
+        "name": "passion fruit",
+        "amount": "1 fruit, pulp scooped",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "pomegranate",
+        "amount": "30 ml juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "curry leaf",
+        "amount": "4 leaves",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "lime",
+        "amount": "15 ml juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "soda",
+        "amount": "90 ml, to top up",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Sugar syrup",
+        "amount": "10 ml",
+        "origin": "extra",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Clap the curry leaves between your palms and drop them into a shaker.",
+      "Add the passion fruit pulp, pomegranate juice, lime juice and sugar syrup, then shake with ice.",
+      "Strain over fresh ice into a highball glass and top with chilled soda."
+    ],
+    "glass": "Highball",
+    "ice": "Shaken with ice; served over fresh ice",
+    "garnish": "A curry leaf and a few pomegranate seeds",
+    "serving": "Serve straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.081Z"
+}

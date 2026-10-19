@@ -1,0 +1,59 @@
+{
+  "drinkId": "bg-menu-bombae-rita",
+  "drinkName": "Bombae Rita",
+  "menuIngredients": [
+    "Camino Blanco",
+    "watermelon",
+    "kokum",
+    "house spice mix"
+  ],
+  "recipe": {
+    "name": "Bombae Rita",
+    "kind": "cocktail",
+    "description": "A vibrant Indian-inspired Margarita marrying crisp tequila with fresh watermelon and tangy, sour kokum, balanced by a savoury spiced rim.",
+    "ingredients": [
+      {
+        "name": "Camino Blanco",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "watermelon",
+        "amount": "45 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "kokum",
+        "amount": "20 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "house spice mix",
+        "amount": "1 bar spoon",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "fresh lime juice",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Moisten half the rim of a rocks glass and coat it with the house spice mix.",
+      "Add the Camino Blanco, fresh watermelon juice, kokum syrup, and optional lime juice to a cocktail shaker.",
+      "Fill the shaker with ice and shake vigorously for 12 seconds until well chilled.",
+      "Strain into the prepared rocks glass over fresh ice."
+    ],
+    "glass": "Rocks glass",
+    "ice": "Cubed ice",
+    "garnish": "House spice mix rim and a small watermelon wedge",
+    "serving": "Served cold in a spice-rimmed rocks glass over fresh cubes."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:00:37.926Z"
+}

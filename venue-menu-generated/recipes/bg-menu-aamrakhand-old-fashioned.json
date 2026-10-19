@@ -1,0 +1,54 @@
+{
+  "drinkId": "bg-menu-aamrakhand-old-fashioned",
+  "drinkName": "Aamrakhand Old Fashioned",
+  "menuIngredients": [
+    "Dewar's White Label",
+    "aamrakhand",
+    "nutmeg",
+    "cardamom"
+  ],
+  "recipe": {
+    "name": "Aamrakhand Old Fashioned",
+    "kind": "cocktail",
+    "description": "A luscious, spiced twist on the classic featuring smooth blended Scotch infused with sweet, fruity mango shrikhand and fragrant warming spices.",
+    "ingredients": [
+      {
+        "name": "Dewar's White Label",
+        "amount": "60 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "aamrakhand",
+        "amount": "20 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "cardamom",
+        "amount": "1 pinch ground",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "nutmeg",
+        "amount": "1 light grating",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Add the aamrakhand and ground cardamom into a mixing glass.",
+      "Pour in the Dewar's White Label and stir vigorously to dissolve and integrate the aamrakhand with the whisky.",
+      "Add ice to the mixing glass and stir until properly chilled and diluted.",
+      "Fine strain the mixture into a rocks glass over a large ice cube.",
+      "Garnish with freshly grated nutmeg over the top."
+    ],
+    "glass": "Rocks glass",
+    "ice": "Large ice cube",
+    "garnish": "Freshly grated nutmeg",
+    "serving": "Serve immediately with a cocktail stirrer"
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:02:13.965Z"
+}

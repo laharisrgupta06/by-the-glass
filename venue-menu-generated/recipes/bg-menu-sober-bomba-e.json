@@ -1,0 +1,44 @@
+{
+  "drinkId": "bg-menu-sober-bomba-e",
+  "drinkName": "Sober Bomba(e)",
+  "menuIngredients": [
+    "fresh watermelon",
+    "spiced kokum cordial"
+  ],
+  "recipe": {
+    "name": "Sober Bomba(e)",
+    "kind": "mocktail",
+    "description": "A sour, fruity mocktail of fresh watermelon shaken with spiced kokum cordial and a pinch of black salt.",
+    "ingredients": [
+      {
+        "name": "fresh watermelon",
+        "amount": "6 cubes (about 120 g)",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "spiced kokum cordial",
+        "amount": "30 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Black salt",
+        "amount": "1 pinch",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Muddle the watermelon cubes in a shaker until they are completely juicy.",
+      "Add the spiced kokum cordial and the black salt, if using, then shake hard with ice.",
+      "Double strain over fresh ice into a rocks glass."
+    ],
+    "glass": "Rocks glass",
+    "ice": "Shaken with ice; served over fresh ice",
+    "garnish": "A small watermelon wedge",
+    "serving": "Serve cold, straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.082Z"
+}

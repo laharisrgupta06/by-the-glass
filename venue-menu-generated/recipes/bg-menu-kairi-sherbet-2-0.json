@@ -1,0 +1,52 @@
+{
+  "drinkId": "bg-menu-kairi-sherbet-2-0",
+  "drinkName": "Kairi Sherbet 2.0",
+  "menuIngredients": [
+    "kairi sherbet",
+    "ginger",
+    "jalapeños",
+    "soda"
+  ],
+  "recipe": {
+    "name": "Kairi Sherbet 2.0",
+    "kind": "mocktail",
+    "description": "A sour, spicy take on raw-mango sherbet: kairi sherbet shaken with ginger and jalapeño, topped with soda.",
+    "ingredients": [
+      {
+        "name": "kairi sherbet",
+        "amount": "60 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "ginger",
+        "amount": "2 thin slices",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "jalapeños",
+        "amount": "2 slices",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "soda",
+        "amount": "100 ml, to top up",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Muddle the ginger and jalapeño slices gently in a shaker.",
+      "Add the kairi sherbet and shake with ice.",
+      "Strain into an ice-filled highball glass and top with chilled soda."
+    ],
+    "glass": "Highball",
+    "ice": "Shaken with ice; served over fresh ice",
+    "garnish": "A jalapeño slice",
+    "serving": "Serve straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.082Z"
+}

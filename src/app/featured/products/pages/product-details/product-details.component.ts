@@ -18,7 +18,7 @@ import { ProductIngredientsComponent } from '../../components/product-ingredient
 import { ProductInstructionsComponent } from '../../components/product-instructions/product-instructions.component';
 import { PRODUCT_DETIAL_CONFIG_DATA } from '../../config/product.config';
 import { withApproximateRecipe } from '../../data/venue-menu/approximate-recipe';
-import { isApproximate, isMenuDescription } from '../../models/recipe.model';
+import { isMenuDescription } from '../../models/recipe.model';
 import { ProductsStore } from '../../store/product.store';
 
 @Component({
@@ -40,7 +40,6 @@ export class ProductDetailsComponent implements OnInit {
   readonly productsStore = inject(ProductsStore);
   readonly productDetailConfig = inject(PRODUCT_DETIAL_CONFIG_DATA);
   readonly isMenuDescription = isMenuDescription;
-  readonly isApproximate = isApproximate;
   /** A venue drink's illustration, once one has been supplied. */
   readonly illustration = signal<MenuIllustration | null>(null);
   /** A venue drink's stored approximate recipe, when it has one. */

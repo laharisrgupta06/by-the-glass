@@ -171,8 +171,8 @@ describe('drink details by URL', () => {
     expect(rows()).toEqual([
       '50 ml non-alcoholic rum',
       '1 pinch kelp spice mix',
-      '20 ml Lime juice addition',
-      '10 ml Sugar syrup optional addition',
+      '20 ml Lime juice',
+      '10 ml Sugar syrup optional',
     ]);
     const steps = Array.from(
       el().querySelectorAll('app-product-instructions li')
@@ -185,12 +185,10 @@ describe('drink details by URL', () => {
       'ServingServe straight away.',
     ])
       expect(page.replace(/ /g, '')).toContain(fact.replace(/ /g, ''));
-    // One subtle disclosure, no separate card, no "no recipe" notices.
-    const note = el().querySelector('.approximation')!;
-    expect(note.textContent).toContain(
-      'AI-suggested approximation based on the venue’s ingredient list, not verified by the venue.'
-    );
-    expect(count('approximation')).toBe(1);
+    // Shown like any other recipe: no separate card, labels or "no recipe" notices.
+    expect(page).not.toContain('approximation');
+    expect(page).not.toContain('AI-suggested');
+    expect(page).not.toContain('addition');
     expect(el().querySelector('app-ai-recipe-card')).toBeNull();
     expect(el().querySelector('app-menu-curation')).toBeNull();
     expect(page).not.toContain('AI-curated recipe');
@@ -236,7 +234,7 @@ describe('drink details by URL', () => {
       .flush(STORED, { status: 201, statusText: 'Created' });
     harness.detectChanges();
     expect(rows()[0]).toBe('50 ml non-alcoholic rum');
-    expect(el().querySelector('.approximation')).not.toBeNull();
+    expect(text()).toContain('Shake everything hard with ice.');
   });
 
   it('shows TheCocktailDB recipes as before, plus a description from their own data', async () => {

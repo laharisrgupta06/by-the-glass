@@ -1,0 +1,50 @@
+{
+  "drinkId": "bg-menu-jamun-daiquiri",
+  "drinkName": "Jamun Daiquiri",
+  "menuIngredients": [
+    "Sober rum",
+    "jamun spice mix"
+  ],
+  "recipe": {
+    "name": "Jamun Daiquiri",
+    "kind": "mocktail",
+    "description": "A spiced, fruity zero-proof daiquiri: Sober rum shaken with jamun spice mix, fresh lime and a touch of sugar.",
+    "ingredients": [
+      {
+        "name": "Sober rum",
+        "amount": "60 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "jamun spice mix",
+        "amount": "1/2 tsp",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Lime juice",
+        "amount": "20 ml",
+        "origin": "extra",
+        "optional": false
+      },
+      {
+        "name": "Sugar syrup",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Add the Sober rum, jamun spice mix, lime juice and sugar syrup to a shaker.",
+      "Fill with ice and shake hard for 10 to 12 seconds.",
+      "Double strain into a chilled coupe."
+    ],
+    "glass": "Coupe",
+    "ice": "Shaken with ice; served without",
+    "garnish": "A light dusting of jamun spice mix",
+    "serving": "Serve straight up, well chilled."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.079Z"
+}

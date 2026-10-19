@@ -1,0 +1,52 @@
+{
+  "drinkId": "bg-menu-tropical-ananas",
+  "drinkName": "Tropical Ananas",
+  "menuIngredients": [
+    "pineapple",
+    "orange",
+    "thyme",
+    "strawberry"
+  ],
+  "recipe": {
+    "name": "Tropical Ananas",
+    "kind": "mocktail",
+    "description": "A sweet, fruity mocktail of pineapple and orange with muddled strawberry and a fresh note of thyme.",
+    "ingredients": [
+      {
+        "name": "pineapple",
+        "amount": "90 ml juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "orange",
+        "amount": "30 ml fresh juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "thyme",
+        "amount": "2 sprigs",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "strawberry",
+        "amount": "3 strawberries",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Muddle the strawberries with one thyme sprig in a shaker.",
+      "Add the pineapple and orange juice and shake with ice.",
+      "Double strain into an ice-filled rocks glass."
+    ],
+    "glass": "Rocks glass",
+    "ice": "Shaken with ice; served over fresh ice",
+    "garnish": "The second thyme sprig and half a strawberry",
+    "serving": "Serve straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.085Z"
+}

@@ -1,0 +1,60 @@
+{
+  "drinkId": "bg-menu-pom-sbagliato",
+  "drinkName": "Pom Sbagliato",
+  "menuIngredients": [
+    "gin",
+    "Aperol",
+    "pomegranate cordial",
+    "sparkling wine",
+    "soda"
+  ],
+  "recipe": {
+    "name": "Pom Sbagliato",
+    "kind": "cocktail",
+    "description": "A delightfully sweet and fruity twist on the classic Sbagliato, blending rich pomegranate cordial and bitter orange Aperol with gin and lively sparkling wine.",
+    "ingredients": [
+      {
+        "name": "gin",
+        "amount": "25 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Aperol",
+        "amount": "25 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "pomegranate cordial",
+        "amount": "15 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "sparkling wine",
+        "amount": "60 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "soda",
+        "amount": "30 ml",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Fill a wine glass with ice cubes.",
+      "Add the gin, Aperol, and pomegranate cordial to the glass.",
+      "Top up with sparkling wine and a splash of soda.",
+      "Gently stir to blend the ingredients while keeping the bubbles intact."
+    ],
+    "glass": "Wine glass",
+    "ice": "Built over ice cubes",
+    "garnish": "Orange wheel and pomegranate seeds",
+    "serving": "Served cold with a straw."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:15:17.851Z"
+}

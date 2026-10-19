@@ -4,7 +4,9 @@ import express, {
   Response,
   Router,
 } from 'express';
-import { join } from 'node:path';
+import { existsSync, readdirSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { BARTENDER_PATHS } from '../../app/core/ai/ai-recipe';
 import {
@@ -47,6 +49,37 @@ function fallbackSetting(value: string | undefined): string {
   return setting.toLowerCase() === 'none' ? '' : setting;
 }
 const DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * Where the venue-menu recipes are: VENUE_MENU_GENERATED_DIR if set, else the
+ * venue-menu-generated folder in the working directory, else the one in the project
+ * root next to the build (dist/by-the-glass/server/), so a host that starts the server
+ * from another directory still finds the published recipes.
+ */
+function generatedDir(env: NodeJS.ProcessEnv): string {
+  const configured = env['VENUE_MENU_GENERATED_DIR']?.trim();
+  if (configured) return configured;
+  const candidates = [join(process.cwd(), 'venue-menu-generated')];
+  try {
+    const here = dirname(fileURLToPath(import.meta.url));
+    candidates.push(resolve(here, '../../../venue-menu-generated'));
+  } catch {
+    // Not running from a file URL (e.g. in tests): the working directory it is.
+  }
+  return (
+    candidates.find(dir => existsSync(join(dir, 'recipes'))) ?? candidates[0]
+  );
+}
+
+function countRecipes(dir: string): number {
+  try {
+    return readdirSync(join(dir, 'recipes')).filter(
+      f => f.endsWith('.json') && !f.includes('.stale-')
+    ).length;
+  } catch {
+    return 0;
+  }
+}
 
 const LOOPBACK = ['127.0.0.1', '::1', '::ffff:127.0.0.1'];
 
@@ -105,9 +138,10 @@ export function ingredientApi(env: NodeJS.ProcessEnv = process.env): Router {
     .split(',')
     .map(m => m.trim())
     .filter(Boolean);
-  const store = new MenuStore(
-    env['VENUE_MENU_GENERATED_DIR']?.trim() ||
-      join(process.cwd(), 'venue-menu-generated')
+  const menuDir = generatedDir(env);
+  const store = new MenuStore(menuDir);
+  console.log(
+    `Venue-menu recipes: ${countRecipes(menuDir)} stored in ${menuDir}.`
   );
   const menu: MenuDeps = {
     store,

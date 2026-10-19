@@ -1,0 +1,52 @@
+{
+  "drinkId": "bg-menu-kokum-kick",
+  "drinkName": "Kokum Kick",
+  "menuIngredients": [
+    "Camino Blanco",
+    "house-made kokum cordial",
+    "soda"
+  ],
+  "recipe": {
+    "name": "Kokum Kick",
+    "kind": "cocktail",
+    "description": "A vibrant highball pairing crisp tequila blanco with tangy, fruity kokum and a distinct savory, salty undertone.",
+    "ingredients": [
+      {
+        "name": "Camino Blanco",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "house-made kokum cordial",
+        "amount": "30 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "soda",
+        "amount": "Top up (approx. 75 ml)",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Sea salt",
+        "amount": "1 pinch",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Combine Camino Blanco, house-made kokum cordial, and a pinch of sea salt in a shaker filled with ice.",
+      "Shake briefly to chill and blend the flavors.",
+      "Strain into a highball glass packed with fresh ice cubes.",
+      "Top up with chilled soda and stir gently once to combine without losing effervescence."
+    ],
+    "glass": "Highball glass",
+    "ice": "Cubed ice",
+    "garnish": "Salt rim or dehydrated citrus wheel",
+    "serving": "Serve immediately with a bar straw."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:00:50.906Z"
+}

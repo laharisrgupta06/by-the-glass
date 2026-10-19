@@ -1,0 +1,66 @@
+{
+  "drinkId": "bg-menu-peach-julep",
+  "drinkName": "Peach Julep",
+  "menuIngredients": [
+    "Dewar's White Label",
+    "peach",
+    "mint leaves",
+    "aromatic bitters",
+    "lime"
+  ],
+  "recipe": {
+    "name": "Peach Julep",
+    "kind": "cocktail",
+    "description": "A floral and fruity variation on a classic Julep, blending smooth Scotch whisky with sweet muddled peach, bright lime, and aromatic mint.",
+    "ingredients": [
+      {
+        "name": "Dewar's White Label",
+        "amount": "60 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "peach",
+        "amount": "2 slices",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "mint leaves",
+        "amount": "8 leaves",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "aromatic bitters",
+        "amount": "2 dashes",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "lime",
+        "amount": "15 ml fresh juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Simple syrup",
+        "amount": "10 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Muddle the peach slices, mint leaves, lime juice, and simple syrup (if using) directly in a Julep cup.",
+      "Add Dewar's White Label and aromatic bitters.",
+      "Fill the cup two-thirds full with crushed ice and stir briskly until chilled and frosty on the outside.",
+      "Pack the glass with additional crushed ice to form a dome on top."
+    ],
+    "glass": "Julep cup",
+    "ice": "Crushed ice",
+    "garnish": "Mint sprig and peach slice",
+    "serving": "Serve immediately over crushed ice with a straw."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:06:11.115Z"
+}

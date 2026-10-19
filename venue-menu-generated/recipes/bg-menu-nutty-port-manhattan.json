@@ -1,0 +1,60 @@
+{
+  "drinkId": "bg-menu-nutty-port-manhattan",
+  "drinkName": "Nutty Port Manhattan",
+  "menuIngredients": [
+    "Dewar's White Label",
+    "hazelnut",
+    "rosemary",
+    "spiced foam"
+  ],
+  "recipe": {
+    "name": "Nutty Port Manhattan",
+    "kind": "cocktail",
+    "description": "A rich and complex twist on a Manhattan that pairs smoky Scotch with nutty hazelnut, herbal rosemary, and a velvety spiced foam header.",
+    "ingredients": [
+      {
+        "name": "Dewar's White Label",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "hazelnut",
+        "amount": "15 ml hazelnut syrup",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "rosemary",
+        "amount": "1 sprig",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "spiced foam",
+        "amount": "top up",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Ruby Port",
+        "amount": "20 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Muddle the rosemary sprig gently in a mixing glass to release its herbal aromas.",
+      "Add Dewar's White Label, hazelnut syrup, and Ruby Port into the mixing glass.",
+      "Fill the mixing glass with ice and stir until well chilled.",
+      "Double strain the liquid into a chilled coupe glass.",
+      "Top the cocktail with a delicate layer of spiced foam."
+    ],
+    "glass": "Coupe glass",
+    "ice": "Stirred with ice, served neat",
+    "garnish": "Singed rosemary sprig",
+    "serving": "Served chilled in a coupe topped with spiced foam"
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:05:58.726Z"
+}

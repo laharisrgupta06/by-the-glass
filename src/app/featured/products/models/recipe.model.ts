@@ -21,7 +21,7 @@ export interface RecipeIngredient {
   name: string;
   /** Exactly as the source writes it, e.g. "1 1/2 oz". Undefined if the source has none. */
   measure?: string;
-  /** A short qualifier shown beside it, e.g. "optional addition". */
+  /** A short qualifier shown beside it, e.g. "optional". */
   note?: string;
 }
 
@@ -87,9 +87,4 @@ export function isMenuDescription(
   recipe: Pick<Recipe, 'completeness'>
 ): boolean {
   return recipe.completeness === 'menu-description';
-}
-
-/** A venue drink shown with an AI-suggested approximation of its recipe. */
-export function isApproximate(recipe: Pick<Recipe, 'completeness'>): boolean {
-  return recipe.completeness === 'approximate';
 }

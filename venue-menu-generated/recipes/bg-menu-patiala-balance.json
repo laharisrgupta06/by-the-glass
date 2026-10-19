@@ -1,0 +1,65 @@
+{
+  "drinkId": "bg-menu-patiala-balance",
+  "drinkName": "Patiala Balance",
+  "menuIngredients": [
+    "gin",
+    "passionfruit",
+    "teppal extract",
+    "orange juice",
+    "lime"
+  ],
+  "recipe": {
+    "name": "Patiala Balance",
+    "kind": "cocktail",
+    "description": "A sweet and floral gin cocktail balanced with vibrant citrus, rich passionfruit, and the distinct woody fragrance of teppal extract.",
+    "ingredients": [
+      {
+        "name": "gin",
+        "amount": "45 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "passionfruit",
+        "amount": "20 ml puree",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "teppal extract",
+        "amount": "2 dashes",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "orange juice",
+        "amount": "30 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "lime",
+        "amount": "15 ml fresh juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "simple syrup",
+        "amount": "10 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Add gin, passionfruit, orange juice, fresh lime juice, teppal extract, and simple syrup into a shaker with ice.",
+      "Shake vigorously until chilled and well combined.",
+      "Fine strain into a chilled coupe glass."
+    ],
+    "glass": "Coupe glass",
+    "ice": "Shaken with ice; served without",
+    "garnish": "Edible floral petal",
+    "serving": "Served neat in a chilled glass"
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:12:29.932Z"
+}

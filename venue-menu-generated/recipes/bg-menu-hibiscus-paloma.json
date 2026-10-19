@@ -1,0 +1,60 @@
+{
+  "drinkId": "bg-menu-hibiscus-paloma",
+  "drinkName": "Hibiscus Paloma",
+  "menuIngredients": [
+    "Camino Gold",
+    "grapefruit",
+    "hibiscus",
+    "chilli"
+  ],
+  "recipe": {
+    "name": "Hibiscus Paloma",
+    "kind": "cocktail",
+    "description": "A vibrant and spicy twist on the classic Paloma, combining rich gold tequila with tart grapefruit, floral hibiscus, and a lingering chili heat.",
+    "ingredients": [
+      {
+        "name": "Camino Gold",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "grapefruit",
+        "amount": "50 ml fresh juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "hibiscus",
+        "amount": "20 ml hibiscus syrup",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "chilli",
+        "amount": "2 thin slices",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "soda water",
+        "amount": "60 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Muddle the chilli slices gently in the bottom of a shaker.",
+      "Add the Camino Gold, fresh grapefruit juice, hibiscus syrup, and ice to the shaker.",
+      "Shake vigorously until well-chilled.",
+      "Fine strain into a highball glass filled with fresh ice cubes.",
+      "Top up with soda water and stir gently to combine."
+    ],
+    "glass": "Highball glass",
+    "ice": "Cubed ice",
+    "garnish": "Grapefruit wheel and a fresh chilli slice",
+    "serving": "Served cold in a highball glass over ice"
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:06:22.650Z"
+}

@@ -1,0 +1,52 @@
+{
+  "drinkId": "bg-menu-lychee-g-and-t",
+  "drinkName": "Lychee G&T",
+  "menuIngredients": [
+    "lychee",
+    "Sober gin",
+    "lime and lemon cordial",
+    "tonic"
+  ],
+  "recipe": {
+    "name": "Lychee G&T",
+    "kind": "mocktail",
+    "description": "A sour, fruity zero-proof G&T: muddled lychee and Sober gin, sharpened with lime and lemon cordial and topped with tonic.",
+    "ingredients": [
+      {
+        "name": "lychee",
+        "amount": "4 peeled lychees",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Sober gin",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "lime and lemon cordial",
+        "amount": "15 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "tonic",
+        "amount": "120 ml, to top up",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Muddle the lychees gently in the bottom of a balloon glass.",
+      "Add the Sober gin and the lime and lemon cordial, then fill the glass with ice.",
+      "Top with chilled tonic and stir once."
+    ],
+    "glass": "Balloon glass",
+    "ice": "Built over cubed ice",
+    "garnish": "A whole lychee and a lime wheel",
+    "serving": "Serve straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.079Z"
+}

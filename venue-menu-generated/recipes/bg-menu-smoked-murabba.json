@@ -1,0 +1,46 @@
+{
+  "drinkId": "bg-menu-smoked-murabba",
+  "drinkName": "Smoked Murabba",
+  "menuIngredients": [
+    "vodka",
+    "smoked orange marmalade",
+    "lime"
+  ],
+  "recipe": {
+    "name": "Smoked Murabba",
+    "kind": "cocktail",
+    "description": "A tart and savory sour balanced by deep citrus sweetness and an evocative, smoldering smokiness.",
+    "ingredients": [
+      {
+        "name": "vodka",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "smoked orange marmalade",
+        "amount": "2 bar spoons",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "lime",
+        "amount": "25 ml (freshly juiced)",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Add the smoked orange marmalade, freshly squeezed lime juice, and vodka into a cocktail shaker.",
+      "Stir gently to break up and dissolve the marmalade into the liquid.",
+      "Fill the shaker with ice and shake vigorously until well-chilled.",
+      "Double-strain through a fine-mesh sieve into an ice-filled rocks glass."
+    ],
+    "glass": "Rocks glass",
+    "ice": "Large clear ice cube",
+    "garnish": "Dehydrated lime wheel",
+    "serving": "Serve immediately over a large clear ice block."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:04:12.976Z"
+}

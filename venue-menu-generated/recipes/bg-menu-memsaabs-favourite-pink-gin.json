@@ -1,0 +1,47 @@
+{
+  "drinkId": "bg-menu-memsaabs-favourite-pink-gin",
+  "drinkName": "Memsaab's Favourite Pink Gin",
+  "menuIngredients": [
+    "gin",
+    "aromatic bitters",
+    "tonic water"
+  ],
+  "recipe": {
+    "name": "Memsaab's Favourite Pink Gin",
+    "kind": "cocktail",
+    "description": "A classic Pink Gin elevated with refreshing tonic water, balancing botanical gin and aromatic bitters with a light floral and fruity character.",
+    "ingredients": [
+      {
+        "name": "gin",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "aromatic bitters",
+        "amount": "3 dashes",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "tonic water",
+        "amount": "120 ml",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Coat the inside of a chilled glass with aromatic bitters.",
+      "Fill the glass with cubed ice.",
+      "Pour in the gin and top up with tonic water.",
+      "Stir gently to combine without losing effervescence.",
+      "Garnish and serve immediately."
+    ],
+    "glass": "Copa de Balón",
+    "ice": "Cubed ice",
+    "garnish": "Strawberry slice",
+    "serving": "Served cold in a stemmed glass"
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:05:45.417Z"
+}

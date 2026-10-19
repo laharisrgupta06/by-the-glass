@@ -1,0 +1,51 @@
+{
+  "drinkId": "bg-menu-amber-highball",
+  "drinkName": "Amber Highball",
+  "menuIngredients": [
+    "lemongrass",
+    "tangerine",
+    "soda"
+  ],
+  "recipe": {
+    "name": "Amber Highball",
+    "kind": "mocktail",
+    "description": "A sour, fruity zero-proof highball of fresh tangerine infused with bruised lemongrass, lengthened with soda.",
+    "ingredients": [
+      {
+        "name": "lemongrass",
+        "amount": "1 stalk, bruised",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "tangerine",
+        "amount": "60 ml fresh juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "soda",
+        "amount": "120 ml, to top up",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Sugar syrup",
+        "amount": "10 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Bruise the lemongrass stalk with the back of a knife and put it in a highball glass.",
+      "Add the tangerine juice (and the sugar syrup, if you like it sweeter) and stir for 30 seconds to draw out the lemongrass.",
+      "Fill the glass with ice, top with chilled soda and stir gently."
+    ],
+    "glass": "Highball",
+    "ice": "Built over cubed ice",
+    "garnish": "Tangerine wheel and the lemongrass stalk",
+    "serving": "Serve straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.080Z"
+}

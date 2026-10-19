@@ -1,0 +1,58 @@
+{
+  "drinkId": "bg-menu-kairi-sherbet",
+  "drinkName": "Kairi Sherbet",
+  "menuIngredients": [
+    "kairi syrup",
+    "house spice mix",
+    "lime",
+    "soda"
+  ],
+  "recipe": {
+    "name": "Kairi Sherbet",
+    "kind": "mocktail",
+    "description": "A sour, fruity raw-mango sherbet: kairi syrup with the house spice mix and lime, lengthened with soda.",
+    "ingredients": [
+      {
+        "name": "kairi syrup",
+        "amount": "45 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "house spice mix",
+        "amount": "1/4 tsp",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "lime",
+        "amount": "10 ml juice",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "soda",
+        "amount": "120 ml, to top up",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Mint leaves",
+        "amount": "few leaves",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Stir the kairi syrup, house spice mix and lime juice together in a Collins glass (with the mint, if using).",
+      "Fill the glass with ice.",
+      "Top with chilled soda and stir gently."
+    ],
+    "glass": "Collins",
+    "ice": "Built over cubed ice",
+    "garnish": "A mint sprig",
+    "serving": "Serve straight away."
+  },
+  "model": "claude-opus-5-5",
+  "createdAt": "2026-10-19T20:10:18.086Z"
+}

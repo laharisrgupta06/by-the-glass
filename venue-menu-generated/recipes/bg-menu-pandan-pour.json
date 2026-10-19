@@ -1,0 +1,52 @@
+{
+  "drinkId": "bg-menu-pandan-pour",
+  "drinkName": "Pandan Pour",
+  "menuIngredients": [
+    "Dewar's White Label",
+    "pandan rosoo",
+    "coconut Campari"
+  ],
+  "recipe": {
+    "name": "Pandan Pour",
+    "kind": "cocktail",
+    "description": "A fragrant, tropical riff on a Boulevardier with bittersweet herbal depth, grassy pandan aromas, toasted coconut undertones, and a subtle savory finish.",
+    "ingredients": [
+      {
+        "name": "Dewar's White Label",
+        "amount": "45 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "pandan rosoo",
+        "amount": "25 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "coconut Campari",
+        "amount": "25 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "saline solution",
+        "amount": "1 dash",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Add Dewar's White Label, pandan rosoo, coconut Campari, and saline solution (if using) into a mixing glass filled with ice.",
+      "Stir smoothly for about 30 seconds until well-chilled and balanced in dilution.",
+      "Strain into a chilled rocks glass over a large clear ice cube.",
+      "Express fresh pandan oils over the surface and tuck the pandan garnish inside the glass."
+    ],
+    "glass": "Rocks glass",
+    "ice": "Large ice cube",
+    "garnish": "Tied pandan leaf knot",
+    "serving": "Stirred and served over a large block of ice in a rocks glass."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:03:45.753Z"
+}

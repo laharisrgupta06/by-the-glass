@@ -1,0 +1,66 @@
+{
+  "drinkId": "bg-menu-the-slow-sundown",
+  "drinkName": "The Slow Sundown",
+  "menuIngredients": [
+    "Bacardi Carta Blanca",
+    "Aperol",
+    "dark rum",
+    "pineapple",
+    "brown butter"
+  ],
+  "recipe": {
+    "name": "The Slow Sundown",
+    "kind": "cocktail",
+    "description": "A rich tropical cocktail combining bright citrus and bitter orange with velvety brown butter and earthy dark rum notes.",
+    "ingredients": [
+      {
+        "name": "Bacardi Carta Blanca",
+        "amount": "30 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Aperol",
+        "amount": "15 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "dark rum",
+        "amount": "30 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "pineapple",
+        "amount": "45 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "brown butter",
+        "amount": "1 bar spoon",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "Fresh lime juice",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Combine Bacardi Carta Blanca, Aperol, dark rum, fresh pineapple juice, melted brown butter, and fresh lime juice in a shaker.",
+      "Dry shake vigorously without ice to emulsify the brown butter with the liquids.",
+      "Fill the shaker with ice cubes and shake hard until thoroughly chilled.",
+      "Double strain through a fine mesh strainer into a chilled coupe glass."
+    ],
+    "glass": "Coupe glass",
+    "ice": "Shaken with ice; served without",
+    "garnish": "Pineapple leaf",
+    "serving": "Served straight up in a chilled coupe glass"
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:15:31.166Z"
+}

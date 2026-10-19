@@ -1,0 +1,45 @@
+{
+  "drinkId": "bg-menu-til-gud-martini",
+  "drinkName": "Til Gud Martini",
+  "menuIngredients": [
+    "sesame whiskey",
+    "jaggery syrup",
+    "coffee"
+  ],
+  "recipe": {
+    "name": "Til Gud Martini",
+    "kind": "cocktail",
+    "description": "A rich and earthy cocktail blending nutty sesame-infused whiskey with complex jaggery syrup and bold espresso.",
+    "ingredients": [
+      {
+        "name": "sesame whiskey",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "jaggery syrup",
+        "amount": "15 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "coffee",
+        "amount": "30 ml",
+        "origin": "given",
+        "optional": false
+      }
+    ],
+    "steps": [
+      "Add sesame whiskey, jaggery syrup, and freshly brewed coffee to a cocktail shaker.",
+      "Fill the shaker with ice and shake vigorously for 15 seconds to create a silky foam.",
+      "Double strain the mixture into a chilled martini glass."
+    ],
+    "glass": "Martini glass",
+    "ice": "Shaken with ice; served without",
+    "garnish": "A floating pinch of toasted sesame seeds",
+    "serving": "Serve well-chilled with a velvety layer of coffee foam on top."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:13:53.864Z"
+}

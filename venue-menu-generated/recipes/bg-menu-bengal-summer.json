@@ -1,0 +1,58 @@
+{
+  "drinkId": "bg-menu-bengal-summer",
+  "drinkName": "Bengal Summer",
+  "menuIngredients": [
+    "gin",
+    "raw mango",
+    "panchporan puree"
+  ],
+  "recipe": {
+    "name": "Bengal Summer",
+    "kind": "cocktail",
+    "description": "A vibrant and tart refresher balancing the crisp botanical bite of gin with sharp raw mango and the warm, complex spices of traditional Bengali panch phoron.",
+    "ingredients": [
+      {
+        "name": "gin",
+        "amount": "50 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "raw mango",
+        "amount": "3 slices (approx. 30 g)",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "panchporan puree",
+        "amount": "15 ml",
+        "origin": "given",
+        "optional": false
+      },
+      {
+        "name": "simple syrup",
+        "amount": "15 ml",
+        "origin": "extra",
+        "optional": true
+      },
+      {
+        "name": "fresh lime juice",
+        "amount": "10 ml",
+        "origin": "extra",
+        "optional": true
+      }
+    ],
+    "steps": [
+      "Place the raw mango slices into the bottom of a cocktail shaker and muddle thoroughly to release the tart juices.",
+      "Add the gin, panchporan puree, simple syrup, and fresh lime juice into the shaker.",
+      "Fill the shaker with ice and shake vigorously for 10 to 12 seconds until well-chilled.",
+      "Double strain the mixture through a fine-mesh strainer into a rocks glass filled with fresh ice cubes."
+    ],
+    "glass": "Rocks glass",
+    "ice": "Cubed ice",
+    "garnish": "A thin slice of raw mango dusted with roasted panch phoron powder",
+    "serving": "Serve chilled over fresh ice alongside savoury bar bites."
+  },
+  "model": "gemini",
+  "createdAt": "2026-10-19T11:03:31.171Z"
+}
